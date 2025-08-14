@@ -1,0 +1,133 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+html,body{
+  height: 100%;
+  width: 100%;
+  background: #000;
+}
+
+.navbar{
+  position: fixed;
+  width:100%;
+  height: 90px;
+  border: 1px solid white;
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+}
+.navlogo{
+  width: 40px;
+  height: 90px;
+  display: flex;
+  
+}
+.logo{
+margin-left: 30px;
+  width: 80%;
+  height: 80px;
+  display: flex;
+  background-size: contain;
+}
+.search-bar{
+  color: aliceblue;
+  background: rgb(32, 32, 32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  padding: 0 15px;
+  width: 660px;
+  height: 70px;
+margin-left: 5px;
+margin-top: 10px;
+}
+.search-bar i{
+ color: rgb(180, 180,180);
+  font-size: 24px;
+/*   
+  height: 68px;
+   display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.search-bar input{
+  flex: 1;
+  font-size: 18px;
+  background: transparent;
+  color: rgb(196, 207, 216);
+  border: none;
+  outline: none;
+  padding: 15px;
+   /* width: 550px;
+  height: 78px;
+  padding-left: 10px;
+  border-radius: 50px; */
+}
+.search-bar i:first-child {
+  margin-right: 10px;
+}
+
+.search-bar i:last-child {
+  margin-left: 10px;
+}
+.nav-option{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-option a{
+  color: white;
+  display: flex;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+.nav-button{
+ margin-top: 5px;
+}
+.nav-slash{
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 15px;
+}
+.nav-install{
+  color: rgb(196, 207, 216);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-install h2{
+  font-size: 18px;
+  margin-left: 5px;
+}
+.nav-install h3{
+  font-size: 18px;
+  margin-left: 10px;
+}
+.nav-install:hover{
+  color: aliceblue;
+}
+.nav-button .btn{
+  font-size: 24px;
+  font-weight: 700;
+    height: 80px;
+    padding: 0 25px;
+  /* width: 70px; */
+  border-radius: 50px;
+}
+
+.nav-space{
+  display: flex;
+}
+.nav-space1 {
+  display: flex;
+}
+
+@media(max-width : )

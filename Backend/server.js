@@ -1,0 +1,10 @@
+require('dotenv').config();   // ✅ load first
+
+const app = require('./src/app');
+const port = process.env.PORT || 3000;
+const connectDB = require('./src/config/db');
+connectDB();
+
+app.listen(port, () => {
+  console.log(`server is running on http://localhost:${port}`);
+});

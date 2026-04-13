@@ -55,7 +55,7 @@
       return res.status(401).json({message: "Invalid credentials"});
     }
     const token = jwt.sign({
-      _id:user.id,
+      id:user._id,
       role: user.role,
     },process.env.JWT_SECRET);
 

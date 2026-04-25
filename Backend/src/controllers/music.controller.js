@@ -1,8 +1,9 @@
-const musicModel = require("../models/music.models");
+const musicModel = require("../models/music.model");
 const jwt = require("jsonwebtoken");
 const {uploadFile} = require("../service/storage.service");
 const albumModel = require("../models/album.model");
 const asyncHandler = require("../utils/asyncHandler");
+const activityModel = require("../models/activity.model");
 
 const createMusic = asyncHandler(async (req, res) => {
     const {title, genre} = req.body;
@@ -63,22 +64,57 @@ const getAllMusics = asyncHandler(async (req, res) => {
 });
 
 const incrementPlay = asyncHandler(async (req, res) => {
-  const{id} = req.params;
-  const music = await musicModel.findByIdAndUpdate(id, {$inc: {plays: 1}}, {new: true});
+  const { id } = req.params;
+
+  const music = await musicModel.findByIdAndUpdate(
+    id,
+    { $inc: { plays: 1 } },
+    { new: true }
+  );
+
+  if (!music) {
+    return res.status(404).json({ message: "Song not found" });
+  }
+
+  // 🔥 Track activity (non-blocking optional improvement later)
+  await activityModel.create({
+    user: req.user.id,
+    song: id,
+    action: "play",
+  });
+
   res.status(200).json({
-    message:"Play count incremented successfully",
-    music: music
-  })
+    success: true,
+    message: "Play count incremented",
+    music,
+  });
 });
 
 const likeSong = asyncHandler(async (req, res) => {
-  const {id} = req.params;
-  const music = await musicModel.findByIdAndUpdate(id, {$inc: {likes: 1}}, {new: true});
-  
+  const { id } = req.params;
+
+  const music = await musicModel.findByIdAndUpdate(
+    id,
+    { $inc: { likes: 1 } },
+    { new: true }
+  );
+
+  if (!music) {
+    return res.status(404).json({ message: "Song not found" });
+  }
+
+  // 🔥 Track activity
+  await activityModel.create({
+    user: req.user.id,
+    song: id,
+    action: "like",
+  });
+
   res.status(200).json({
-    message:"Like count incremented successfully",
-    music: music
-  })
+    success: true,
+    message: "Song liked",
+    music,
+  });
 });
 
 

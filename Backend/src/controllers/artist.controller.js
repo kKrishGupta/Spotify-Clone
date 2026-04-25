@@ -21,7 +21,7 @@ const getArtistDashboard = asyncHandler (async(req,res)=>{
 });
 
 const getArtistSongs = asyncHandler(async(req,res)=>{
-  const songs = await musicModel.fid({artist:req.user.id});
+  const songs = await musicModel.find({artist:req.user.id});
     res.status(200).json({
     success: true,
     songs

@@ -27,7 +27,7 @@ const approveSong = asyncHandler(async(req,res) =>{
 
 // 🔥 Reject song
 const rejectSong = asyncHandler(async(req,res) =>{
-  const song = await musicModelfindByIdAndUpdate(req.params.id,{status:"rejected"},{new:true});
+  const song = await musicModel.findByIdAndUpdate(req.params.id,{status:"rejected"},{new:true});
   
   res.status(200).json({
     message:"Song rejected",

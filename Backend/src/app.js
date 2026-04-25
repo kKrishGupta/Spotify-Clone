@@ -8,6 +8,7 @@ const activityRoutes = require('./routes/activity.routes');
 const feedRoutes = require('./routes/feed.routes');
 const artistRoutes = require('./routes/artist.routes');
 const adminRoutes = require('./routes/admin.routes');
+const playlistRoutes = require('./routes/playlist.routes');
 // Global error handler
 
 app.use(express.json());
@@ -20,5 +21,7 @@ app.use('/api/activity', activityRoutes);
 app.use('/api/feed',feedRoutes); 
 app.use('/api/artist', artistRoutes);
 app.use('/api/admin',adminRoutes);
+app.use('/api/playlist', playlistRoutes);
+
 app.use(errorHandler);
 module.exports = app;

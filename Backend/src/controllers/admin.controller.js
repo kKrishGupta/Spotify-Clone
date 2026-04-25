@@ -1,6 +1,6 @@
 const asyncHandler = require("../utils/asyncHandler");
 const musicModel = require("../models/music.model");
-const userModel = require("../models/user.models");
+const userModel = require("../models/user.model");
 
 // 🔥 Get all songs (including pending)
 const getAllSongsAdmin = asyncHandler(async(req,res) =>{

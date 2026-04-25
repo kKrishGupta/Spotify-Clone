@@ -1,12 +1,52 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+
 const musicController = require("../controllers/music.controller");
-const multer = require('multer');
-const authMiddleware = require("../middlewares/auth.middleware");
+const { protect, authorize } = require("../middlewares/auth.middleware");
+
+const multer = require("multer");
+
+// ✅ Memory storage (good for Cloudinary later)
 const upload = multer({
-  storage:multer.memoryStorage()
+  storage: multer.memoryStorage(),
 });
 
-router.post('/upload',authMiddleware.authArtist,upload.single("music"),  musicController.createMusic);
-router.post('/album' ,authMiddleware.authArtist, musicController.createAlbum);
+// 🎵 Upload song (Artist only)
+router.post(
+  "/upload",
+  protect,
+  authorize("artist"),
+  upload.single("music"),
+  musicController.createMusic
+);
+
+// 📀 Create album (Artist only)
+router.post(
+  "/album",
+  protect,
+  authorize("artist"),
+  musicController.createAlbum
+);
+
+// 🎧 Get all songs (All logged-in users)
+router.get(
+  "/",
+  protect,
+  musicController.getAllMusics
+);
+
+// 📀 Get all albums
+router.get(
+  "/album",
+  protect,
+  musicController.getAllAlbums
+);
+
+// 📀 Get album by ID
+router.get(
+  "/album/:albumId",
+  protect,
+  musicController.getAlbumById
+);
+
 module.exports = router;

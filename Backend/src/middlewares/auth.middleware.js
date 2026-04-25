@@ -1,26 +1,30 @@
 const jwt = require('jsonwebtoken');
-async function authArtist(req,res,next) {
+
+const protect = (req , res,next) =>{
   const token = req.cookies.token;
   if(!token){
-    return res.send(401).json({message:"Unauthorized"})
+    return res.status(401).json({message: "Unauthorized"});
   }
   try{
-    const decoded = jwt.verify(token,process.env,JWT_SECRET);
-    if(decoded.role!=="artist"){
-      return res.status(403).json({
-        message:"You don't have access to upload songs"
-      })
-    }
+    const decoded = jwt.verify(token,process.env.JWT_SECRET);
     req.user = decoded;
-    
-     next();
+    next();
   }catch(err){
     console.log(err);
-    return res.status(401).json({
-      message:"Unauthorized"
-    })
+    return res.status(401).json({message: "Unauthorized"});
   }
- 
-}
+};
 
-module.exports ={authArtist};
+const authorize = (...roles) =>{
+  return (req,res,next) =>{
+    if(!roles.includes(req.user.role)){
+      return res.status(403).json({message: "Forbidden"});
+    }
+    next();
+  }
+};
+
+module.exports = {
+  protect,
+  authorize
+}

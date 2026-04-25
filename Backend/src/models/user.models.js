@@ -17,10 +17,31 @@ const userSchema = new mongoose.Schema({
   },
   role:{
     type: String,
-    enum : ['user' , 'artist'],
+    enum : ['user' , 'artist','admin'],
     default:'user',
-  }
-})
+  },
+
+  avator: String,
+
+  followers:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"user"
+    }
+  ],
+  following:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"user"
+    }
+  ],
+  likedSongs:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"music"
+    }
+  ]
+},{timestamps:true})
 
 const userModel = mongoose.model("user" , userSchema);
 module.exports = userModel;

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const { MONGO_URI } = require('./env');
 async function connectDB(){
   try{
-    await  mongoose.connect(process.env.MONGO_URI);
+    await  mongoose.connect(MONGO_URI);
     console.log('DataBase connect successfully');
   }catch(err){
     console.error('Database connection error' , err);

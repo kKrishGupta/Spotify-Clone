@@ -33,7 +33,22 @@ const getUserActivity = asyncHandler(async (req, res) => {
   })
 });
 
+const getGlobalFeed = asyncHandler(async (req, res) => {
+  const activities = await activityModel.find().populate("user", "username").populate("song", "title").sort({createdAt: -1}).limit(20);
+  res.status(200).json({
+    message: "Global feed fetched successfully",
+    feed: activities.map(activity => ({
+    id: activity._id,
+    user: activity.user,
+    song: activity.song,
+    action: activity.action,
+    createdAt: activity.createdAt,
+    }))
+  })
+});
+
 module.exports = {
   trackActivity,
-  getUserActivity
+  getUserActivity,
+  getGlobalFeed
 }

@@ -2,15 +2,23 @@ const musicModel = require("../models/music.models");
 const jwt = require("jsonwebtoken");
 const {uploadFile} = require("../service/storage.service");
 const albumModel = require("../models/album.model");
-async function createMusic(req,res){
-    const {title} = req.body;
+const asyncHandler = require("../utils/asyncHandler");
+
+const createMusic = asyncHandler(async (req, res) => {
+    const {title, genre} = req.body;
+    if(!req.file){
+      return res.status(400).json({message: "Music file is required"});
+    }
     const file = req.file;
     const result = await uploadFile(file.buffer.toString('base64'));
 
     const music = await musicModel.create({
       uri: result.url,
       title,
-      artist :req.user.id
+      genre,
+      artist :req.user.id,
+      source: 'upload',
+      status: 'pending',
     })
     res.status(201).json({
       message:"Music created successfully",
@@ -19,11 +27,14 @@ async function createMusic(req,res){
         uri: music.uri,
         title: music.title,
         artist: music.artist,
+        genre: music.genre,
+        source: music.source,
+        status: music.status,
       }
     })
-};
+});
 
-async function createAlbum(req,res){
+const createAlbum = asyncHandler(async (req, res) => {
     const { title, musicIds } = req.body;
     const album = await albumModel.create({
       title,
@@ -39,17 +50,37 @@ async function createAlbum(req,res){
         musics: album.musics,
       }
     })
-};
+});
 
 
-async function getAllMusics(req,res){
-  const musics = await musicModel.find().limit(2).populate("artist");
+const getAllMusics = asyncHandler(async (req, res) => {
+  const musics = await musicModel.find({status: 'approved'}).populate("artist","username email").sort({createdAt: -1});
 
   res.status(200).json({
     message:"Musics fetched successfully",
     musics: musics
   })
-}
+});
+
+const incrementPlay = asyncHandler(async (req, res) => {
+  const{id} = req.params;
+  const music = await musicModel.findByIdAndUpdate(id, {$inc: {plays: 1}}, {new: true});
+  res.status(200).json({
+    message:"Play count incremented successfully",
+    music: music
+  })
+});
+
+const likeSong = asyncHandler(async (req, res) => {
+  const {id} = req.params;
+  const music = await musicModel.findByIdAndUpdate(id, {$inc: {likes: 1}}, {new: true});
+  
+  res.status(200).json({
+    message:"Like count incremented successfully",
+    music: music
+  })
+});
+
 
 async function getAllAlbums(req,res){
   const albums = await albumModel.find().select("title artist").populate("artist","username email").populate("musics");
@@ -67,4 +98,15 @@ async function getAlbumById(req,res){
     album : album,
 })
 }
-module.exports = {createMusic, createAlbum,getAllMusics,getAllAlbums,getAlbumById};
+
+const getMusicByGenre = asyncHandler(async (req, res) => {
+  const { genre } = req.query;
+
+  const musics = await musicModel.find({
+    genre,
+    status: "approved"
+  });
+
+  res.status(200).json(musics);
+});
+module.exports = {createMusic, createAlbum,getAllMusics,getAllAlbums,getAlbumById,getMusicByGenre, incrementPlay, likeSong};

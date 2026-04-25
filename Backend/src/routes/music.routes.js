@@ -48,5 +48,7 @@ router.get(
   protect,
   musicController.getAlbumById
 );
-
+router.put("/play/:id", protect, musicController.incrementPlay);
+router.put("/like/:id", protect, musicController.likeSong);
+router.get("/genre", protect, musicController.getMusicByGenre);
 module.exports = router;

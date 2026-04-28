@@ -51,4 +51,11 @@ router.get(
 router.put("/play/:id", protect, musicController.incrementPlay);
 router.put("/like/:id", protect, musicController.likeSong);
 router.get("/genre", protect, musicController.getMusicByGenre);
+
+// 🔍 SEARCH MUSIC
+router.get(
+  "/search",
+  protect,
+  musicController.searchMusic
+);
 module.exports = router;

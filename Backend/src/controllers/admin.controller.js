@@ -49,7 +49,7 @@ const getAdminDashboard = asyncHandler(async(req,res) =>{
   const totalSongs = await musicModel.countDocuments();
   const pendingSongs = await musicModel.countDocuments({status:"pending"});
 
-  const totalPlayAgg = await musicModel.aggregate([
+  const totalPlaysAgg = await musicModel.aggregate([
     {
      $group: {
         _id: null,

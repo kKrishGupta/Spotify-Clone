@@ -1,35 +1,54 @@
-﻿import { useAuthStore } from "../features/auth/authStore";
-import { loginUser, logoutUser, registerUser } from "../features/auth/authAPI";
+﻿import { useState } from "react";
+import { loginUser, registerUser } from "../features/auth/authAPI";
+import { useAuthStore } from "../features/auth/authStore";
 
 export const useAuth = () => {
-  const { user, isAuthenticated, isLoading, login, logout, setLoading } = useAuthStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuthStore();
 
-  const handleLogin = async (data) => {
-    setLoading(true);
-    const res = await loginUser(data);
-    login(res.user);
-    return res.user;
+  const handleLogin = async (form) => {
+    try {
+      setIsLoading(true);
+
+      const res = await loginUser(form);
+
+      // ✅ SAFETY CHECK (very important)
+      if (!res?.user) {
+        throw new Error("User data missing from response");
+      }
+
+      // ✅ store correct user object
+      login(res.user);
+
+      return res.user;
+    } catch (err) {
+      console.error("Login Error:", err);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleRegister = async (data) => {
-    setLoading(true);
-    const res = await registerUser(data);
-    login(res.user);
-    return res.user;
+  const handleRegister = async (form) => {
+    try {
+      setIsLoading(true);
+
+      const res = await registerUser(form);
+
+      if (!res?.user) {
+        throw new Error("User data missing from response");
+      }
+
+      login(res.user);
+
+      return res.user;
+    } catch (err) {
+      console.error("Register Error:", err);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleLogout = async () => {
-    setLoading(true);
-    await logoutUser();
-    logout();
-  };
-
-  return {
-    user,
-    isAuthenticated,
-    isLoading,
-    handleLogin,
-    handleRegister,
-    handleLogout,
-  };
+  return { handleLogin, handleRegister, isLoading };
 };

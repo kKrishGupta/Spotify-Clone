@@ -4,6 +4,7 @@ const {uploadFile} = require("../service/storage.service");
 const albumModel = require("../models/album.model");
 const asyncHandler = require("../utils/asyncHandler");
 const activityModel = require("../models/activity.model");
+const { getHybridSongs } = require("../service/music.service");
 
 const createMusic = asyncHandler(async (req, res) => {
     const {title, genre} = req.body;
@@ -55,8 +56,7 @@ const createAlbum = asyncHandler(async (req, res) => {
 
 
 const getAllMusics = asyncHandler(async (req, res) => {
-  const musics = await musicModel.find({status: 'approved'}).populate("artist","username email").sort({createdAt: -1});
-
+  const musics = await getHybridSongs();
   res.status(200).json({
     message:"Musics fetched successfully",
     musics: musics
@@ -145,4 +145,55 @@ const getMusicByGenre = asyncHandler(async (req, res) => {
 
   res.status(200).json(musics);
 });
-module.exports = {createMusic, createAlbum,getAllMusics,getAllAlbums,getAlbumById,getMusicByGenre, incrementPlay, likeSong};
+
+const searchMusic= asyncHandler(async (req, res) => {
+  const { q } = req.query;
+
+  try {
+    // ✅ Empty query → return empty
+    if (!q || !q.trim()) {
+      return res.json({
+        success: true,
+        data: [],
+      });
+    }
+
+    // 🔍 Search songs
+    const songs = await musicModel
+      .find({
+        status: "approved",
+        $or: [
+          { title: { $regex: q, $options: "i" } },
+          { genre: { $regex: q, $options: "i" } }, // better than album
+        ],
+      })
+      .populate("artist", "username") // ✅ get artist name
+      .limit(20);
+
+    // ✅ Format response for frontend
+    const formattedSongs = songs.map((song) => ({
+      id: song._id,
+      title: song.title,
+      artist: song.artist?.username || "Unknown",
+      cover: song.cover || "https://via.placeholder.com/150",
+      uri: song.uri,
+      plays: song.plays || 0,
+      likes: song.likes || 0,
+      duration: song.duration || 0,
+    }));
+
+    res.json({
+      success: true,
+      data: formattedSongs,
+    });
+  } catch (err) {
+    console.error("Search error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Search failed",
+    });
+  }
+});
+
+module.exports = {createMusic, createAlbum,getAllMusics,getAllAlbums,getAlbumById,getMusicByGenre, incrementPlay, likeSong, searchMusic};

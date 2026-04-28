@@ -1,25 +1,30 @@
 ﻿import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api",
+  baseURL: "http://localhost:3000/api",
   withCredentials: true,
 });
 
-API.interceptors.response.use(
-  (response) => response,
-  (error) => Promise.reject(error),
-);
-
-export const unwrap = (response) => response?.data?.data ?? response?.data ?? response;
-
-export const withFallback = async (request, fallback) => {
+// ✅ ADD THIS
+export const withFallback = async (fn, fallback) => {
   try {
-    const response = await request();
-    return unwrap(response);
-  } catch (error) {
-    await new Promise((resolve) => window.setTimeout(resolve, 240));
-    return typeof fallback === "function" ? fallback(error) : fallback;
+    const res = await fn();
+
+    // ✅ ALWAYS RETURN CLEAN DATA
+    if (res && res.data) {
+      return res.data.data ?? res.data;
+    }
+
+    return fallback;
+  } catch (err) {
+    console.error(
+      "API error:",
+      err?.response?.data || err.message
+    );
+
+    return typeof fallback === "function"
+      ? fallback()
+      : fallback;
   }
 };
-
 export default API;

@@ -1,8 +1,12 @@
-﻿import API, { withFallback } from "../../services/api";
-import { adminDashboard } from "../../utils/constants";
+﻿import API from "../../services/api";
 
-export const getAdminDashboard = () =>
-  withFallback(() => API.get("/admin/dashboard"), adminDashboard);
+// ✅ MUST be named export
+export const getAdminDashboard = async () => {
+  const res = await API.get("/admin/dashboard");
+  return res.data;
+};
 
-export const getPendingSongs = () =>
-  withFallback(() => API.get("/admin/songs/pending"), adminDashboard.pendingSongs);
+export const getPendingSongs = async () => {
+  const res = await API.get("/admin/songs/pending");
+  return res.data;
+};

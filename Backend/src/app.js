@@ -11,10 +11,16 @@ const adminRoutes = require('./routes/admin.routes');
 const playlistRoutes = require('./routes/playlist.routes');
 // Global error handler
 const userRoutes = require('./routes/user.routes');
+const cors = require('cors');
 
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/music', musicRoutes);
@@ -22,8 +28,8 @@ app.use('/api/activity', activityRoutes);
 app.use('/api/feed',feedRoutes); 
 app.use('/api/artist', artistRoutes);
 app.use('/api/admin',adminRoutes);
-app.use('/api/playlist', playlistRoutes);
-app.use('/api/user', userRoutes);
+app.use('/api/playlists', playlistRoutes);
+app.use('/api/users', userRoutes);
 
 
 app.use(errorHandler);

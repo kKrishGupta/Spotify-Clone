@@ -1,50 +1,39 @@
 ﻿import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { DEMO_USER } from "../../utils/constants";
 
 export const useAuthStore = create(
   persist(
-    (set, get) => ({
-      user: DEMO_USER,
-      isAuthenticated: true,
+    (set) => ({
+      user: null,
+      isAuthenticated: false,
       isLoading: false,
 
-      setLoading: (isLoading) => set({ isLoading }),
-
-      setUser: (user) =>
-        set({
-          user,
-          isAuthenticated: Boolean(user),
-        }),
-
+      // ✅ store FULL user object
       login: (user) =>
         set({
-          user: user || DEMO_USER,
-          isAuthenticated: true,
-          isLoading: false,
+          user: user || null,
+          isAuthenticated: !!user,
         }),
 
       logout: () =>
         set({
           user: null,
           isAuthenticated: false,
-          isLoading: false,
         }),
 
-      switchRole: (role) => {
-        const currentUser = get().user || DEMO_USER;
+      setLoading: (value) =>
         set({
-          user: { ...currentUser, role },
-          isAuthenticated: true,
-        });
-      },
+          isLoading: value,
+        }),
     }),
     {
-      name: "beatflow-auth",
+      name: "auth-storage",
+
+      // 🔥 IMPORTANT: only persist needed fields
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
       }),
-    },
-  ),
+    }
+  )
 );

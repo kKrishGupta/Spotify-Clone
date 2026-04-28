@@ -1,5 +1,5 @@
 const axios = require('axios');
-const fetchJamendoData = async () => {
+const fetchJamendoSongs = async () => {
   try{
     const res = await axios.get(`https://api.jamendo.com/v3.0/tracks`,{
       params:{
@@ -26,5 +26,5 @@ const fetchJamendoData = async () => {
 };
 
 module.exports = {
-  fetchJamendoData
+  fetchJamendoSongs
 }

@@ -1,24 +1,37 @@
-﻿import API, { withFallback } from "../../services/api";
-import { homeFeed, songs, userDashboard } from "../../utils/constants";
+﻿import API from "../../services/api";
 
-export const getFeed = () => withFallback(() => API.get("/feed"), homeFeed);
+export const getFeed = async () => {
+  const res = await API.get("/feed");
 
-export const searchFeed = (query = "") =>
-  withFallback(() => API.get("/music/search", { params: { q: query } }), () => {
-    const normalizedQuery = query.trim().toLowerCase();
+  // ✅ FIX: unwrap backend response
+  return res.data.data;
+};
 
-    if (!normalizedQuery) return songs;
-
-    return songs.filter((song) =>
-      [song.title, song.artist, song.album]
-        .join(" ")
-        .toLowerCase()
-        .includes(normalizedQuery),
-    );
+export const searchFeed = async (query = "") => {
+  const res = await API.get("/music/search", {
+    params: { q: query },
   });
+  return res.data.data;
+};
 
-export const getRecommendations = () =>
-  withFallback(() => API.get("/feed/recommendations"), homeFeed.recommended);
+export const getRecommendations = async () => {
+  const res = await API.get("/feed/recommendations");
+  return res.data.data;
+};
 
-export const getUserDashboard = () =>
-  withFallback(() => API.get("/users/me/dashboard"), userDashboard);
+export const getUserDashboard = async () => {
+  try {
+    const res = await API.get("/users/me/dashboard");
+
+    return res.data?.data || {
+      stats: [],
+      recent: [],
+    };
+  } catch (err) {
+    console.error("Dashboard API error:", err);
+    return {
+      stats: [],
+      recent: [],
+    };
+  }
+};

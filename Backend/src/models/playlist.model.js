@@ -1,27 +1,34 @@
 const mongoose = require("mongoose");
 
-const playlistSchema = new mongoose.Schema({
-  name:{
-    type: String,
-    required: true
-  },
-  user:{
-     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
-    required: true
-  },
-  songs: [
-    {
+const playlistSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "music"
+      ref: "User", // ✅ match model name
+      required: true
+    },
+
+    songs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Song" // ✅ match model name
+      }
+    ],
+
+    isPublic: {
+      type: Boolean,
+      default: true
     }
-  ],
-
-  isPublic: {
-    type: Boolean,
-    default: true
+  },
+  {
+    timestamps: true // ✅ fixed
   }
+);
 
-},{timeStamps:true});
-
-module.exports = mongoose.model("playlist", playlistSchema);
+module.exports = mongoose.model("Playlist", playlistSchema);

@@ -1,8 +1,11 @@
-﻿import API, { withFallback } from "../../services/api";
-import { artistDashboard } from "../../utils/constants";
+﻿import API from "../../services/api";
 
-export const getArtistDashboard = () =>
-  withFallback(() => API.get("/artist/dashboard"), artistDashboard);
+export const getArtistDashboard = async () => {
+  const res = await API.get("/artist/dashboard");
+  return res.data;
+};
 
-export const getArtistSongs = () =>
-  withFallback(() => API.get("/artist/songs"), artistDashboard.songs);
+export const getArtistSongs = async () => {
+  const res = await API.get("/artist/songs");
+  return res.data;
+};

@@ -1,5 +1,55 @@
 const asyncHandler = require("../utils/asyncHandler");
 const userModel = require("../models/user.model");
+const musicModel = require("../models/music.model");
+const activityModel = require("../models/activity.model");
+
+const getUserDashboard = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const user = await userModel.findById(userId);
+
+    // 🔥 stats
+    const totalPlays = await musicModel.aggregate([
+      { $group: { _id: null, total: { $sum: "$plays" } } },
+    ]);
+
+    const likedSongs = await activityModel.countDocuments({
+      user: userId,
+      action: "like",
+    });
+
+    // 🔥 recent activity
+    const recent = await activityModel
+      .find({ user: userId })
+      .populate("song")
+      .sort({ createdAt: -1 })
+      .limit(10);
+
+    res.json({
+      success: true,
+      data: {
+        username: user.username,
+        stats: [
+          { label: "Plays", value: totalPlays[0]?.total || 0 },
+          { label: "Likes", value: likedSongs || 0 },
+          { label: "Following", value: user.following?.length || 0 },
+          { label: "Followers", value: user.followers?.length || 0 },
+        ],
+
+        recent: recent.map((a) => ({
+          id: a._id,
+          title: a.song?.title,
+          artist: a.song?.artist,
+          cover: a.song?.cover,
+        })),
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Dashboard failed" });
+  }
+};
 
 // follow user
 const followUser = asyncHandler(async (req, res) => {
@@ -52,4 +102,5 @@ const unfollowUser = asyncHandler(async (req, res) => {
 module.exports = {
   followUser,
   unfollowUser,
+  getUserDashboard,
 };

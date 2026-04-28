@@ -26,7 +26,11 @@
       role: user.role,
     },process.env.JWT_SECRET);
 
-    res.cookie("token" , token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, // true in production (HTTPS)
+      sameSite: "lax",
+    });
     res.status(201).json({
       message: "user registered successfully",
       user:{
@@ -38,46 +42,99 @@
     })
 
   }
-  async function loginUser (req,res){
-    const {username, email,password} = req.body;
-    const user = await userModel.findOne({
-      $or:[
-        {username},
-        {email}
-      ]
-    })
-    if(!user){
-      return res.status(401).json({message: "Invalid credentials"});
-    }
+  // async function loginUser (req,res){
+  //   const {username, email,password} = req.body;
+  //   const user = await userModel.findOne({
+  //     $or:[
+  //       {username},
+  //       {email}
+  //     ]
+  //   })
+  //   if(!user){
+  //     return res.status(401).json({message: "Invalid credentials"});
+  //   }
 
-    const isPasswordValid = await bcrypt.compare(password,user.password);
+  //   const isPasswordValid = await bcrypt.compare(password,user.password);
 
-    if(!isPasswordValid){
-      return res.status(401).json({message: "Invalid credentials"});
-    }
-    const token = jwt.sign({
-      id:user._id,
-      role: user.role,
-    },process.env.JWT_SECRET);
+  //   if(!isPasswordValid){
+  //     return res.status(401).json({message: "Invalid credentials"});
+  //   }
+  //   const token = jwt.sign({
+  //     id:user._id,
+  //     role: user.role,
+  //   },process.env.JWT_SECRET);
 
-    res.cookie("token" , token);
-    res.status(200).json({
-      message: "User logged in successfully",
-      user:{
-        id:user._id,
-        username : user.username,
-        email:user.email,
-        role:user.role,
-      }
-    })
+  //   res.cookie("token" , token);
+  //   res.status(200).json({
+  //     message: "User logged in successfully",
+  //     user:{
+  //       id:user._id,
+  //       username : user.username,
+  //       email:user.email,
+  //       role:user.role,
+  //     }
+  //   })
+  // }
+
+  async function loginUser(req, res) {
+  const { username, email, password } = req.body;
+
+  const query = [];
+
+  if (username) query.push({ username });
+  if (email) query.push({ email });
+
+  const user = await userModel.findOne({ $or: query });
+
+  if (!user) {
+    return res.status(401).json({ message: "Invalid credentials" });
   }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  const token = jwt.sign(
+    {
+      id: user._id,
+      role: user.role,
+    },
+    process.env.JWT_SECRET
+  );
+
+  res.cookie("token", token, {
+  httpOnly: true,
+  secure: false, // true in production (HTTPS)
+  sameSite: "lax",
+});
+
+  res.status(200).json({
+    message: "User logged in successfully",
+    user: {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      role: user.role,
+    },
+  });
+}
 
   async function logoutUser(req,res){
     res.clearCookie("token")
     res.status(200).json({message:"user logged out successfully"});
   }
-  module.exports = {
-    registerUser,
-    loginUser,
-    logoutUser
-  };
+ 
+ async function getCurrentUser(req, res) {
+  res.status(200).json({
+    user: req.user,
+  });
+}
+
+ module.exports = {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getCurrentUser
+};

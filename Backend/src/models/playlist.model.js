@@ -17,7 +17,7 @@ const playlistSchema = new mongoose.Schema(
     songs: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Song" // ✅ match model name
+        ref: "music" // ✅ match model name
       }
     ],
 

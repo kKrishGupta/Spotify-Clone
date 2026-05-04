@@ -1,83 +1,50 @@
 const asyncHandler = require("../utils/asyncHandler");
-const musicModel = require("../models/music.model");
-const activityModel = require("../models/activity.model");
+const { getPersonalizedFeed } = require("../service/recommendation.service");
+const redis = require("../config/redis");
 const { getHybridSongs } = require("../service/music.service");
 
+// 🎯 USER-AWARE + CACHED FEED
 const getFeed = asyncHandler(async (req, res) => {
-  const userId = req.user.id;
+  const userId = req.user?.id;
 
-  const trendingDB = await musicModel
-    .find({ status: "approved" })
-    .populate("artist", "username")
-    .sort({ plays: -1 })
-    .limit(10);
+  // ✅ Auth safety
+  if (!userId) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized - user not found",
+    });
+  }
 
-  const newReleasesDB = await musicModel
-    .find({ status: "approved" })
-    .populate("artist", "username")
-    .sort({ createdAt: -1 })
-    .limit(10);
+  const cacheKey = `feed:${userId}`;
 
-  const userActivities = await activityModel
-    .find({ user: userId })
-    .populate("song");
+  // 🔥 1. Try cache first
+  const cachedData = await redis.get(cacheKey);
 
-  const genres = userActivities
-    .map((a) => a.song?.genre)
-    .filter(Boolean);
+  if (cachedData) {
+    return res.status(200).json({
+      success: true,
+      data: JSON.parse(cachedData),
+      source: "cache", // optional (debugging)
+    });
+  }
 
-  const uniqueGenres = [...new Set(genres)];
+  // 🔥 2. Generate personalized feed
+  const data = await getPersonalizedFeed(userId);
 
-  const recommendedDB = await musicModel
-    .find({
-      genre: { $in: uniqueGenres },
-      status: "approved",
-    })
-    .populate("artist", "username")
-    .limit(10);
+  if (!data.length) {
+  const hybrid = await getHybridSongs();
+  return res.json({ success: true, data: hybrid });
+}
 
-  const apiSongs = await getHybridSongs();
-
-  // 🔥 NORMALIZE FUNCTION (CRITICAL FIX)
-  const formatSong = (song) => ({
-    id: song._id,
-    title: song.title,
-    artist: song.artist?.username || "Unknown",
-    cover: song.cover || "https://via.placeholder.com/150",
-    uri: song.uri,
-    plays: song.plays || 0,
-    likes: song.likes || 0,
+  // 🔥 3. Store in Redis (TTL: 60 seconds)
+  await redis.set(cacheKey, JSON.stringify(data), {
+    EX: 60,
   });
-
-  const formattedTrending = trendingDB.map(formatSong);
-  const formattedRecommended = recommendedDB.map(formatSong);
-  const formattedNew = newReleasesDB.map(formatSong);
 
   res.status(200).json({
     success: true,
-    data: {
-      hero:
-        formattedTrending[0] ||
-        apiSongs[0] ||
-        null,
-
-      trending:
-        formattedTrending.length > 0
-          ? formattedTrending
-          : apiSongs,
-
-      recommended:
-        formattedRecommended.length > 0
-          ? formattedRecommended
-          : apiSongs,
-
-      madeForYou:
-        formattedNew.length > 0
-          ? formattedNew
-          : apiSongs,
-
-      apiSongs,
-    },
+    data,
+    source: "api", // optional (debugging)
   });
 });
 

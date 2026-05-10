@@ -1,24 +1,13 @@
 const aiService = require("../service/ai.service");
+const { success } = require("../utils/response");
+const asyncHandler = require("../utils/asyncHandler");
 
-const chat = async (req, res) => {
-  try {
-    const { message } = req.body;
+const chat = asyncHandler(async (req, res) => {
+  const { message } = req.body;
 
-    const reply = await aiService.generateReply(req.user.id, message);
+  const reply = await aiService.generateReply(req.user.id, message);
 
-    res.json({
-      success: true,
-      reply
-    });
-
-  } catch (error) {
-    console.error("AI Chat Error:", error);
-
-    res.status(500).json({
-      success: false,
-      message: "Something went wrong"
-    });
-  }
-};
+  return success(res, { reply }, "AI response generated");
+});
 
 module.exports = { chat };

@@ -84,6 +84,13 @@ otpLastSentAt: {
   default: null,
 },
 
+preferences: {
+  genres: [String],
+  languages: [String],
+},
+
+lastLogin: Date,
+
 },{timestamps:true});
 
 const userModel = mongoose.model("user", userSchema);

@@ -4,9 +4,27 @@ const albumModel = require("../models/album.model");
 const asyncHandler = require("../utils/asyncHandler");
 const { getHybridSongs } = require("../service/music.service");
 const musicRepo = require("../repositories/music.repository");
+const userModel = require("../models/user.model");
+const logger = require("../config/logger");
+const audioQueue = require("../queues/audio.queue");
+const analyticsQueue = require("../queues/analytics.queue");
+const { invalidateMusicCache } = require("../cache/music.cache");
+const { invalidateFeedCache } = require("../cache/feed.cache");
 
 // 🚀 NEW: Queue instead of direct DB write
 const activityQueue = require("../queues/activity.queue");
+
+const invalidateMusicMutationCaches = async () => {
+  Promise.allSettled([
+    invalidateMusicCache("music:all"),
+    invalidateFeedCache("feed:global"),
+  ]).catch((err) => {
+    logger.warn({
+      message: "Cache invalidation skipped",
+      error: err.message,
+    });
+  });
+};
 
 // 🎵 CREATE MUSIC
 const createMusic = asyncHandler(async (req, res) => {
@@ -27,6 +45,22 @@ const createMusic = asyncHandler(async (req, res) => {
     source: "upload",
     status: "pending",
   });
+
+  await audioQueue
+    .add("process-upload", {
+      musicId: music._id.toString(),
+      url: result.url,
+      filename: music._id.toString(),
+    })
+    .catch((err) => {
+      logger.warn({
+        message: "Audio processing queue enqueue failed",
+        musicId: music._id,
+        error: err.message,
+      });
+    });
+
+  await invalidateMusicMutationCaches();
 
   res.status(201).json({
     message: "Music created successfully",
@@ -84,11 +118,22 @@ const incrementPlay = asyncHandler(async (req, res) => {
   }
 
   // 🚀 Send to queue instead of DB
-  await activityQueue.add("trackActivity", {
-    user: req.user.id,
-    song: id,
-    action: "play",
-  });
+  await activityQueue
+    .add("trackActivity", {
+      user: req.user.id,
+      song: id,
+      action: "play",
+    })
+    .catch((err) => {
+      logger.warn({
+        message: "Activity queue enqueue failed",
+        action: "play",
+        song: id,
+        error: err.message,
+      });
+    });
+
+  await invalidateMusicMutationCaches();
 
   res.status(200).json({
     success: true,
@@ -118,11 +163,33 @@ const likeSong = asyncHandler(async (req, res) => {
   });
 
   // 🚀 3. Queue activity (non-blocking)
-  await activityQueue.add("trackActivity", {
-    user: req.user.id,
-    song: id,
-    action: "like",
-  });
+  await activityQueue
+    .add("trackActivity", {
+      user: req.user.id,
+      song: id,
+      action: "like",
+    })
+    .catch((err) => {
+      logger.warn({
+        message: "Activity queue enqueue failed",
+        action: "like",
+        song: id,
+        error: err.message,
+      });
+    });
+
+  await analyticsQueue
+    .add("like", {
+      type: "like",
+      value: 1,
+      meta: {
+        user: req.user.id,
+        song: id,
+      },
+    })
+    .catch(() => {});
+
+  await invalidateMusicMutationCaches();
 
   res.status(200).json({
     success: true,

@@ -1,33 +1,145 @@
 require("dotenv").config();
-require("./src/workers/activity.worker");
 
-const app = require("./src/app");
+const http = require("http");
 const connectDB = require("./src/config/db");
+const app = require("./src/app");
+const redis = require("./src/config/redis");
+const logger = require("./src/config/logger");
 const { PORT } = require("./src/config/env");
-const { startNgrok } = require("./src/config/ngrok.manager");
+const { initializeSocket } = require("./src/config/socket");
+const { closeBullMQConnections } = require("./src/config/bullmq");
 
-// 🚀 CLEAN SERVER BOOTSTRAP
+const backgroundModules = [];
+
+const startBackgroundSystems = (queuePrerequisitesAvailable) => {
+  if (queuePrerequisitesAvailable) {
+    backgroundModules.push(
+      require("./src/workers/activity.worker"),
+      require("./src/workers/audio.worker"),
+      require("./src/workers/analytics.worker"),
+      require("./src/workers/notification.worker"),
+      require("./src/workers/recommendation.worker")
+    );
+  } else {
+    logger.warn("Queue workers skipped because Redis or MongoDB is unavailable");
+  }
+
+  backgroundModules.push(
+    require("./src/schedulers/cleanup.scheduler"),
+    require("./src/schedulers/trending.scheduler"),
+    require("./src/schedulers/analytics.scheduler")
+  );
+};
+
+const closeBackgroundSystems = async () => {
+  await Promise.allSettled(
+    backgroundModules
+      .filter((moduleRef) => moduleRef && typeof moduleRef.close === "function")
+      .map((moduleRef) => moduleRef.close())
+  );
+
+  await closeBullMQConnections();
+};
+
 const startServer = async () => {
+  let server;
+
   try {
-    // 1️⃣ Connect DB
-    await connectDB();
-    console.log("✅ Database connected successfully");
+    logger.info("Starting server");
 
-     // 3️⃣ Start ngrok (AFTER server is up)
-    await startNgrok();
+    let dbAvailable = false;
 
-    
-    // 2️⃣ Start Express server
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    try {
+      await connectDB();
+      dbAvailable = true;
+      logger.info("MongoDB connected successfully");
+    } catch (err) {
+      logger.warn({
+        message: "MongoDB unavailable during startup",
+        error: err.message,
+      });
+
+      if (process.env.DB_REQUIRED === "true") {
+        throw err;
+      }
+    }
+
+    let redisAvailable = false;
+
+    try {
+      await redis.connectRedis();
+      redisAvailable = true;
+      logger.info("Redis connected successfully");
+    } catch (err) {
+      logger.warn({
+        message: "Redis unavailable during startup",
+        error: err.message,
+      });
+
+      if (process.env.REDIS_REQUIRED === "true") {
+        throw err;
+      }
+    }
+
+    server = http.createServer(app);
+    initializeSocket(server);
+    startBackgroundSystems(redisAvailable && dbAvailable);
+
+    server.listen(PORT, () => {
+      logger.info({
+        message: `Server running on http://localhost:${PORT}`,
+      });
     });
 
-   
+    const gracefulShutdown = async () => {
+      logger.warn("Graceful shutdown initiated");
+
+      if (server) {
+        server.close(async () => {
+          try {
+            await closeBackgroundSystems();
+            await redis.disconnectRedis();
+            logger.info("Server resources closed");
+            process.exit(0);
+          } catch (err) {
+            logger.error({
+              shutdownError: err.message,
+            });
+            process.exit(1);
+          }
+        });
+      }
+    };
+
+    process.on("SIGINT", gracefulShutdown);
+    process.on("SIGTERM", gracefulShutdown);
   } catch (err) {
-    console.error("❌ Server startup failed:", err);
+    logger.error({
+      startupError: err.message,
+      stack: err.stack,
+    });
+
     process.exit(1);
   }
 };
 
-// 🔥 Start everything
+process.on("uncaughtException", (err) => {
+  logger.error({
+    type: "UNCAUGHT_EXCEPTION",
+    message: err.message,
+    stack: err.stack,
+  });
+
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (reason) => {
+  logger.error({
+    type: "UNHANDLED_REJECTION",
+    reason,
+  });
+
+  process.exit(1);
+});
+
 startServer();

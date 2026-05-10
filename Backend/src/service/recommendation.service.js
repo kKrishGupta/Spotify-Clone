@@ -16,7 +16,7 @@ const uniqueById = (songs) => {
 
 const getPersonalizedFeed = async (userId) => {
   // ✅ 1. Get user activity
-  const activity = await activityRepo.getUserActivity(userId);
+  const activity = await activityRepo.findByUser(userId);
 
   const likedSongs = activity
     .filter((a) => a.action === "like")

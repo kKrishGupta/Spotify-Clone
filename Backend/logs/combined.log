@@ -1,0 +1,444 @@
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.447Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.451Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.468Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.469Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.515Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.531Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.532Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.533Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.622Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.640Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.641Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.642Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.778Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.809Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.810Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.811Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:16.982Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.029Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.030Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.031Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.257Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.296Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.297Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.298Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.576Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.607Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.608Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.609Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.937Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.968Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.969Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:17.970Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:18.468Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:18.470Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:18.470Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:18.471Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:18.937Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:18.938Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:18.939Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:18.939Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:19.457Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:19.460Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:19.462Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:19.463Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:20.019Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:20.020Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:20.020Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:20.021Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:20.628Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:20.628Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:20.629Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:20.629Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:21.298Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:21.299Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:21.300Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:21.300Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:22.015Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:22.016Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:22.017Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:22.017Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:22.865Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:22.866Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:22.867Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:22.867Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:23.733Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:23.734Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:23.735Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:23.736Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:24.607Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:24.608Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:24.608Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:24.609Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:25.523Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:25.524Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:25.526Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:25.526Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:26.487Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:26.488Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:26.488Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:26.489Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:27.506Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:27.507Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:27.508Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:27.509Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:28.652Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:28.653Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:28.654Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:28.654Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:29.912Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:29.913Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:29.914Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:29.915Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:31.126Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:31.126Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:31.127Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:31.128Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:32.379Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:32.380Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:32.380Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:32.381Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:33.703Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:33.705Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:33.706Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:33.707Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:35.016Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:35.017Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:35.018Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:35.019Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:36.480Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:36.481Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:36.482Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:36.483Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:38.024Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:38.025Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:38.025Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:38.026Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:39.570Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:39.571Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:39.572Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:39.573Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:41.140Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:41.141Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:41.143Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:41.144Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:42.780Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:42.782Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:42.783Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:42.784Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:44.447Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:44.448Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:44.449Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:44.450Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:46.159Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:46.160Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:46.161Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:46.163Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:47.997Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:47.998Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:47.999Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:47.999Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:49.813Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:49.813Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:49.814Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:49.814Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:51.626Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:51.626Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:51.627Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:51.627Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:53.600Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:53.601Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:53.601Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:53.602Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:55.908Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:55.909Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:55.910Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:55.911Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:57.886Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:57.886Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:57.887Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:11:57.887Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:00.094Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:00.095Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:00.096Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:00.097Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:02.143Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:02.146Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:02.148Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:02.150Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:04.213Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:04.214Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:04.215Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:04.216Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:06.268Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:06.269Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:06.269Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:06.270Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:08.338Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:08.339Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:08.340Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:08.341Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:10.399Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:10.400Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:10.400Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:10.401Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:12.455Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:12.457Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:12.460Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:12.461Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:14.526Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:14.528Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:14.529Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:14.530Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:16.692Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:16.692Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:16.693Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:16.693Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:18.810Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:18.811Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:18.812Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:18.812Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:20.946Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:20.947Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:20.948Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:20.948Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:23.062Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:23.063Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:23.064Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:23.065Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:25.094Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:25.095Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:25.096Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:25.096Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:27.134Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:27.135Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:27.136Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:27.137Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:29.193Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:29.194Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:29.195Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:29.195Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:31.252Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:31.253Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:31.254Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:31.254Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:33.304Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:33.307Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:33.308Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:33.308Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:35.351Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:35.352Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:35.353Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:35.353Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:37.413Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:37.414Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:37.414Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:37.415Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:39.479Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:39.480Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:39.481Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:39.481Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:41.523Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:41.524Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:41.525Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:41.526Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:43.583Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:43.584Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:43.585Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:43.586Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:45.638Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:45.639Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:45.640Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:45.640Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:47.690Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:47.691Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:47.692Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:47.693Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:49.750Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:49.752Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:49.753Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:49.755Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:51.835Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:51.836Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:51.837Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:51.837Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:53.941Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:53.942Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:53.942Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:53.942Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:56.004Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:56.005Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:56.005Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:56.006Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:58.055Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:58.057Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:58.057Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:12:58.057Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:00.120Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:00.121Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:00.122Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:00.123Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:02.174Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:02.175Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:02.175Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:02.176Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:05.288Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:05.292Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:05.294Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:05.295Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:07.394Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:07.395Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:07.396Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:07.397Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:09.439Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:09.440Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:09.440Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:09.441Z"}
+{"connection":"analytics-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:11.494Z"}
+{"connection":"audio-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:11.494Z"}
+{"connection":"activity-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:11.495Z"}
+{"connection":"recommendation-queue","error":"","level":"error","message":"BullMQ Redis connection error","timestamp":"2026-05-10T20:13:11.496Z"}
+{"level":"warn","message":"socket.io is not installed; realtime events will be no-op","timestamp":"2026-05-10T20:17:20.752Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:17:20.756Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:17:22.829Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:17:22.832Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:17:23.111Z"}
+{"level":"warn","message":"socket.io is not installed; realtime events will be no-op","timestamp":"2026-05-10T20:17:26.542Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:17:26.547Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:17:27.254Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:17:27.256Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:17:27.527Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:17:27.776Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-10T20:17:27.777Z"}
+{"level":"warn","message":"node-cron is not installed; scheduler fallback is active","timestamp":"2026-05-10T20:17:28.075Z"}
+{"expression":"0 * * * *","level":"warn","message":"Scheduler using interval fallback","name":"cleanup","timestamp":"2026-05-10T20:17:28.079Z"}
+{"expression":"*/30 * * * *","level":"warn","message":"Scheduler using interval fallback","name":"trending","timestamp":"2026-05-10T20:17:28.087Z"}
+{"expression":"0 0 * * *","level":"warn","message":"Scheduler using interval fallback","name":"analytics","timestamp":"2026-05-10T20:17:28.091Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-10T20:17:28.109Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:17:28.367Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:17:28.377Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:17:28.637Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:17:28.646Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:17:28.685Z"}
+{"level":"warn","message":"socket.io is not installed; realtime events will be no-op","timestamp":"2026-05-10T20:19:07.872Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:19:07.878Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:19:08.612Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:19:08.613Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:19:09.154Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:19:09.415Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-10T20:19:09.417Z"}
+{"level":"warn","message":"node-cron is not installed; scheduler fallback is active","timestamp":"2026-05-10T20:19:09.532Z"}
+{"expression":"0 * * * *","level":"warn","message":"Scheduler using interval fallback","name":"cleanup","timestamp":"2026-05-10T20:19:09.533Z"}
+{"expression":"*/30 * * * *","level":"warn","message":"Scheduler using interval fallback","name":"trending","timestamp":"2026-05-10T20:19:09.537Z"}
+{"expression":"0 0 * * *","level":"warn","message":"Scheduler using interval fallback","name":"analytics","timestamp":"2026-05-10T20:19:09.541Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-10T20:19:09.560Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:19:10.122Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:19:10.130Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:19:10.150Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:19:10.157Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:19:10.162Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:19:59.898Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:20:00.592Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:20:00.593Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:20:01.117Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:20:01.418Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-10T20:20:01.419Z"}
+{"level":"warn","message":"node-cron is not installed; scheduler fallback is active","timestamp":"2026-05-10T20:20:01.588Z"}
+{"expression":"0 * * * *","level":"warn","message":"Scheduler using interval fallback","name":"cleanup","timestamp":"2026-05-10T20:20:01.588Z"}
+{"expression":"*/30 * * * *","level":"warn","message":"Scheduler using interval fallback","name":"trending","timestamp":"2026-05-10T20:20:01.592Z"}
+{"expression":"0 0 * * *","level":"warn","message":"Scheduler using interval fallback","name":"analytics","timestamp":"2026-05-10T20:20:01.595Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-10T20:20:01.625Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:20:01.899Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:20:01.910Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:20:01.915Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:20:01.917Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:20:01.924Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:20:02.871Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:20:35.058Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:21:53.988Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:21:54.640Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:21:54.648Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:21:54.924Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:21:55.175Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-10T20:21:55.176Z"}
+{"level":"warn","message":"node-cron is not installed; scheduler fallback is active","timestamp":"2026-05-10T20:21:55.269Z"}
+{"expression":"0 * * * *","level":"warn","message":"Scheduler using interval fallback","name":"cleanup","timestamp":"2026-05-10T20:21:55.270Z"}
+{"expression":"*/30 * * * *","level":"warn","message":"Scheduler using interval fallback","name":"trending","timestamp":"2026-05-10T20:21:55.272Z"}
+{"expression":"0 0 * * *","level":"warn","message":"Scheduler using interval fallback","name":"analytics","timestamp":"2026-05-10T20:21:55.275Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-10T20:21:55.286Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:21:55.842Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:21:55.857Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:21:55.865Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:21:55.868Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:21:55.870Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:21:59.069Z"}
+{"level":"error","message":{"dbError":"MongoDB connection timed out"},"timestamp":"2026-05-10T20:22:10.092Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:23:10.950Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:23:12.481Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:23:12.483Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:23:12.774Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:23:13.030Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-10T20:23:13.035Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-10T20:23:14.183Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:14.454Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:14.459Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:14.463Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:14.466Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:14.469Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:23:15.073Z"}
+{"level":"error","message":{"dbError":"MongoDB connection timed out"},"timestamp":"2026-05-10T20:23:26.097Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:23:44.392Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:23:45.074Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:23:45.076Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:23:45.336Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:23:48.724Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:23:49.401Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:23:49.403Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:23:49.690Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:23:49.945Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-10T20:23:49.946Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-10T20:23:50.174Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:50.423Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:50.425Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:50.426Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:50.428Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:50.672Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:23:56.382Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:23:57.079Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:23:57.080Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:23:57.355Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:23:57.615Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-10T20:23:57.616Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-10T20:23:57.805Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:58.065Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:58.075Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:58.078Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:58.319Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:23:58.329Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:24:00.714Z"}
+{"level":"error","message":{"dbError":"MongoDB connection timed out"},"timestamp":"2026-05-10T20:24:11.732Z"}
+{"error":"MongoDB connection timed out","level":"warn","message":"MongoDB unavailable during startup","timestamp":"2026-05-10T20:24:11.733Z"}
+{"error":"","level":"error","message":"Redis client error","timestamp":"2026-05-10T20:24:11.788Z"}
+{"error":"","level":"error","message":"Redis client error","timestamp":"2026-05-10T20:24:11.796Z"}
+{"error":"","level":"error","message":"Redis client error","timestamp":"2026-05-10T20:24:12.349Z"}
+{"error":"","level":"error","message":"Redis client error","timestamp":"2026-05-10T20:24:13.362Z"}
+{"error":"","level":"error","message":"Redis client error","timestamp":"2026-05-10T20:24:14.872Z"}
+{"error":"","level":"error","message":"Redis client error","timestamp":"2026-05-10T20:24:16.930Z"}
+{"level":"error","message":"Redis retry limit reached","retries":6,"timestamp":"2026-05-10T20:24:19.493Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:25:26.784Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:25:27.494Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:25:27.496Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:25:27.789Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:25:28.036Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-10T20:25:28.039Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-10T20:25:28.362Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:25:28.656Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:25:28.657Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:25:28.664Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:25:28.904Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-10T20:25:28.909Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-10T20:26:23.798Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-10T20:26:24.449Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-10T20:26:24.450Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-10T20:26:24.718Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-10T20:26:24.961Z"}

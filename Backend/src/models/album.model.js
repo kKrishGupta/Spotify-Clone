@@ -13,6 +13,8 @@ const albumSchema = new mongoose.Schema({
     ref:"user",
     required: true
   }
+},{
+  timestamps:true
 })
 
 const albumModel =  mongoose.model("album" , albumSchema);

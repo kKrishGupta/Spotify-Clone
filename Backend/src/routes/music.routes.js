@@ -3,13 +3,8 @@ const router = express.Router();
 
 const musicController = require("../controllers/music.controller");
 const { protect, authorize } = require("../middlewares/auth.middleware");
-
-const multer = require("multer");
-
-// ✅ Memory storage (good for Cloudinary later)
-const upload = multer({
-  storage: multer.memoryStorage(),
-});
+const upload =
+require("../middlewares/upload.middleware");
 
 // 🎵 Upload song (Artist only)
 router.post(

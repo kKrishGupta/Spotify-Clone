@@ -2,6 +2,7 @@ const asyncHandler = require("../utils/asyncHandler");
 const { getPersonalizedFeed } = require("../service/recommendation.service");
 const redis = require("../config/redis");
 const { getHybridSongs } = require("../service/music.service");
+const logger = require("../config/logger");
 
 // 🎯 USER-AWARE + CACHED FEED
 const getFeed = asyncHandler(async (req, res) => {
@@ -18,7 +19,17 @@ const getFeed = asyncHandler(async (req, res) => {
   const cacheKey = `feed:${userId}`;
 
   // 🔥 1. Try cache first
-  const cachedData = await redis.get(cacheKey);
+  let cachedData = null;
+
+  try {
+    await redis.connectRedis();
+    cachedData = await redis.get(cacheKey);
+  } catch (err) {
+    logger.warn({
+      message: "Feed cache read skipped",
+      error: err.message,
+    });
+  }
 
   if (cachedData) {
     return res.status(200).json({
@@ -37,9 +48,17 @@ const getFeed = asyncHandler(async (req, res) => {
 }
 
   // 🔥 3. Store in Redis (TTL: 60 seconds)
-  await redis.set(cacheKey, JSON.stringify(data), {
-    EX: 60,
-  });
+  try {
+    await redis.connectRedis();
+    await redis.set(cacheKey, JSON.stringify(data), {
+      EX: 60,
+    });
+  } catch (err) {
+    logger.warn({
+      message: "Feed cache write skipped",
+      error: err.message,
+    });
+  }
 
   res.status(200).json({
     success: true,

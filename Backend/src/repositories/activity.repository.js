@@ -1,14 +1,30 @@
 const activityModel = require("../models/activity.model");
 
-const getUserActivity = (userId) => {
-  return activityModel.find({ user: userId }).lean();
+// 👤 USER ACTIVITY
+const findByUser = async (userId) => {
+  return await activityModel
+    .find({ user: userId })
+    .populate("song", "title")
+    .sort({ createdAt: -1 });
 };
 
-const createActivity = (data) => {
-  return activityModel.create(data);
+// 🌍 GLOBAL FEED
+const findGlobal = async () => {
+  return await activityModel
+    .find()
+    .populate("user", "username")
+    .populate("song", "title")
+    .sort({ createdAt: -1 })
+    .limit(20);
+};
+
+// 🆕 CREATE ACTIVITY (FIXED)
+const createActivity = async (data) => {
+  return await activityModel.create(data);
 };
 
 module.exports = {
-  getUserActivity,
-  createActivity
+  findByUser,
+  findGlobal,
+  createActivity,
 };

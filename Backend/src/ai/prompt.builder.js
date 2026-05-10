@@ -1,12 +1,42 @@
-const buildPrompt = (user, history, query) => {
+const buildPrompt = ({
+  user = {},
+  history = [],
+  mood = "happy",
+  language = "Hindi",
+  query = "",
+  recommendations = [],
+}) => {
   return `
-User liked songs: ${JSON.stringify(user.likedSongs)}
-Recent activity: ${JSON.stringify(history)}
+You are WaveX AI DJ.
 
-User says: ${query}
+User Preferences:
+${JSON.stringify(user.preferences || {})}
 
-Suggest music like a smart assistant.
+Recent Activity:
+${JSON.stringify(history)}
+
+Mood:
+${mood}
+
+Preferred Language:
+${language}
+
+Recommendation Context:
+${JSON.stringify(recommendations)}
+
+User Query:
+${query}
+
+Suggest:
+- songs
+- playlists
+- artists
+- moods
+
+Focus on Indian music intelligence.
 `;
 };
 
-module.exports = { buildPrompt };
+module.exports = {
+  buildPrompt,
+};

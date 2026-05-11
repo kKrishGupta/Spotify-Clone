@@ -10,6 +10,7 @@ const audioQueue = require("../queues/audio.queue");
 const analyticsQueue = require("../queues/analytics.queue");
 const { invalidateMusicCache } = require("../cache/music.cache");
 const { invalidateFeedCache } = require("../cache/feed.cache");
+const ExternalSong = require("../models/externalSong.model");
 
 // 🚀 NEW: Queue instead of direct DB write
 const activityQueue = require("../queues/activity.queue");
@@ -27,54 +28,101 @@ const invalidateMusicMutationCaches = async () => {
 };
 
 // 🎵 CREATE MUSIC
-const createMusic = asyncHandler(async (req, res) => {
-  const { title, genre } = req.body;
+const createMusic = asyncHandler(
+  async (req, res) => {
+    const {title,genre,language} = req.body;
 
-  if (!req.file) {
-    return res.status(400).json({ message: "Music file is required" });
-  }
-
-  const file = req.file;
-  const result = await uploadFile(file.buffer.toString("base64"));
-
-  const music = await musicModel.create({
-    uri: result.url,
-    title,
-    genre,
-    artist: req.user.id,
-    source: "upload",
-    status: "pending",
-  });
-
-  await audioQueue
-    .add("process-upload", {
-      musicId: music._id.toString(),
-      url: result.url,
-      filename: music._id.toString(),
-    })
-    .catch((err) => {
-      logger.warn({
-        message: "Audio processing queue enqueue failed",
-        musicId: music._id,
-        error: err.message,
+    // ❌ Validate file
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Music file is required",
       });
+    }
+
+    const file = req.file;
+    // ☁ Upload to cloud storage
+    const result =
+      await uploadFile(
+        file.buffer.toString(
+          "base64"
+        )
+      );
+
+    // 💾 Save music metadata
+    const music =
+      await musicModel.create({
+        uri: result.url,
+        title,
+        genre,
+        audioLanguage:
+          language,
+        artist:
+          req.user.id,
+        source: "upload",
+        status: "pending",
+      });
+
+    // 🎧 Queue audio processing
+    await audioQueue
+      .add(
+        "process-upload",
+        {
+          musicId:
+            music._id.toString(),
+          url: result.url,
+          filename:
+            music._id.toString(),
+        }
+      )
+      .catch((err) => {
+        logger.warn({
+          message:
+            "Audio processing queue enqueue failed",
+          musicId:
+            music._id,
+          error:
+            err.message,
+        });
+      });
+
+    // 🧹 Clear caches
+    await invalidateMusicMutationCaches();
+
+    // ✅ Response
+    res.status(201).json({
+      success: true,
+
+      message:
+        "Music created successfully",
+
+      music: {
+        id: music._id,
+
+        uri: music.uri,
+
+        title:
+          music.title,
+
+        genre:
+          music.genre,
+
+        audioLanguage:
+          music.audioLanguage,
+
+        artist:
+          music.artist,
+
+        source:
+          music.source,
+
+        status:
+          music.status,
+      },
     });
-
-  await invalidateMusicMutationCaches();
-
-  res.status(201).json({
-    message: "Music created successfully",
-    music: {
-      id: music._id,
-      uri: music.uri,
-      title: music.title,
-      artist: music.artist,
-      genre: music.genre,
-      source: music.source,
-      status: music.status,
-    },
-  });
-});
+  }
+);
 
 // 🎧 CREATE ALBUM
 const createAlbum = asyncHandler(async (req, res) => {
@@ -109,94 +157,253 @@ const getAllMusics = asyncHandler(async (req, res) => {
 
 // 🔥 INCREMENT PLAY (QUEUE BASED)
 const incrementPlay = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+     const { id } = req.params;
 
-  const music = await musicRepo.incrementPlay(id);
+     // 🔥 EXTERNAL SONG
+     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+       // FIND EXISTING
+       let song =await ExternalSong.findOne({externalId: id,});
 
-  if (!music) {
-    return res.status(404).json({ message: "Song not found" });
-  }
+       // CREATE IF NOT EXISTS
+       if (!song) {
+         song =
+           await ExternalSong.create(
+             {
+               externalId:
+                 id,
 
-  // 🚀 Send to queue instead of DB
-  await activityQueue
-    .add("trackActivity", {
-      user: req.user.id,
-      song: id,
-      action: "play",
-    })
-    .catch((err) => {
-      logger.warn({
-        message: "Activity queue enqueue failed",
-        action: "play",
-        song: id,
-        error: err.message,
-      });
-    });
+               title:
+                 req.body
+                   ?.title ||
+                 "Unknown",
 
-  await invalidateMusicMutationCaches();
+               artist:
+                 req.body
+                   ?.artist ||
+                 "Unknown",
 
-  res.status(200).json({
-    success: true,
-    message: "Play count incremented",
-    music,
-  });
-});
+               cover:
+                 req.body
+                   ?.cover ||
+                 "",
+
+               uri:
+                 req.body
+                   ?.uri ||
+                 "",
+
+               source:
+                 req.body
+                   ?.source ||
+                 "external",
+             }
+           );
+       }
+
+       // 🔥 TRACK PLAY
+       song.plays += 1;
+
+       await song.save();
+
+       return res
+         .status(200)
+         .json({
+           success: true,
+
+           external: true,
+
+           message:
+             "External song play tracked",
+
+           data: {
+             id:
+               song.externalId,
+
+             plays:
+               song.plays,
+           },
+         });
+     }
+
+     // ✅ NORMAL DB SONG
+     const music =
+       await musicModel.findById(
+         id
+       );
+
+     if (!music) {
+       return res
+         .status(404)
+         .json({
+           success:
+             false,
+
+           message:
+             "Song not found",
+         });
+     }
+
+     music.plays += 1;
+
+     await music.save();
+
+     return res
+       .status(200)
+       .json({
+         success: true,
+
+         external: false,
+
+         message:
+           "Song play tracked",
+
+         data: {
+           id:
+             music._id,
+
+           plays:
+             music.plays,
+         },
+       });
+   }
+ );
 
 // ❤️ LIKE SONG (QUEUE BASED)
-const likeSong = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+const likeSong =
+ asyncHandler(
+   async (req, res) => {
+     const { id } =
+       req.params;
 
-  // ✅ 1. Increment likes count
-  const music = await musicModel.findByIdAndUpdate(
-    id,
-    { $inc: { likes: 1 } },
-    { new: true }
-  );
+     // 🔥 EXTERNAL SONG
+     if (
+       !id.match(
+         /^[0-9a-fA-F]{24}$/
+       )
+     ) {
 
-  if (!music) {
-    return res.status(404).json({ message: "Song not found" });
-  }
+       let song =
+         await ExternalSong.findOne(
+           {
+             externalId: id,
+           }
+         );
 
-  // ✅ 2. Store in user profile (IMPORTANT)
-  await userModel.findByIdAndUpdate(req.user.id, {
-    $addToSet: { likedSongs: id }, // avoids duplicates
-  });
+       if (!song) {
+         song =
+           await ExternalSong.create(
+             {
+               externalId:
+                 id,
 
-  // 🚀 3. Queue activity (non-blocking)
-  await activityQueue
-    .add("trackActivity", {
-      user: req.user.id,
-      song: id,
-      action: "like",
-    })
-    .catch((err) => {
-      logger.warn({
-        message: "Activity queue enqueue failed",
-        action: "like",
-        song: id,
-        error: err.message,
-      });
-    });
+               title:
+                 req.body
+                   ?.title ||
+                 "Unknown",
 
-  await analyticsQueue
-    .add("like", {
-      type: "like",
-      value: 1,
-      meta: {
-        user: req.user.id,
-        song: id,
-      },
-    })
-    .catch(() => {});
+               artist:
+                 req.body
+                   ?.artist ||
+                 "Unknown",
 
-  await invalidateMusicMutationCaches();
+               cover:
+                 req.body
+                   ?.cover ||
+                 "",
 
-  res.status(200).json({
-    success: true,
-    message: "Song liked",
-    music,
-  });
-});
+               uri:
+                 req.body
+                   ?.uri ||
+                 "",
+
+               source:
+                 req.body
+                   ?.source ||
+                 "external",
+             }
+           );
+       }
+
+       // 🔥 PREVENT DUPLICATE LIKES
+       const alreadyLiked =
+         song.usersLiked.includes(
+           req.user.id
+         );
+
+       if (
+         !alreadyLiked
+       ) {
+         song.likes += 1;
+
+         song.usersLiked.push(
+           req.user.id
+         );
+
+         await song.save();
+       }
+
+       return res
+         .status(200)
+         .json({
+           success: true,
+
+           external: true,
+
+           message:
+             "External song liked",
+
+           data: {
+             id:
+               song.externalId,
+
+             likes:
+               song.likes,
+           },
+         });
+     }
+
+     // ✅ NORMAL SONG
+     const music =
+       await musicModel.findById(
+         id
+       );
+
+     if (!music) {
+       return res
+         .status(404)
+         .json({
+           success:
+             false,
+
+           message:
+             "Song not found",
+         });
+     }
+
+     music.likes += 1;
+
+     await music.save();
+
+     return res
+       .status(200)
+       .json({
+         success: true,
+
+         external: false,
+
+         message:
+           "Song liked",
+
+         data: {
+           id:
+             music._id,
+
+           likes:
+             music.likes,
+         },
+       });
+   }
+ );
 
 // 📀 GET ALL ALBUMS
 const getAllAlbums = asyncHandler(async (req, res) => {
@@ -227,53 +434,140 @@ const getAlbumById = asyncHandler(async (req, res) => {
   });
 });
 
-// 🎼 GET MUSIC BY GENRE
-const getMusicByGenre = asyncHandler(async (req, res) => {
-  const { genre } = req.query;
+const getMusicByGenre =
+  asyncHandler(
+    async (req, res) => {
+      const {
+        genre,
+      } = req.query;
 
-  const musics = await musicModel.find({
-    genre,
-    status: "approved",
-  });
+      // 🔥 VALIDATION
+      if (!genre) {
+        return res
+          .status(400)
+          .json({
+            success:
+              false,
 
-  res.status(200).json(musics);
-});
+            message:
+              "Genre is required",
+          });
+      }
+
+      // 🔥 GET HYBRID SONGS
+      const songs =
+        await getHybridSongs();
+
+      // 🔥 FILTER
+      const filteredSongs =
+        songs.filter(
+          (song) => {
+            const songGenre =
+              (
+                song.genre ||
+                ""
+              ).toLowerCase();
+
+            const title =
+              (
+                song.title ||
+                ""
+              ).toLowerCase();
+
+            const artist =
+              (
+                song.artist ||
+                ""
+              ).toLowerCase();
+
+            const q =
+              genre.toLowerCase();
+
+            // 🔥 MULTI-MATCH SYSTEM
+            return (
+              songGenre.includes(
+                q
+              ) ||
+
+              title.includes(
+                q
+              ) ||
+
+              artist.includes(
+                q
+              )
+            );
+          }
+        );
+
+      return res
+        .status(200)
+        .json({
+          success: true,
+
+          genre,
+
+          total:
+            filteredSongs.length,
+
+          data:
+            filteredSongs,
+        });
+    }
+  );
 
 // 🔍 SEARCH MUSIC
-const searchMusic = asyncHandler(async (req, res) => {
-  const { q } = req.query;
+const {
+  searchSongs,
+} = require(
+  "../service/search.service"
+);
 
-  if (!q || !q.trim()) {
-    return res.json({ success: true, data: [] });
-  }
+const searchMusic =
+  asyncHandler(
+    async (req, res) => {
+      const {
+        query,
+        page = 1,
+        limit = 20,
+      } = req.query;
 
-  const songs = await musicModel
-    .find({
-      status: "approved",
-      $or: [
-        { title: { $regex: q, $options: "i" } },
-        { genre: { $regex: q, $options: "i" } },
-      ],
-    })
-    .populate("artist", "username")
-    .limit(20);
+      // 🔥 EMPTY QUERY
+      if (
+        !query ||
+        !query.trim()
+      ) {
+        return res.json({
+          success: true,
+          data: [],
+        });
+      }
 
-  const formattedSongs = songs.map((song) => ({
-    id: song._id,
-    title: song.title,
-    artist: song.artist?.username || "Unknown",
-    cover: song.cover || "https://via.placeholder.com/150",
-    uri: song.uri,
-    plays: song.plays || 0,
-    likes: song.likes || 0,
-    duration: song.duration || 0,
-  }));
+      // 🔥 HYBRID SEARCH
+      const results =
+        await searchSongs(
+          query,
+          Number(page),
+          Number(limit)
+        );
 
-  res.json({
-    success: true,
-    data: formattedSongs,
-  });
-});
+      res.status(200).json({
+        success: true,
+
+        total:
+          results.total,
+
+        currentPage:
+          results.currentPage,
+
+        totalPages:
+          results.totalPages,
+
+        data:
+          results.songs,
+      });
+    }
+  );
 
 module.exports = {
   createMusic,

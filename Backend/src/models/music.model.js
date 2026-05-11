@@ -26,7 +26,7 @@ const musicSchema = new mongoose.Schema(
       index: true,
     },
 
-    language: {
+    audiolanguage: {
       type: String,
       enum: [
         "Hindi",

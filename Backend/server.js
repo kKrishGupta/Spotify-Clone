@@ -3,7 +3,7 @@ require("dotenv").config();
 const http = require("http");
 const connectDB = require("./src/config/db");
 const app = require("./src/app");
-const redis = require("./src/config/redis");
+const {client: redis,connectRedis,} = require("./src/config/redis");
 const logger = require("./src/config/logger");
 const { PORT } = require("./src/config/env");
 const { initializeSocket } = require("./src/config/socket");
@@ -67,7 +67,7 @@ const startServer = async () => {
     let redisAvailable = false;
 
     try {
-      await redis.connectRedis();
+      await connectRedis();
       redisAvailable = true;
       logger.info("Redis connected successfully");
     } catch (err) {

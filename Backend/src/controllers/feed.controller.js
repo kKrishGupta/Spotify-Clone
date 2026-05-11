@@ -1,70 +1,219 @@
-const asyncHandler = require("../utils/asyncHandler");
-const { getPersonalizedFeed } = require("../service/recommendation.service");
-const redis = require("../config/redis");
-const { getHybridSongs } = require("../service/music.service");
-const logger = require("../config/logger");
+const asyncHandler =
+  require(
+    "../utils/asyncHandler"
+  );
 
-// 🎯 USER-AWARE + CACHED FEED
-const getFeed = asyncHandler(async (req, res) => {
-  const userId = req.user?.id;
+const {
+  getPersonalizedFeed,
+} = require(
+  "../service/recommendation.service"
+);
 
-  // ✅ Auth safety
-  if (!userId) {
-    return res.status(401).json({
-      success: false,
-      message: "Unauthorized - user not found",
-    });
-  }
+const {
+  getHybridSongs,
+} = require(
+  "../service/music.service"
+);
 
-  const cacheKey = `feed:${userId}`;
+const {
+  getTrendingSongs,
+} = require(
+  "../service/trending.service"
+);
 
-  // 🔥 1. Try cache first
-  let cachedData = null;
+const redis =
+  require(
+    "../config/redis"
+  );
 
-  try {
-    await redis.connectRedis();
-    cachedData = await redis.get(cacheKey);
-  } catch (err) {
-    logger.warn({
-      message: "Feed cache read skipped",
-      error: err.message,
-    });
-  }
+const logger =
+  require(
+    "../config/logger"
+  );
 
-  if (cachedData) {
-    return res.status(200).json({
-      success: true,
-      data: JSON.parse(cachedData),
-      source: "cache", // optional (debugging)
-    });
-  }
+// 🚀 SMART FEED ENGINE
+const getFeed =
+  asyncHandler(
+    async (req, res) => {
 
-  // 🔥 2. Generate personalized feed
-  const data = await getPersonalizedFeed(userId);
+      const userId =
+        req.user?.id;
 
-  if (!data.length) {
-  const hybrid = await getHybridSongs();
-  return res.json({ success: true, data: hybrid });
-}
+      if (!userId) {
+        return res
+          .status(401)
+          .json({
+            success:
+              false,
 
-  // 🔥 3. Store in Redis (TTL: 60 seconds)
-  try {
-    await redis.connectRedis();
-    await redis.set(cacheKey, JSON.stringify(data), {
-      EX: 60,
-    });
-  } catch (err) {
-    logger.warn({
-      message: "Feed cache write skipped",
-      error: err.message,
-    });
-  }
+            message:
+              "Unauthorized",
+          });
+      }
 
-  res.status(200).json({
-    success: true,
-    data,
-    source: "api", // optional (debugging)
-  });
-});
+      const cacheKey =
+        `feed:${userId}`;
 
-module.exports = { getFeed };
+      // 🔥 CACHE
+      try {
+        const cached =
+          await redis.get(
+            cacheKey
+          );
+
+        if (cached) {
+          return res
+            .status(200)
+            .json({
+              success: true,
+
+              source:
+                "cache",
+
+              data:
+                JSON.parse(
+                  cached
+                ),
+            });
+        }
+      } catch (err) {
+        logger.warn({
+          message:
+            "Feed cache read failed",
+
+          error:
+            err.message,
+        });
+      }
+
+      // 🚀 PERSONALIZED
+      let personalized =
+        [];
+
+      try {
+        personalized =
+          await getPersonalizedFeed(
+            userId
+          );
+      } catch (err) {
+        logger.warn({
+          message:
+            "Personalized feed failed",
+
+          error:
+            err.message,
+        });
+      }
+
+      // 🚀 TRENDING
+      let trending =
+        [];
+
+      try {
+        trending =
+          await getTrendingSongs();
+      } catch (err) {
+        logger.warn({
+          message:
+            "Trending fetch failed",
+
+          error:
+            err.message,
+        });
+      }
+
+      // 🚀 HYBRID FALLBACK
+      let hybrid = [];
+
+      try {
+        hybrid =
+          await getHybridSongs();
+      } catch (err) {
+        logger.warn({
+          message:
+            "Hybrid fetch failed",
+
+          error:
+            err.message,
+        });
+      }
+
+      // 🚀 MERGE FEED
+      const finalFeed =
+        [
+          ...personalized,
+          ...trending,
+          ...hybrid,
+        ];
+
+      // 🚀 REMOVE DUPLICATES
+      const unique =
+        [];
+
+      const seen =
+        new Set();
+
+      for (const song of finalFeed) {
+
+        const id =
+          song.id ||
+          song._id?.toString();
+
+        if (
+          !id ||
+          seen.has(id)
+        )
+          continue;
+
+        seen.add(id);
+
+        unique.push(song);
+      }
+
+      // 🚀 LIMIT
+      const result =
+        unique.slice(0, 50);
+
+      // 🚀 CACHE
+      try {
+        await redis.set(
+          cacheKey,
+
+          JSON.stringify(
+            result
+          ),
+
+          {
+            EX: 60,
+          }
+        );
+      } catch (err) {
+        logger.warn({
+          message:
+            "Feed cache write failed",
+
+          error:
+            err.message,
+        });
+      }
+
+      return res
+        .status(200)
+        .json({
+          success: true,
+
+          source:
+            "api",
+
+          total:
+            result.length,
+
+          data:
+            result,
+        });
+    }
+  );
+
+module.exports = {
+  getFeed,
+};

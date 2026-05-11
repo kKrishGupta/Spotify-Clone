@@ -13,11 +13,11 @@ const {
 const worker = new Worker(
   QUEUES.ACTIVITY,
   async (job) => {
-    const { user, song, action, metadata } = job.data || {};
+    const { user, songId, action, metadata } = job.data || {};
 
     const activity = await activityRepo.createActivity({
       user,
-      song,
+      songId,
       action,
       metadata,
     });
@@ -28,7 +28,7 @@ const worker = new Worker(
         value: 1,
         meta: {
           user,
-          song,
+          songId,
           action,
         },
       })
@@ -41,10 +41,10 @@ const worker = new Worker(
 
     const io = getIO();
     if (io && action === "play") {
-      emitSongPlayed(io, { user, song });
+      emitSongPlayed(io, { user, songId });
     }
     if (io && action === "like") {
-      emitSongLiked(io, { user, song });
+      emitSongLiked(io, { user, songId });
     }
 
     return {

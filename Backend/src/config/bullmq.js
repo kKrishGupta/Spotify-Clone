@@ -1,64 +1,108 @@
-const IORedis = require("ioredis");
-const logger = require("./logger");
+const IORedis =
+  require("ioredis");
 
-const REDIS_URL = process.env.REDIS_URL || "redis://127.0.0.1:6379";
+const logger =
+  require("./logger");
 
-const connections = new Set();
+const REDIS_URL =
+  process.env.REDIS_URL;
 
-const createBullMQConnection = (name = "bullmq") => {
-  const connection = new IORedis(REDIS_URL, {
-    lazyConnect: true,
-    maxRetriesPerRequest: null,
-    enableReadyCheck: false,
-    enableOfflineQueue: process.env.BULLMQ_ENABLE_OFFLINE_QUEUE === "true",
-    connectTimeout: Number(process.env.REDIS_CONNECT_TIMEOUT_MS || 5000),
-    retryStrategy: (times) => {
-      if (times > 5) {
-        return null;
+const connections =
+  new Set();
+
+const createBullMQConnection =
+  (
+    name = "bullmq"
+  ) => {
+    const connection =
+      new IORedis(
+        REDIS_URL,
+        {
+          lazyConnect: true,
+
+          maxRetriesPerRequest:
+            null,
+
+          enableReadyCheck:
+            true,
+
+          enableOfflineQueue:
+            true,
+
+          connectTimeout:
+            20000,
+
+          retryStrategy: (
+            times
+          ) => {
+            logger.warn({
+              message:
+                "Retrying BullMQ Redis connection",
+
+              connection:
+                name,
+
+              attempt:
+                times,
+            });
+
+            return Math.min(
+              times * 1000,
+              5000
+            );
+          },
+        }
+      );
+
+    connection.on(
+      "connect",
+      () => {
+        logger.info({
+          message:
+            "BullMQ Redis connected",
+
+          connection:
+            name,
+        });
       }
+    );
 
-      return Math.min(times * 500, 3000);
-    },
-    tls: REDIS_URL.startsWith("rediss://")
-      ? { rejectUnauthorized: false }
-      : undefined,
-  });
+    connection.on(
+      "ready",
+      () => {
+        logger.info({
+          message:
+            "BullMQ Redis ready",
 
-  connection.on("error", (err) => {
-    logger.error({
-      message: "BullMQ Redis connection error",
-      connection: name,
-      error: err.message,
-    });
-  });
-
-  connection.on("connect", () => {
-    logger.info({
-      message: "BullMQ Redis connected",
-      connection: name,
-    });
-  });
-
-  connections.add(connection);
-  return connection;
-};
-
-const closeBullMQConnections = async () => {
-  await Promise.allSettled(
-    [...connections].map(async (connection) => {
-      if (connection.status === "wait") {
-        connection.disconnect();
-        return;
+          connection:
+            name,
+        });
       }
+    );
 
-      if (connection.status !== "end") {
-        await connection.quit();
+    connection.on(
+      "error",
+      (err) => {
+        logger.error({
+          message:
+            "BullMQ Redis error",
+
+          connection:
+            name,
+
+          error:
+            err.message,
+        });
       }
-    })
-  );
-};
+    );
+
+    connections.add(
+      connection
+    );
+
+    return connection;
+  };
 
 module.exports = {
   createBullMQConnection,
-  closeBullMQConnections,
 };

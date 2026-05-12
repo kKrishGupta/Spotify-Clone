@@ -18,13 +18,34 @@ const worker = new Worker(
     const result = await processAudio(job.data);
 
     if (job.data?.musicId) {
-      await musicModel.findByIdAndUpdate(job.data.musicId, {
-        waveform: result.waveform?.waveform || "",
-        hls: result.hls?.playlist || "",
-        processedFiles: {
-          bitrates: result.bitrates || [],
-        },
-      });
+      await musicModel.findByIdAndUpdate(
+  job.data.musicId,
+
+  {
+    waveform:
+      result.waveform?.waveform || "",
+
+    hls:
+      result.hls?.playlist || "",
+
+    duration:
+      result.metadata?.duration || 0,
+
+    processedFiles: {
+      bitrates:
+        result.bitrates || [],
+    },
+
+    quality: [
+      "64kbps",
+      "128kbps",
+      "320kbps",
+    ],
+
+    status:
+      "approved",
+  }
+)
     }
 
     const io = getIO();

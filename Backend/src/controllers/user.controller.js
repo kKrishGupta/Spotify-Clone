@@ -2,6 +2,7 @@ const asyncHandler = require("../utils/asyncHandler");
 const userModel = require("../models/user.model");
 const musicModel = require("../models/music.model");
 const activityModel = require("../models/activity.model");
+const notificationService = require("../service/notification.service");
 
 const getUserDashboard = async (req, res) => {
   try {
@@ -22,7 +23,6 @@ const getUserDashboard = async (req, res) => {
     // 🔥 recent activity
     const recent = await activityModel
       .find({ user: userId })
-      .populate("song")
       .sort({ createdAt: -1 })
       .limit(10);
 
@@ -38,11 +38,14 @@ const getUserDashboard = async (req, res) => {
         ],
 
         recent: recent.map((a) => ({
-          id: a._id,
-          title: a.song?.title,
-          artist: a.song?.artist,
-          cover: a.song?.cover,
-        })),
+  id: a._id,
+  title: a.title,
+  artist: a.artist,
+  cover: a.cover,
+  action: a.action,
+  createdAt:
+    a.createdAt,
+})),
       },
     });
   } catch (err) {
@@ -76,6 +79,22 @@ const followUser = asyncHandler(async (req, res) => {
       $addToSet: { followers: currentUserId },
     }),
   ]);
+
+  await notificationService.sendNotification(
+  {
+    user:
+      targetUserId,
+
+    message:
+      `${req.user.username} followed you`,
+
+    metadata: {
+      type: "follow",
+      follower:
+        currentUserId,
+    },
+  }
+);
 
   res.status(200).json({
     success: true,

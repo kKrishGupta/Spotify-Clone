@@ -1,32 +1,37 @@
 const redis = require("../config/redis");
+
 const SEARCH_TTL = 60;
 
-const getSearchCache = async (
-  key
-) => {
-  await redis.connectRedis();
-  const data = await redis.get(key);
-  return data ? JSON.parse(data) : null;
-};
+const getSearchCache =
+  async (key) => {
 
-const setSearchCache = async (
-  key,
-  value
-) => {
-  await redis.connectRedis();
-  await redis.set(
-    key,
-    JSON.stringify(value),
-    {
-      EX: SEARCH_TTL,
-    }
-  );
-};
+    const data =
+      await redis.get(key);
 
-const invalidateSearchCache = async (key) => {
-  await redis.connectRedis();
-  return redis.del(key);
-};
+    return data
+      ? JSON.parse(data)
+      : null;
+  };
+
+const setSearchCache =
+  async (key, value) => {
+
+    await redis.set(
+      key,
+
+      JSON.stringify(value),
+
+      {
+        EX: SEARCH_TTL,
+      }
+    );
+  };
+
+const invalidateSearchCache =
+  async (key) => {
+
+    return redis.del(key);
+  };
 
 module.exports = {
   getSearchCache,

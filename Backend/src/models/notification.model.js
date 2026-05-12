@@ -10,12 +10,40 @@ const notificationSchema =
             .Types.ObjectId,
 
         ref: "user",
+
+        required: true,
       },
 
-      message: String,
+      type: {
+        type: String,
+
+        enum: [
+          "follow",
+          "like",
+          "upload",
+          "playlist",
+          "system",
+        ],
+
+        default:
+          "system",
+      },
+
+      message: {
+        type: String,
+
+        required: true,
+      },
+
+      metadata: {
+        type: Object,
+
+        default: {},
+      },
 
       read: {
         type: Boolean,
+
         default: false,
       },
     },
@@ -24,6 +52,11 @@ const notificationSchema =
       timestamps: true,
     }
   );
+
+notificationSchema.index({
+  user: 1,
+  read: 1,
+});
 
 module.exports =
   mongoose.model(

@@ -1,10 +1,38 @@
-const asyncHandler =require("../utils/asyncHandler");
-const {resolveSongData} = require('../service/songResolver.service');
-const Playlist =require("../models/playlist.model");
+const asyncHandler = require(
+  "../utils/asyncHandler"
+);
 
-// 🚀 CREATE PLAYLIST
-const createPlaylist =asyncHandler(async (req, res) => {
-  const { name } =req.body;
+const {
+  resolveSongData,
+} = require(
+  "../service/songResolver.service"
+);
+
+const Playlist = require(
+  "../models/playlist.model"
+);
+
+const {
+  getIO,
+} = require(
+  "../config/socket"
+);
+
+const {
+  emitPlaylistUpdated,
+} = require(
+  "../events/playlist.events"
+);
+
+/* =========================================
+   🚀 CREATE PLAYLIST
+========================================= */
+
+const createPlaylist =
+  asyncHandler(
+    async (req, res) => {
+      const { name } =
+        req.body;
 
       if (!name) {
         return res
@@ -36,7 +64,10 @@ const createPlaylist =asyncHandler(async (req, res) => {
     }
   );
 
-// 🚀 ADD SONG TO PLAYLIST
+/* =========================================
+   🚀 ADD SONG TO PLAYLIST
+========================================= */
+
 const addSongToPlaylist =
   asyncHandler(
     async (req, res) => {
@@ -120,13 +151,36 @@ const addSongToPlaylist =
           });
       }
 
-      // 🚀 ADD SONG
+      // ➕ ADD SONG
       playlist.songs.push(
         songData
       );
 
       // 💾 SAVE PLAYLIST
       await playlist.save();
+
+      /* =====================================
+         📡 REALTIME PLAYLIST UPDATE
+      ===================================== */
+
+      const io = getIO();
+
+      if (io) {
+        emitPlaylistUpdated(
+          io,
+          playlist._id,
+          {
+            type:
+              "playlist:add-song",
+
+            playlistId:
+              playlist._id,
+
+            song:
+              songData,
+          }
+        );
+      }
 
       // ✅ RESPONSE
       res.status(200).json({
@@ -140,7 +194,10 @@ const addSongToPlaylist =
     }
   );
 
-// 🚀 GET USER PLAYLISTS
+/* =========================================
+   🚀 GET USER PLAYLISTS
+========================================= */
+
 const getUserPlaylists =
   asyncHandler(
     async (req, res) => {

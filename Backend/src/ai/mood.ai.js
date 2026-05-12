@@ -1,29 +1,89 @@
-const detectMood = async (
-  text
-) => {
-  const normalized =
-    text.toLowerCase();
+const moodMap = {
+  sad: [
+    "sad",
+    "cry",
+    "heartbreak",
+    "alone",
+    "pain",
+  ],
 
-  if (
-    normalized.includes("sad")
-  ) {
-    return { mood: "sad" };
-  }
+  workout: [
+    "gym",
+    "workout",
+    "fitness",
+    "power",
+    "energy",
+  ],
 
-  if (
-    normalized.includes("gym")
-  ) {
-    return { mood: "workout" };
-  }
+  focus: [
+    "study",
+    "focus",
+    "coding",
+    "deep work",
+  ],
 
-  if (
-    normalized.includes("study")
-  ) {
-    return { mood: "focus" };
-  }
+  romantic: [
+    "love",
+    "romantic",
+    "date",
+    "couple",
+  ],
 
-  return { mood: "happy" };
+  chill: [
+    "lofi",
+    "relax",
+    "calm",
+    "peaceful",
+  ],
 };
+
+const detectMood =
+  async (
+    text = ""
+  ) => {
+
+    const normalized =
+      text.toLowerCase();
+
+    let bestMood =
+      "happy";
+
+    let max = 0;
+
+    for (const [
+      mood,
+      words,
+    ] of Object.entries(
+      moodMap
+    )) {
+
+      let score = 0;
+
+      for (const word of words) {
+
+        if (
+          normalized.includes(
+            word
+          )
+        ) {
+          score++;
+        }
+      }
+
+      if (score > max) {
+
+        max = score;
+
+        bestMood =
+          mood;
+      }
+    }
+
+    return {
+      mood:
+        bestMood,
+    };
+  };
 
 module.exports = {
   detectMood,

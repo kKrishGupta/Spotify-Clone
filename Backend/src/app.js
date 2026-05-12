@@ -18,12 +18,18 @@ const rateLimiter = require("./middlewares/rateLimiter");
 const aiRoutes = require("./routes/ai.routes");
 // Global error handler
 const userRoutes = require('./routes/user.routes');
+const notificationRoutes = require("./routes/notification.routes");
+const analyticsRoutes = require("./routes/analytics.routes");
+const healthRoutes =require("./routes/health.routes");
+const traceMiddleware = require("./tracing/trace.middleware");
+
 const cors = require('cors');
 setupSecurity(app);
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
 app.use(rateLimiter);
+app.use(traceMiddleware);
 
 app.use(
   cors({
@@ -41,6 +47,9 @@ app.use('/api/admin',adminRoutes);
 app.use('/api/playlists', playlistRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/notifications',notificationRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/health',healthRoutes);
 app.use(errorHandler);
 
 module.exports = app;

@@ -1,66 +1,121 @@
-const ffmpeg = require("fluent-ffmpeg");
-const ffmpegPath = require("ffmpeg-static");
-const fs = require("fs/promises");
-const path = require("path");
+const ffmpeg =
+  require("fluent-ffmpeg");
 
-ffmpeg.setFfmpegPath(ffmpegPath);
+const ffmpegPath =
+  require("ffmpeg-static");
 
-const ensureDir = (dir) =>
-  fs.mkdir(dir, {
-    recursive: true,
-  });
+const fs =
+  require("fs/promises");
 
-const safeUnlink = async (filePath) => {
-  try {
-    await fs.unlink(filePath);
-  } catch (err) {
-    if (err.code !== "ENOENT") {
-      throw err;
-    }
-  }
-};
+const path =
+  require("path");
 
-const generateWaveform = async (inputFile) => {
-  const waveformDir = path.join("uploads", "waveforms");
-  const tempDir = path.join("uploads", "temp");
+ffmpeg.setFfmpegPath(
+  ffmpegPath
+);
 
-  await ensureDir(waveformDir);
-  await ensureDir(tempDir);
+/* =========================================
+   🚀 GENERATE WAVEFORM
+========================================= */
 
-  const id = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  const outputJson = path.join(waveformDir, `${id}.json`);
-  const tempRaw = path.join(tempDir, `${id}.raw`);
+const generateWaveform =
+  async (
+    inputFile
+  ) => {
 
-  return new Promise((resolve, reject) => {
-    const waveformData = [];
+    const waveformDir =
+      path.join(
+        "uploads",
+        "waveforms"
+      );
 
-    ffmpeg(inputFile)
-      .audioFilters("aformat=channel_layouts=mono")
-      .format("f32le")
-      .on("error", async (err) => {
-        await safeUnlink(tempRaw).catch(() => {});
-        reject(err);
-      })
-      .on("end", async () => {
-        try {
-          for (let i = 0; i < 200; i += 1) {
-            waveformData.push(Math.floor(Math.random() * 100));
-          }
+    await fs.mkdir(
+      waveformDir,
+      {
+        recursive:
+          true,
+      }
+    );
 
-          await fs.writeFile(outputJson, JSON.stringify(waveformData));
-          await safeUnlink(tempRaw);
+    const id =
+      `${Date.now()}`;
 
-          resolve({
-            waveform: outputJson,
-            peaks: waveformData,
-          });
-        } catch (err) {
-          reject(err);
-        }
-      })
-      .saveToFile(tempRaw);
-  });
-};
+    const output =
+      path.join(
+        waveformDir,
+        `${id}.png`
+      );
+
+    return new Promise(
+      (
+        resolve,
+        reject
+      ) => {
+
+        const command =
+          ffmpeg(inputFile)
+
+            .complexFilter([
+              "showwavespic=s=1200x200:colors=white",
+            ])
+
+            .frames(1)
+
+            .output(output)
+
+            .on(
+              "end",
+
+              () =>
+
+                resolve({
+                  waveform:
+                    output,
+                })
+            )
+
+            .on(
+              "error",
+
+              async (
+                err
+              ) => {
+
+                try {
+
+                  await fs.rm(
+                    output,
+                    {
+                      force: true,
+                    }
+                  );
+
+                } catch {}
+
+                reject(err);
+              }
+            )
+
+            .run();
+
+        // 🚨 TIMEOUT
+        setTimeout(
+          () => {
+
+            try {
+
+              command.kill(
+                "SIGKILL"
+              );
+
+            } catch {}
+          },
+
+          60000
+        );
+      }
+    );
+  };
 
 module.exports = {
   generateWaveform,

@@ -3,24 +3,6 @@ const asyncHandler =
     "../utils/asyncHandler"
   );
 
-const {
-  getPersonalizedFeed,
-} = require(
-  "../service/recommendation.service"
-);
-
-const {
-  getHybridSongs,
-} = require(
-  "../service/music.service"
-);
-
-const {
-  getTrendingSongs,
-} = require(
-  "../service/trending.service"
-);
-
 const redis =
   require(
     "../config/redis"
@@ -31,13 +13,26 @@ const logger =
     "../config/logger"
   );
 
-// 🚀 SMART FEED ENGINE
+const {
+  buildFeed,
+} = require(
+  "../service/feed.service"
+);
+
+/* =========================================
+   🚀 SMART FEED CONTROLLER
+========================================= */
+
 const getFeed =
   asyncHandler(
     async (req, res) => {
 
       const userId =
         req.user?.id;
+
+      /* =====================================
+         🔐 AUTH CHECK
+      ===================================== */
 
       if (!userId) {
         return res
@@ -54,7 +49,10 @@ const getFeed =
       const cacheKey =
         `feed:${userId}`;
 
-      // 🔥 CACHE
+      /* =====================================
+         🔥 CACHE READ
+      ===================================== */
+
       try {
         const cached =
           await redis.get(
@@ -86,95 +84,41 @@ const getFeed =
         });
       }
 
-      // 🚀 PERSONALIZED
-      let personalized =
-        [];
+      /* =====================================
+         🚀 BUILD FEED
+      ===================================== */
+
+      let result = [];
 
       try {
-        personalized =
-          await getPersonalizedFeed(
+        result =
+          await buildFeed(
             userId
           );
       } catch (err) {
-        logger.warn({
+        logger.error({
           message:
-            "Personalized feed failed",
+            "Feed build failed",
 
           error:
             err.message,
         });
+
+        return res
+          .status(500)
+          .json({
+            success:
+              false,
+
+            message:
+              "Failed to build feed",
+          });
       }
 
-      // 🚀 TRENDING
-      let trending =
-        [];
+      /* =====================================
+         🔥 CACHE WRITE
+      ===================================== */
 
-      try {
-        trending =
-          await getTrendingSongs();
-      } catch (err) {
-        logger.warn({
-          message:
-            "Trending fetch failed",
-
-          error:
-            err.message,
-        });
-      }
-
-      // 🚀 HYBRID FALLBACK
-      let hybrid = [];
-
-      try {
-        hybrid =
-          await getHybridSongs();
-      } catch (err) {
-        logger.warn({
-          message:
-            "Hybrid fetch failed",
-
-          error:
-            err.message,
-        });
-      }
-
-      // 🚀 MERGE FEED
-      const finalFeed =
-        [
-          ...personalized,
-          ...trending,
-          ...hybrid,
-        ];
-
-      // 🚀 REMOVE DUPLICATES
-      const unique =
-        [];
-
-      const seen =
-        new Set();
-
-      for (const song of finalFeed) {
-
-        const id =
-          song.id ||
-          song._id?.toString();
-
-        if (
-          !id ||
-          seen.has(id)
-        )
-          continue;
-
-        seen.add(id);
-
-        unique.push(song);
-      }
-
-      // 🚀 LIMIT
-      const result =
-        unique.slice(0, 50);
-
-      // 🚀 CACHE
       try {
         await redis.set(
           cacheKey,
@@ -196,6 +140,10 @@ const getFeed =
             err.message,
         });
       }
+
+      /* =====================================
+         ✅ RESPONSE
+      ===================================== */
 
       return res
         .status(200)

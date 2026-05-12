@@ -1,7 +1,5 @@
 const activityModel =
-  require(
-    "../models/activity.model"
-  );
+  require("../models/activity.model");
 
 // 👤 USER ACTIVITY
 const findByUser =
@@ -11,10 +9,6 @@ const findByUser =
       .find({
         user: userId,
       })
-      .populate(
-        "user",
-        "username"
-      )
       .sort({
         createdAt: -1,
       });
@@ -28,7 +22,7 @@ const findGlobal =
       .find()
       .populate(
         "user",
-        "username"
+        "username avatar"
       )
       .sort({
         createdAt: -1,
@@ -36,7 +30,7 @@ const findGlobal =
       .limit(20);
   };
 
-// 🚀 CREATE
+// 🆕 CREATE
 const createActivity =
   async (data) => {
 
@@ -47,8 +41,6 @@ const createActivity =
 
 module.exports = {
   findByUser,
-
   findGlobal,
-
   createActivity,
 };

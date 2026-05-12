@@ -1,16 +1,38 @@
 const Playlist = require("../models/playlist.model");
 
-const create = (data) => Playlist.create(data);
+const create = async (data) => {
+  return await Playlist.create(data);
+};
 
-const addSong = (playlistId, songId) =>
-  Playlist.findByIdAndUpdate(
+const addSong = async (
+  playlistId,
+  songData
+) => {
+
+  return await Playlist.findByIdAndUpdate(
     playlistId,
-    { $addToSet: { songs: songId } },
-    { new: true }
-  );
 
-const findByUser = (userId) =>
-  Playlist.find({ user: userId }).populate("songs");
+    {
+      $push: {
+        songs: songData,
+      },
+    },
+
+    {
+      new: true,
+    }
+  );
+};
+
+const findByUser = async (
+  userId
+) => {
+  return await Playlist.find({
+    user: userId,
+  }).sort({
+    createdAt: -1,
+  });
+};
 
 module.exports = {
   create,

@@ -1,38 +1,102 @@
-const { Worker } = require("bullmq");
-const { createBullMQConnection } = require("../config/bullmq");
-const logger = require("../config/logger");
-const analyticsRepo = require("../repositories/analytics.repository");
-const QUEUES = require("../constants/queues");
+const { Worker } =
+  require("bullmq");
 
-const worker = new Worker(
-  QUEUES.ANALYTICS,
-  async (job) => {
-    const payload = job.data || {};
-
-    await analyticsRepo.create({
-      type: payload.type || job.name,
-      value: payload.value || 1,
-      meta: payload.meta || payload,
-    });
-
-    logger.info({
-      message: "Analytics event recorded",
-      jobId: job.id,
-      type: payload.type || job.name,
-    });
-  },
-  {
-    connection: createBullMQConnection("analytics-worker"),
-    concurrency: Number(process.env.ANALYTICS_WORKER_CONCURRENCY || 5),
-  }
+const {
+  createBullMQConnection,
+} = require(
+  "../config/bullmq"
 );
 
-worker.on("failed", (job, err) => {
-  logger.error({
-    message: "Analytics job failed",
-    jobId: job?.id,
-    error: err.message,
-  });
-});
+const logger =
+  require("../config/logger");
 
-module.exports = worker;
+const analyticsRepo =
+  require(
+    "../repositories/analytics.repository"
+  );
+
+const {
+  updateTrendingScore,
+} = require(
+  "../service/trending.service"
+);
+
+const {
+  updateUserEmbedding,
+} = require(
+  "../ai/embedding.service"
+);
+
+const QUEUES =
+  require(
+    "../constants/queues"
+  );
+
+const worker =
+  new Worker(
+    QUEUES.ANALYTICS,
+
+    async (job) => {
+
+      const payload =
+        job.data || {};
+
+      // 🚀 SAVE EVENT
+      const analytics =
+        await analyticsRepo.create(
+          payload
+        );
+
+      // 🚀 TRENDING UPDATE
+      if (
+        payload.songId
+      ) {
+
+        await updateTrendingScore(
+          payload.songId,
+          payload.type
+        );
+      }
+
+      // 🚀 AI SIGNAL
+      if (
+        payload.user
+      ) {
+
+        await updateUserEmbedding(
+          payload.user,
+          payload
+        );
+      }
+
+      logger.info({
+        message:
+          "Analytics processed",
+
+        type:
+          payload.type,
+
+        user:
+          payload.user,
+      });
+
+      return analytics;
+    },
+
+    {
+      connection:
+        createBullMQConnection(
+          "analytics-worker"
+        ),
+
+      concurrency:
+        Number(
+          process.env
+            .ANALYTICS_WORKER_CONCURRENCY ||
+            5
+        ),
+    }
+  );
+
+module.exports =
+  worker;

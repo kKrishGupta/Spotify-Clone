@@ -1,33 +1,57 @@
-const notificationModel =
+const notificationRepo =
   require(
-    "../models/notification.model"
+    "../repositories/notification.repository"
   );
 
-const createNotification =
+const notificationQueue =
+  require(
+    "../queues/notification.queue"
+  );
+
+const sendNotification =
   async ({
     user,
     message,
+    metadata = {},
   }) => {
-    return notificationModel.create(
+
+    await notificationQueue.add(
+      "send-notification",
       {
         user,
         message,
+        metadata,
       }
     );
   };
 
 const getNotifications =
   async (userId) => {
-    return notificationModel
-      .find({
-        user: userId,
-      })
-      .sort({
-        createdAt: -1,
-      });
+
+    return await notificationRepo.getUserNotifications(
+      userId
+    );
+  };
+
+const readNotification =
+  async (id) => {
+
+    return await notificationRepo.markAsRead(
+      id
+    );
+  };
+
+const removeNotification =
+  async (id) => {
+
+    return await notificationRepo.deleteNotification(
+      id
+    );
   };
 
 module.exports = {
-  createNotification,
+  sendNotification,
   getNotifications,
+  readNotification,
+  removeNotification,
 };

@@ -1,62 +1,328 @@
-const logger = require("./logger");
+const logger =
+  require("./logger");
+
+const jwt =
+  require("jsonwebtoken");
+
+const redis =
+  require("./redis");
+
+const {
+  setUserOnline,
+  setUserOffline,
+} = require(
+  "../service/presence.service"
+);
 
 let socketio = null;
+
 let io = null;
 
 try {
-  socketio = require("socket.io");
+
+  socketio =
+    require("socket.io");
+
 } catch (err) {
+
   logger.warn({
-    message: "socket.io is not installed; realtime events will be no-op",
+    message:
+      "socket.io unavailable",
   });
 }
 
-const createNoopSocket = () => ({
-  emit: () => false,
-  to: () => ({
+/* =========================================
+   🚀 ONLINE USERS
+========================================= */
+
+const onlineUsers =
+  new Map();
+
+/* =========================================
+   🚫 NOOP SOCKET
+========================================= */
+
+const createNoopSocket =
+  () => ({
     emit: () => false,
-  }),
-});
 
-const initializeSocket = (server) => {
-  if (!socketio) {
-    io = createNoopSocket();
-    return io;
-  }
-
-  io = socketio(server, {
-    cors: {
-      origin: process.env.CLIENT_URL || "http://localhost:5173",
-      credentials: true,
-    },
+    to: () => ({
+      emit: () => false,
+    }),
   });
 
-  io.on("connection", (socket) => {
-    logger.info({
-      message: "Socket connected",
-      socketId: socket.id,
+/* =========================================
+   🚀 INITIALIZE SOCKET
+========================================= */
+
+const initializeSocket =
+  async (server) => {
+
+    if (!socketio) {
+
+      io =
+        createNoopSocket();
+
+      return io;
+    }
+
+    io = socketio(server, {
+
+      cors: {
+        origin:
+          process.env.CLIENT_URL,
+
+        credentials: true,
+      },
+
+      transports: [
+        "websocket",
+      ],
     });
 
-    socket.on("user:join", (userId) => {
-      if (userId) {
-        socket.join(userId.toString());
+    /* =====================================
+       🔐 SOCKET AUTH
+    ===================================== */
+
+    io.use(
+      async (
+        socket,
+        next
+      ) => {
+
+        try {
+
+          const token =
+            socket.handshake
+              .auth?.token;
+
+          if (!token) {
+
+            return next(
+              new Error(
+                "Unauthorized"
+              )
+            );
+          }
+
+          const decoded =
+            jwt.verify(
+              token,
+              process.env
+                .JWT_ACCESS_SECRET
+            );
+
+          socket.user =
+            decoded;
+
+          return next();
+
+        } catch (err) {
+
+          logger.warn({
+            message:
+              "Socket authentication failed",
+
+            error:
+              err.message,
+          });
+
+          return next(
+            new Error(
+              "Socket auth failed"
+            )
+          );
+        }
       }
-    });
+    );
 
-    socket.on("disconnect", () => {
-      logger.info({
-        message: "Socket disconnected",
-        socketId: socket.id,
-      });
-    });
-  });
+    /* =====================================
+       🔌 CONNECTION
+    ===================================== */
 
-  return io;
-};
+    io.on(
+      "connection",
 
-const getIO = () => io;
+      async (
+        socket
+      ) => {
+
+        const userId =
+          socket.user.id;
+
+        /* =================================
+           🚀 MEMORY PRESENCE
+        ================================= */
+
+        onlineUsers.set(
+          userId,
+          socket.id
+        );
+
+        /* =================================
+           🚀 REDIS PRESENCE
+        ================================= */
+
+        await redis.client.set(
+          `online:${userId}`,
+
+          "1",
+
+          {
+            EX: 60,
+          }
+        );
+
+        /* =================================
+           🚀 PRESENCE ENGINE
+        ================================= */
+
+        await setUserOnline(
+          socket.user.id,
+          socket.id
+        );
+
+        /* =================================
+           👤 USER ROOM
+        ================================= */
+
+        socket.join(
+          `user:${socket.user.id}`
+        );
+
+        logger.info({
+          message:
+            "Realtime user connected",
+
+          userId,
+        });
+
+        /* =================================
+           🎵 LIVE LISTENING
+        ================================= */
+
+        socket.on(
+          "music:listen",
+
+          async (
+            payload
+          ) => {
+
+            await redis.client.set(
+              `listening:${userId}`,
+
+              JSON.stringify(
+                payload
+              ),
+
+              {
+                EX: 120,
+              }
+            );
+
+            io.emit(
+              "presence:listening",
+
+              {
+                userId,
+                ...payload,
+              }
+            );
+          }
+        );
+
+        /* =================================
+           📀 PLAYLIST ROOM
+        ================================= */
+
+        socket.on(
+          "join:playlist",
+
+          (
+            playlistId
+          ) => {
+
+            socket.join(
+              `playlist:${playlistId}`
+            );
+          }
+        );
+
+        /* =================================
+           🎤 ARTIST ROOM
+        ================================= */
+
+        socket.on(
+          "join:artist",
+
+          (
+            artistId
+          ) => {
+
+            socket.join(
+              `artist:${artistId}`
+            );
+          }
+        );
+
+        /* =================================
+           ❌ DISCONNECT
+        ================================= */
+
+        socket.on(
+          "disconnect",
+
+          async () => {
+
+            onlineUsers.delete(
+              userId
+            );
+
+            await redis.client.del(
+              `online:${userId}`
+            );
+
+            /* =============================
+               🚀 PRESENCE OFFLINE
+            ============================= */
+
+            await setUserOffline(
+              socket.user.id
+            );
+
+            logger.info({
+              message:
+                "Realtime user disconnected",
+
+              userId,
+            });
+          }
+        );
+      }
+    );
+
+    return io;
+  };
+
+/* =========================================
+   📡 GET IO
+========================================= */
+
+const getIO =
+  () => io;
+
+/* =========================================
+   🟢 ONLINE STATUS
+========================================= */
+
+const isUserOnline =
+  (userId) =>
+    onlineUsers.has(
+      userId
+    );
 
 module.exports = {
   initializeSocket,
   getIO,
+  isUserOnline,
 };

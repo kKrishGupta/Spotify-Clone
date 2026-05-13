@@ -11,7 +11,7 @@ const analyticsQueue = require("../queues/analytics.queue");
 const { invalidateMusicCache } = require("../cache/music.cache");
 const { invalidateFeedCache } = require("../cache/feed.cache");
 const ExternalSong = require("../models/externalSong.model");
-
+const notificationService = require("../service/notification.service");
 // 🚀 NEW: Queue instead of direct DB write
 const activityQueue = require("../queues/activity.queue");
 
@@ -383,6 +383,23 @@ const likeSong =
      music.likes += 1;
 
      await music.save();
+
+     // 🔔 SEND LIKE NOTIFICATION
+if (
+  music.artist.toString() !==
+  req.user.id
+) {
+  await notificationService.sendNotification({
+    user: music.artist,
+    type: "like",
+    title: "Song Liked",
+    message:
+      `${req.user.username} liked your song`,
+    metadata: {
+      songId: music._id,
+    },
+  });
+}
 
      return res
        .status(200)

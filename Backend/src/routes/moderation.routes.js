@@ -18,19 +18,14 @@ const moderationController =
 
 router.post(
   "/report",
-
   protect,
-
   moderationController.report
 );
 
 router.get(
   "/reports",
-
   protect,
-
   authorize("admin"),
-
   moderationController.getReports
 );
 

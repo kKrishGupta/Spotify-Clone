@@ -7,7 +7,7 @@ const router =
 const {
   register,
 } = require(
-  "../metrics/prometheus"
+  "../metrices/prometheus"
 );
 
 router.get(
@@ -29,5 +29,4 @@ router.get(
   }
 );
 
-module.exports =
-  router;
+module.exports = router;

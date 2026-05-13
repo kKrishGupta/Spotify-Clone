@@ -24,6 +24,11 @@ const {
   "../events/notification.events"
 );
 
+const logger =
+  require(
+    "../config/logger"
+  );
+
 const QUEUES =
   require(
     "../constants/queues"
@@ -37,22 +42,28 @@ const worker =
 
       const {
         user,
+        type = "system",
+        title = "Notification",
         message,
-        metadata,
+        metadata = {},
+        priority = "normal",
       } = job.data;
 
-      // 💾 SAVE
       const notification =
-        await notificationRepo.createNotification(
-          {
+        await notificationRepo
+          .createNotification({
             user,
+            type,
             message,
-            metadata,
-          }
-        );
+            metadata: {
+              title,
+              priority,
+              ...metadata,
+            },
+          });
 
-      // ⚡ REALTIME EMIT
-      const io = getIO();
+      const io =
+        getIO();
 
       if (io) {
 
@@ -63,6 +74,14 @@ const worker =
         );
       }
 
+      logger.info({
+        message:
+          "Notification delivered",
+
+        user,
+        type,
+      });
+
       return notification;
     },
 
@@ -71,6 +90,8 @@ const worker =
         createBullMQConnection(
           "notification-worker"
         ),
+
+      concurrency: 10,
     }
   );
 

@@ -39,4 +39,24 @@ router.get(
   adminController.getAdminDashboard
 );
 
+router.post(
+  "/notifications/send",
+  protect,
+  authorize("admin"),
+  adminController.sendAdminNotification
+);
+
+router.post(
+  "/notifications/broadcast",
+  protect,
+  authorize("admin"),
+  adminController.broadcastNotification
+);
+
+router.post(
+  "/notifications/plan",
+  protect,
+  authorize("admin"),
+  adminController.planNotification
+);
 module.exports = router;

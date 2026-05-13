@@ -5,7 +5,35 @@ const {
   "./vector.service"
 );
 
-// 🚀 UPDATE USER EMBEDDING
+/* =========================================
+   🚀 GENERATE EMBEDDING
+========================================= */
+
+const generateEmbedding =
+  async (text) => {
+
+    if (!text) {
+
+      return [];
+    }
+
+    // ⚠️ Temporary lightweight embedding
+    // Replace later with real AI vectors
+
+    return text
+      .toLowerCase()
+      .split(/\s+/)
+      .map(
+        (
+          token
+        ) => token.length
+      );
+  };
+
+/* =========================================
+   🚀 UPDATE USER EMBEDDING
+========================================= */
+
 const updateUserEmbedding =
   async (
     userId,
@@ -21,14 +49,17 @@ const updateUserEmbedding =
       ) || {};
 
     const updated = {
+
       plays:
         (
           existing.plays ||
           0
         ) +
+
         (
           payload.type ===
           "play"
+
             ? 1
             : 0
         ),
@@ -38,9 +69,11 @@ const updateUserEmbedding =
           existing.likes ||
           0
         ) +
+
         (
           payload.type ===
           "like"
+
             ? 1
             : 0
         ),
@@ -50,6 +83,7 @@ const updateUserEmbedding =
           existing.skips ||
           0
         ) +
+
         (
           payload.skipped
             ? 1
@@ -61,18 +95,21 @@ const updateUserEmbedding =
           existing.duration ||
           0
         ) +
+
         (
           payload.duration ||
           0
         ),
 
       genres: {
+
         ...(
           existing.genres ||
           {}
         ),
 
         [payload.genre]:
+
           (
             existing
               ?.genres?.[
@@ -82,12 +119,14 @@ const updateUserEmbedding =
       },
 
       moods: {
+
         ...(
           existing.moods ||
           {}
         ),
 
         [payload.mood]:
+
           (
             existing
               ?.moods?.[
@@ -110,5 +149,6 @@ const updateUserEmbedding =
   };
 
 module.exports = {
+  generateEmbedding,
   updateUserEmbedding,
 };

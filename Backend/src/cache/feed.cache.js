@@ -6,7 +6,7 @@ const getFeedCache =
   async (key) => {
 
     const data =
-      await redis.get(key);
+      await redis.client.get(key);
 
     return data
       ? JSON.parse(data)
@@ -16,7 +16,7 @@ const getFeedCache =
 const setFeedCache =
   async (key, value) => {
 
-    await redis.set(
+    await redis.client.set(
       key,
 
       JSON.stringify(value),
@@ -30,7 +30,7 @@ const setFeedCache =
 const invalidateFeedCache =
   async (key) => {
 
-    return redis.del(key);
+    return redis.client.del(key);
   };
 
 module.exports = {

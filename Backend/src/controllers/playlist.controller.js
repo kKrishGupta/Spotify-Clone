@@ -24,6 +24,8 @@ const {
   "../events/playlist.events"
 );
 
+const notificationService = require("../service/notification.service");
+
 /* =========================================
    🚀 CREATE PLAYLIST
 ========================================= */
@@ -181,6 +183,20 @@ const addSongToPlaylist =
           }
         );
       }
+
+      // 🔔 PLAYLIST UPDATE NOTIFICATION
+    await notificationService.sendNotification({
+      user: playlist.user,
+      type: "playlist",
+      title: "Playlist Updated",
+      message:
+        "A new song was added to your playlist",
+      metadata: {
+        playlistId:
+          playlist._id,
+        songId,
+      },
+    });
 
       // ✅ RESPONSE
       res.status(200).json({

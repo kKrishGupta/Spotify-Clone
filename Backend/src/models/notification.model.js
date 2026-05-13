@@ -23,27 +23,32 @@ const notificationSchema =
           "upload",
           "playlist",
           "system",
+          "broadcast",
+          "admin",
+          "scheduled",
         ],
 
         default:
           "system",
       },
 
+      title: {
+        type: String,
+        default: "",
+      },
+
       message: {
         type: String,
-
         required: true,
       },
 
       metadata: {
         type: Object,
-
         default: {},
       },
 
       read: {
         type: Boolean,
-
         default: false,
       },
     },

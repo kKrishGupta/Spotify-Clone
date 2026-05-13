@@ -22,7 +22,9 @@ const notificationRoutes = require("./routes/notification.routes");
 const analyticsRoutes = require("./routes/analytics.routes");
 const healthRoutes =require("./routes/health.routes");
 const traceMiddleware = require("./tracing/trace.middleware");
-
+const moderationRoutes = require("./routes/moderation.routes");
+const presenceRoutes = require("./routes/presence.routes");
+const prometheusRoutes = require("./routes/metrics.routes");
 const cors = require('cors');
 setupSecurity(app);
 app.use(express.json());
@@ -50,6 +52,9 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/notifications',notificationRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/health',healthRoutes);
+app.use('/api/moderation',moderationRoutes);
+app.use('/api/presence',presenceRoutes);
+app.use('/api/metrics',prometheusRoutes);
 app.use(errorHandler);
 
 module.exports = app;

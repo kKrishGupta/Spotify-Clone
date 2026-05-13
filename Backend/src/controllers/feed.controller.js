@@ -55,7 +55,7 @@ const getFeed =
 
       try {
         const cached =
-          await redis.get(
+          await redis.client.get(
             cacheKey
           );
 
@@ -120,7 +120,7 @@ const getFeed =
       ===================================== */
 
       try {
-        await redis.set(
+        await redis.client.set(
           cacheKey,
 
           JSON.stringify(

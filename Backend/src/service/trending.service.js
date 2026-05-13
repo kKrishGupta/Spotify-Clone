@@ -40,7 +40,7 @@ const getTrendingSongs =
   ) => {
 
     const ids =
-      await redis.zRange(
+      await redis.client.zRange(
         "trending:songs",
         0,
         limit - 1,

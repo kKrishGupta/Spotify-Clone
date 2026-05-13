@@ -55,52 +55,104 @@ const getUserDashboard = async (req, res) => {
 };
 
 // follow user
-const followUser = asyncHandler(async (req, res) => {
-    const targetUserId = req.params.id;
-  const currentUserId = req.user.id;
+const followUser =
+  asyncHandler(
+    async (req, res) => {
 
-  // ❌ Prevent self-follow
-  if (targetUserId === currentUserId) {
-    return res.status(400).json({ message: "You cannot follow yourself" });
-  }
+      const targetUserId =
+        req.params.id;
 
-  // ✅ Check if target exists
-  const targetUser = await userModel.findById(targetUserId);
-  if (!targetUser) {
-    return res.status(404).json({ message: "User not found" });
-  }
+      const currentUserId =
+        req.user.id;
 
-  // 🔥 Atomic updates (no duplicates)
-  await Promise.all([
-    userModel.findByIdAndUpdate(currentUserId, {
-      $addToSet: { following: targetUserId },
-    }),
-    userModel.findByIdAndUpdate(targetUserId, {
-      $addToSet: { followers: currentUserId },
-    }),
-  ]);
+      // ❌ Prevent self-follow
+      if (
+        targetUserId ===
+        currentUserId
+      ) {
+        return res.status(400).json({
+          message:
+            "You cannot follow yourself",
+        });
+      }
 
-  await notificationService.sendNotification(
-  {
-    user:
-      targetUserId,
+      // ✅ Check target user
+      const targetUser =
+        await userModel.findById(
+          targetUserId
+        );
 
-    message:
-      `${req.user.username} followed you`,
+      if (!targetUser) {
+        return res.status(404).json({
+          message:
+            "User not found",
+        });
+      }
 
-    metadata: {
-      type: "follow",
-      follower:
-        currentUserId,
-    },
-  }
-);
+      // ✅ Current logged user
+      const currentUser =
+        await userModel.findById(
+          currentUserId
+        );
 
-  res.status(200).json({
-    success: true,
-    message: "User followed successfully",
-  });
-});
+      if (!currentUser) {
+        return res.status(404).json({
+          message:
+            "Current user not found",
+        });
+      }
+
+      // 🔥 Atomic updates
+      await Promise.all([
+        userModel.findByIdAndUpdate(
+          currentUserId,
+          {
+            $addToSet: {
+              following:
+                targetUserId,
+            },
+          }
+        ),
+
+        userModel.findByIdAndUpdate(
+          targetUserId,
+          {
+            $addToSet: {
+              followers:
+                currentUserId,
+            },
+          }
+        ),
+      ]);
+
+      // 🔔 SEND NOTIFICATION
+      await notificationService.sendNotification({
+        user:
+          targetUserId,
+
+        type:
+          "follow",
+
+        title:
+          "New Follower",
+
+        message:
+          `${currentUser.username} followed you`,
+
+        metadata: {
+          follower:
+            currentUserId,
+        },
+      });
+
+      res.status(200).json({
+        success: true,
+
+        message:
+          "User followed successfully",
+      });
+    }
+  );
 
 // unfollow user
 const unfollowUser = asyncHandler(async (req, res) => {

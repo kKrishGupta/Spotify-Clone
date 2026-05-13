@@ -190,6 +190,32 @@ const initializeSocket =
           `user:${socket.user.id}`
         );
 
+        /* =================================
+           🚀 GENERIC JOIN ROOM
+        ================================= */
+
+        socket.on(
+          "join",
+
+          (
+            roomId
+          ) => {
+
+            socket.join(
+              roomId
+            );
+
+            logger.info({
+              message:
+                "User joined socket room",
+
+              userId,
+
+              roomId,
+            });
+          }
+        );
+
         logger.info({
           message:
             "Realtime user connected",
@@ -245,6 +271,15 @@ const initializeSocket =
             socket.join(
               `playlist:${playlistId}`
             );
+
+            logger.info({
+              message:
+                "Joined playlist room",
+
+              userId,
+
+              playlistId,
+            });
           }
         );
 
@@ -262,6 +297,37 @@ const initializeSocket =
             socket.join(
               `artist:${artistId}`
             );
+
+            logger.info({
+              message:
+                "Joined artist room",
+
+              userId,
+
+              artistId,
+            });
+          }
+        );
+
+        /* =================================
+           🔔 NOTIFICATION ROOM
+        ================================= */
+
+        socket.on(
+          "join:notifications",
+
+          () => {
+
+            socket.join(
+              userId.toString()
+            );
+
+            logger.info({
+              message:
+                "Joined notification room",
+
+              userId,
+            });
           }
         );
 

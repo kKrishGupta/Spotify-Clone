@@ -1,84 +1,260 @@
-const { Worker } = require("bullmq");
-const { createBullMQConnection } = require("../config/bullmq");
-const logger = require("../config/logger");
-const { getIO } = require("../config/socket");
-const musicModel = require("../models/music.model");
-const QUEUES = require("../constants/queues");
-const { processAudio } = require("../streaming/audio.processor");
+const { Worker } =
+  require("bullmq");
 
-const worker = new Worker(
-  QUEUES.AUDIO_PROCESSING,
-  async (job) => {
-    logger.info({
-      message: "Processing audio",
-      jobId: job.id,
-      musicId: job.data?.musicId,
-    });
+const {
+  createBullMQConnection,
+} = require(
+  "../config/bullmq"
+);
 
-    const result = await processAudio(job.data);
+const logger =
+  require(
+    "../config/logger"
+  );
 
-    if (job.data?.musicId) {
-      await musicModel.findByIdAndUpdate(
-  job.data.musicId,
+const {
+  getIO,
+} = require(
+  "../config/socket"
+);
 
-  {
-    waveform:
-      result.waveform?.waveform || "",
+const musicModel =
+  require(
+    "../models/music.model"
+  );
 
-    hls:
-      result.hls?.playlist || "",
+const QUEUES =
+  require(
+    "../constants/queues"
+  );
 
-    duration:
-      result.metadata?.duration || 0,
+const {
+  processAudio,
+} = require(
+  "../streaming/audio.processor"
+);
 
-    processedFiles: {
-      bitrates:
-        result.bitrates || [],
+const worker =
+  new Worker(
+    QUEUES.AUDIO_PROCESSING,
+
+    async (job) => {
+
+      logger.info({
+        message:
+          "Processing audio",
+
+        jobId:
+          job.id,
+
+        musicId:
+          job.data?.musicId,
+      });
+
+      let result = null;
+
+      try {
+
+        /* =====================================
+           🚀 PROCESS AUDIO
+        ===================================== */
+
+        result =
+          await processAudio(
+            job.data
+          );
+
+        /* =====================================
+           💾 UPDATE MUSIC
+        ===================================== */
+
+        if (
+          job.data?.musicId
+        ) {
+
+          await musicModel.findByIdAndUpdate(
+            job.data.musicId,
+
+            {
+              waveform:
+                result.waveform
+                  ?.waveform || "",
+
+              hls:
+                result.hls
+                  ?.playlist || "",
+
+              duration:
+                result.metadata
+                  ?.duration || 0,
+
+              processedFiles: {
+                bitrates:
+                  result.bitrates || [],
+              },
+
+              quality: [
+                "64kbps",
+                "128kbps",
+                "320kbps",
+              ],
+
+              // ✅ FIXED
+              status:
+                result.success
+                  ? "approved"
+                  : "processing_failed",
+            }
+          );
+        }
+
+        /* =====================================
+           📡 REALTIME SOCKET EVENT
+        ===================================== */
+
+        const io =
+          getIO();
+
+        if (io) {
+
+          io.emit(
+            "music:processed",
+
+            {
+              musicId:
+                job.data?.musicId,
+
+              waveform:
+                result.waveform
+                  ?.waveform,
+
+              hls:
+                result.hls
+                  ?.playlist,
+
+              status:
+                result.success
+                  ? "approved"
+                  : "processing_failed",
+            }
+          );
+        }
+
+        return result;
+
+      } catch (err) {
+
+        logger.error({
+          message:
+            "Audio processing failed",
+
+          jobId:
+            job.id,
+
+          musicId:
+            job.data?.musicId,
+
+          error:
+            err.message,
+        });
+
+        /* =====================================
+           ❌ UPDATE FAILED STATUS
+        ===================================== */
+
+        if (
+          job.data?.musicId
+        ) {
+
+          await musicModel.findByIdAndUpdate(
+            job.data.musicId,
+
+            {
+              status:
+                "processing_failed",
+            }
+          );
+        }
+
+        throw err;
+      }
     },
 
-    quality: [
-      "64kbps",
-      "128kbps",
-      "320kbps",
-    ],
+    {
+      connection:
+        createBullMQConnection(
+          "audio-worker"
+        ),
 
-    status:
-      "approved",
-  }
-)
+      concurrency:
+        Number(
+          process.env
+            .AUDIO_WORKER_CONCURRENCY || 2
+        ),
     }
+  );
 
-    const io = getIO();
-    if (io) {
-      io.emit("music:processed", {
-        musicId: job.data?.musicId,
-        waveform: result.waveform?.waveform,
-        hls: result.hls?.playlist,
-      });
-    }
+/* =========================================
+   ✅ COMPLETED
+========================================= */
 
-    return result;
-  },
-  {
-    connection: createBullMQConnection("audio-worker"),
-    concurrency: Number(process.env.AUDIO_WORKER_CONCURRENCY || 2),
+worker.on(
+  "completed",
+
+  (job) => {
+
+    logger.info({
+      message:
+        "Audio job completed",
+
+      jobId:
+        job.id,
+    });
   }
 );
 
-worker.on("completed", (job) => {
-  logger.info({
-    message: "Audio job completed",
-    jobId: job.id,
-  });
-});
+/* =========================================
+   ❌ FAILED
+========================================= */
 
-worker.on("failed", (job, err) => {
-  logger.error({
-    message: "Audio job failed",
-    jobId: job?.id,
-    musicId: job?.data?.musicId,
-    error: err.message,
-  });
-});
+worker.on(
+  "failed",
 
-module.exports = worker;
+  async (
+    job,
+    err
+  ) => {
+
+    logger.error({
+      message:
+        "Audio job failed",
+
+      jobId:
+        job?.id,
+
+      musicId:
+        job?.data?.musicId,
+
+      error:
+        err.message,
+    });
+
+    // ✅ EXTRA SAFETY UPDATE
+    if (
+      job?.data?.musicId
+    ) {
+
+      await musicModel.findByIdAndUpdate(
+        job.data.musicId,
+
+        {
+          status:
+            "processing_failed",
+        }
+      );
+    }
+  }
+);
+
+module.exports =
+  worker;

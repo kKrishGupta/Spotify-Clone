@@ -16,13 +16,27 @@ const recommendationWorker =
 const shutdown =
   async () => {
 
-    await Promise.all([
-      activityWorker.close(),
-      analyticsWorker.close(),
-      audioWorker.close(),
-      notificationWorker.close(),
-      recommendationWorker.close(),
-    ]);
+    try {
+
+      await Promise.allSettled([
+        activityWorker.close(),
+        analyticsWorker.close(),
+        audioWorker.close(),
+        notificationWorker.close(),
+        recommendationWorker.close(),
+      ]);
+
+      console.log(
+        "✅ Workers closed"
+      );
+
+    } catch (err) {
+
+      console.error(
+        "❌ Worker shutdown failed",
+        err.message
+      );
+    }
 
     process.exit(0);
   };

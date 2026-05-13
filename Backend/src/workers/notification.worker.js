@@ -91,7 +91,11 @@ const worker =
           "notification-worker"
         ),
 
-      concurrency: 10,
+      concurrency:
+      Number(
+        process.env
+          .NOTIFICATION_WORKER_CONCURRENCY || 1
+      )
     }
   );
 

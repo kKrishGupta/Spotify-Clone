@@ -7526,3 +7526,18 @@
 {"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:54:41.091Z"}
 {"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:54:41.160Z"}
 {"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:54:41.856Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:55:11.505Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:55:12.320Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:55:12.324Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:55:12.437Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:55:12.502Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:55:12.503Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:55:12.899Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:55:13.012Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:55:13.109Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:55:14.176Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"ee866126-d492-485f-84bb-896da407635e","url":"/api/auth/register"},"timestamp":"2026-05-17T07:55:15.917Z"}
+{"level":"info","message":"Email sent successfully","messageId":"<09a1d00b-91e9-f9b8-f6de-25a078634b42@gmail.com>","timestamp":"2026-05-17T07:55:21.077Z","to":"krish23153106@akgec.ac.in"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"d84b079d-44c4-4efd-bbbd-a03a1fa1e50b","url":"/api/auth/register"},"timestamp":"2026-05-17T07:55:29.878Z"}
+{"level":"info","message":"Email sent successfully","messageId":"<8a5bcf0c-ad48-a006-a848-4b1f1f5e95eb@gmail.com>","timestamp":"2026-05-17T07:55:34.127Z","to":"krish23153106@akgec.ac.in"}
+{"level":"warn","message":"Graceful shutdown initiated","timestamp":"2026-05-17T07:57:03.886Z"}

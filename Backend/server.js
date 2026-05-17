@@ -3,7 +3,7 @@ require("dotenv").config();
 const http = require("http");
 const connectDB = require("./src/config/db");
 const app = require("./src/app");
-const {client: redis,connectRedis,} = require("./src/config/redis");
+const {client: redis,connectRedis,disconnectRedis} = require("./src/config/redis");
 const logger = require("./src/config/logger");
 const { PORT } = require("./src/config/env");
 const { initializeSocket } = require("./src/config/socket");
@@ -87,8 +87,17 @@ const startServer = async () => {
 
     server.listen(PORT, () => {
       logger.info({
-        message: `Server running on http://localhost:${PORT}`,
-      });
+  message:
+    "Server running",
+
+  port: PORT,
+
+  env:
+    process.env.NODE_ENV,
+
+  render:
+    !!process.env.RENDER,
+});
     });
 
     const gracefulShutdown = async () => {
@@ -98,7 +107,7 @@ const startServer = async () => {
         server.close(async () => {
           try {
             await closeBackgroundSystems();
-            await redis.disconnectRedis();
+            await disconnectRedis();
             logger.info("Server resources closed");
             process.exit(0);
           } catch (err) {

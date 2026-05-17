@@ -7179,3 +7179,21 @@
 {"level":"info","message":"Recalculating trending songs...","timestamp":"2026-05-17T05:00:00.064Z"}
 {"count":5,"level":"info","message":"Trending songs updated","timestamp":"2026-05-17T05:00:00.195Z"}
 {"level":"warn","message":"Graceful shutdown initiated","timestamp":"2026-05-17T05:06:25.290Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T06:15:14.527Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T06:15:15.492Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T06:15:15.493Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T06:15:15.590Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T06:15:15.654Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T06:15:15.655Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T06:15:16.918Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T06:15:17.085Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T06:15:17.152Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T06:18:13.023Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T06:18:13.792Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T06:18:13.794Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T06:18:13.886Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T06:18:13.947Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T06:18:13.948Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T06:18:14.068Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T06:18:14.127Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T06:18:14.187Z"}

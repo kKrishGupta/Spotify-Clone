@@ -7386,3 +7386,143 @@
 {"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:30:15.662Z"}
 {"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:30:15.751Z"}
 {"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:30:16.733Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:30:50.450Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:30:51.251Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:30:51.253Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:30:51.496Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:30:51.563Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:30:51.564Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:30:51.767Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:30:51.865Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:30:51.940Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:30:52.941Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"7205d9e6-19be-46f5-8d97-e0cffe2e3542","url":"/api/auth/register"},"timestamp":"2026-05-17T07:31:05.854Z"}
+{"level":"info","message":"Email sent successfully","messageId":"<62a22e1c-d985-3601-8fc1-b561b81baa1c@gmail.com>","timestamp":"2026-05-17T07:31:10.079Z","to":"krish23153106@gmail.com"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:17.090Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:17.094Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:17.098Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:17.197Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:17.202Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:25.424Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:25.532Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:25.533Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:25.657Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:25.737Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:37.435Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:37.464Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:37.490Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:37.496Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:39:37.974Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:43:50.932Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:43:50.973Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:43:51.010Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:43:51.059Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:43:51.084Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:44:02.375Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:44:03.186Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:44:03.187Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:44:03.279Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:44:03.347Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:44:03.350Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:44:03.677Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:44:03.778Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:44:03.847Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:44:04.809Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:44:49.442Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:44:50.327Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:44:50.328Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:44:50.429Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:44:50.492Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:44:50.496Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:44:50.760Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:44:50.857Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:44:50.914Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:44:51.561Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:13.821Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:13.823Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:13.824Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:13.824Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:13.833Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:22.048Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:22.050Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:22.052Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:22.078Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:22.554Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:29.265Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:29.273Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:29.275Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:29.279Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:46:29.284Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:47:36.860Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:47:37.677Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:47:37.678Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:47:37.793Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:47:37.857Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:47:37.858Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:47:38.199Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:47:38.261Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:47:38.342Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:47:39.333Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:50:27.640Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:50:28.425Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:50:28.425Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:50:28.508Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:50:28.564Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:50:28.565Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:50:28.927Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:50:29.011Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:50:29.078Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:50:30.140Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:50:37.542Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:50:38.301Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:50:38.303Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:50:38.402Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:50:38.471Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:50:38.472Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:50:38.705Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:50:38.768Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:50:38.835Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:50:39.780Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:51:07.386Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:51:08.154Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:51:08.155Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:51:08.254Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:51:08.310Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:51:08.311Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:51:08.563Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:51:08.642Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:51:08.754Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:51:09.385Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:51:46.820Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:51:47.550Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:51:47.552Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:51:47.649Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:51:47.714Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:51:47.716Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:51:47.942Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:51:48.015Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:51:48.103Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:51:49.076Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"8ac400d1-d471-4ac5-a50f-241c95089915","url":"/api/auth/register"},"timestamp":"2026-05-17T07:52:18.164Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"8791e946-ad79-4eff-9bd9-2ca3278f593a","url":"/api/auth/register"},"timestamp":"2026-05-17T07:52:37.620Z"}
+{"level":"error","message":"redis.set is not a function","method":"POST","requestId":"8791e946-ad79-4eff-9bd9-2ca3278f593a","stack":"TypeError: redis.set is not a function\n    at D:\\desktop\\Back\\Spotify-Clone\\Backend\\src\\controllers\\auth.controller.js:125:19","statusCode":500,"timestamp":"2026-05-17T07:52:37.957Z","url":"/api/auth/register"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:54:30.665Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:54:31.436Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:54:31.450Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:54:31.544Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:54:31.616Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:54:31.618Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:54:31.899Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:54:31.991Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:54:32.089Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:54:33.030Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:54:39.904Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:54:40.690Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:54:40.691Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:54:40.796Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:54:40.857Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:54:40.858Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:54:41.014Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:54:41.091Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:54:41.160Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:54:41.856Z"}

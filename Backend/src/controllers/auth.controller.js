@@ -31,85 +31,244 @@ const generateTokens = (user) => {
   return { accessToken, refreshToken };
 };
 
+const redis = require("../config/redis");
+
 // 🔐 HASH OTP
 const hashOtp = (otp) =>
   crypto.createHash("sha256").update(otp).digest("hex");
 
 // ================= REGISTER =================
-const registerUser = asyncHandler(async (req, res) => {
-  const { username, email, password, role = "user" } = req.body;
 
-  const existingUser = await userModel.findOne({
-    $or: [{ username }, { email }],
-  });
+const registerUser =
+  asyncHandler(
+    async (req, res) => {
 
-  if (existingUser) {
-    return res.status(409).json({ message: "User already exists" });
-  }
+      const {
+        username,
+        email,
+        password,
+        role = "user",
+      } = req.body;
 
-  const hash = await bcrypt.hash(password, 10);
+      // ✅ VALIDATION
+      if (
+        !username ||
+        !email ||
+        !password
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "All fields are required",
+        });
+      }
 
-  const otp = crypto.randomInt(100000, 999999).toString();
-  const hashedOtp = hashOtp(otp);
+      // ✅ CHECK EXISTING USER
+      const existingUser =
+        await userModel.findOne({
+          $or: [
+            { username },
+            {
+              email:
+                email.toLowerCase(),
+            },
+          ],
+        });
 
-  const user = await userModel.create({
-    username,
-    email: email.toLowerCase(),
-    password: hash,
-    role,
-    emailOtp: hashedOtp,
-    emailOtpExpires: Date.now() + 10 * 60 * 1000,
-    otpAttempts: 0,
-    otpLastSentAt: Date.now(),
-    isVerified: false,
-  });
+      if (existingUser) {
+        return res.status(409).json({
+          success: false,
+          message:
+            "User already exists",
+        });
+      }
 
-  await sendVerificationEmail(user.email, otp);
+      // 🔐 HASH PASSWORD
+      const hashedPassword =
+        await bcrypt.hash(
+          password,
+          10
+        );
 
-  res.status(201).json({
-    message: "OTP sent to email. Verify to continue.",
-  });
-});
+      // 🔐 GENERATE OTP
+      const otp =
+        crypto
+          .randomInt(
+            100000,
+            999999
+          )
+          .toString();
+
+      const hashedOtp =
+        hashOtp(otp);
+
+      // 🚀 TEMP USER DATA
+      const tempUser = {
+        username,
+
+        email:
+          email.toLowerCase(),
+
+        password:
+          hashedPassword,
+
+        role,
+
+        emailOtp:
+          hashedOtp,
+
+        createdAt:
+          Date.now(),
+      };
+
+      // 🚀 STORE TEMP USER
+      await redis.client.set(
+
+        `verify:${email.toLowerCase()}`,
+
+        JSON.stringify(
+          tempUser
+        ),
+
+        {
+          EX: 600,
+        }
+      );
+
+      // 📧 SEND OTP
+      await sendVerificationEmail(
+        email,
+        otp
+      );
+
+      return res.status(200).json({
+        success: true,
+
+        message:
+          "OTP sent to email",
+      });
+    }
+  );
 
 // ================= VERIFY EMAIL =================
-const verifyEmail = asyncHandler(async (req, res) => {
-  const { email, otp } = req.body;
+const verifyEmail =
+  asyncHandler(
+    async (req, res) => {
 
-  const user = await userModel.findOne({
-    email: email.toLowerCase(),
-  });
+      const {
+        email,
+        otp,
+      } = req.body;
 
-  if (!user) return res.status(400).json({ message: "User not found" });
+      // 🚀 GET TEMP USER
+      const tempData =
+        await redis.client.get(
+          `verify:${email.toLowerCase()}`
+        );
 
-  if (!user.emailOtp || !user.emailOtpExpires) {
-    return res.status(400).json({ message: "No OTP found" });
-  }
+      if (!tempData) {
 
-  if (user.emailOtpExpires < Date.now()) {
-    return res.status(400).json({ message: "OTP expired" });
-  }
+        return res.status(400).json({
+          success: false,
 
-  if (user.otpAttempts >= 5) {
-    return res.status(429).json({ message: "Too many attempts" });
-  }
+          message:
+            "OTP expired or registration not found",
+        });
+      }
 
-  const hashedOtp = hashOtp(otp.trim());
+      const parsed =
+        JSON.parse(
+          tempData
+        );
 
-  if (user.emailOtp !== hashedOtp) {
-    user.otpAttempts += 1;
-    await user.save();
-    return res.status(400).json({ message: "Invalid OTP" });
-  }
+      // 🔐 VERIFY OTP
+      const hashedOtp =
+        hashOtp(
+          otp.trim()
+        );
 
-  user.isVerified = true;
-  user.emailOtp = undefined;
-  user.emailOtpExpires = undefined;
-  user.otpAttempts = 0;
+      if (
+        parsed.emailOtp !==
+        hashedOtp
+      ) {
 
-  await user.save();
+        return res.status(400).json({
+          success: false,
 
-  res.json({ message: "Email verified successfully" });
-});
+          message:
+            "Invalid OTP",
+        });
+      }
+
+      // ✅ FINAL DUPLICATE CHECK
+      const existingUser =
+        await userModel.findOne({
+          $or: [
+            {
+              username:
+                parsed.username,
+            },
+            {
+              email:
+                parsed.email,
+            },
+          ],
+        });
+
+      if (existingUser) {
+
+        return res.status(409).json({
+          success: false,
+
+          message:
+            "User already exists",
+        });
+      }
+
+      // 🚀 CREATE REAL USER
+      const user =
+        await userModel.create({
+
+          username:
+            parsed.username,
+
+          email:
+            parsed.email,
+
+          password:
+            parsed.password,
+
+          role:
+            parsed.role,
+
+          isVerified:
+            true,
+        });
+
+      // 🧹 REMOVE TEMP DATA
+      await redis.client.del(
+        `verify:${email.toLowerCase()}`
+      );
+
+      return res.status(201).json({
+        success: true,
+
+        message:
+          "Email verified successfully",
+
+        user: {
+          id:
+            user._id,
+
+          username:
+            user.username,
+
+          email:
+            user.email,
+        },
+      });
+    }
+  );
 
 // ================= LOGIN PASSWORD =================
 const loginUser = asyncHandler(async (req, res) => {

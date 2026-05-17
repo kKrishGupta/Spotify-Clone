@@ -777,3 +777,4 @@
 {"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:43.471Z"}
 {"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:43.519Z"}
 {"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:45.878Z"}
+{"level":"error","message":"redis.set is not a function","method":"POST","requestId":"8791e946-ad79-4eff-9bd9-2ca3278f593a","stack":"TypeError: redis.set is not a function\n    at D:\\desktop\\Back\\Spotify-Clone\\Backend\\src\\controllers\\auth.controller.js:125:19","statusCode":500,"timestamp":"2026-05-17T07:52:37.957Z","url":"/api/auth/register"}

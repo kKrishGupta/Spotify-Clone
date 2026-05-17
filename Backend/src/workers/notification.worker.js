@@ -86,10 +86,7 @@ const worker =
     },
 
     {
-      connection:
-        createBullMQConnection(
-          "notification-worker"
-        ),
+      connection:createBullMQConnection(),
 
       concurrency:
       Number(

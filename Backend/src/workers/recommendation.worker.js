@@ -29,8 +29,8 @@ const worker = new Worker(
     return recommendations;
   },
   {
-    connection: createBullMQConnection("recommendation-worker"),
-    concurrency: Number(process.env.RECOMMENDATION_WORKER_CONCURRENCY || 2),
+    connection: createBullMQConnection(),
+    concurrency: Number(process.env.RECOMMENDATION_WORKER_CONCURRENCY || 1),
   }
 );
 

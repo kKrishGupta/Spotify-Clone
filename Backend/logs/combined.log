@@ -7159,3 +7159,23 @@
 {"attempt":1,"connection":"audio-worker","level":"warn","message":"Retrying BullMQ Redis connection","timestamp":"2026-05-13T13:24:45.661Z"}
 {"attempt":1,"connection":"activity-worker","level":"warn","message":"Retrying BullMQ Redis connection","timestamp":"2026-05-13T13:24:46.726Z"}
 {"level":"warn","message":"Graceful shutdown initiated","timestamp":"2026-05-13T13:25:04.310Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T04:58:21.244Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T04:58:22.662Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T04:58:22.664Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T04:58:23.363Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T04:58:23.419Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T04:58:23.422Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-05-17T04:58:25.031Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-17T04:58:25.086Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-17T04:58:25.089Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-17T04:58:25.092Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-17T04:58:25.097Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis connected","timestamp":"2026-05-17T04:58:25.102Z"}
+{"connection":"analytics-worker","level":"info","message":"BullMQ Redis ready","timestamp":"2026-05-17T04:58:25.165Z"}
+{"connection":"notification-worker","level":"info","message":"BullMQ Redis ready","timestamp":"2026-05-17T04:58:25.171Z"}
+{"connection":"activity-worker","level":"info","message":"BullMQ Redis ready","timestamp":"2026-05-17T04:58:25.180Z"}
+{"connection":"recommendation-worker","level":"info","message":"BullMQ Redis ready","timestamp":"2026-05-17T04:58:25.188Z"}
+{"connection":"audio-worker","level":"info","message":"BullMQ Redis ready","timestamp":"2026-05-17T04:58:25.192Z"}
+{"level":"info","message":"Recalculating trending songs...","timestamp":"2026-05-17T05:00:00.064Z"}
+{"count":5,"level":"info","message":"Trending songs updated","timestamp":"2026-05-17T05:00:00.195Z"}
+{"level":"warn","message":"Graceful shutdown initiated","timestamp":"2026-05-17T05:06:25.290Z"}

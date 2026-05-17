@@ -181,15 +181,12 @@ const worker =
     },
 
     {
-      connection:
-        createBullMQConnection(
-          "audio-worker"
-        ),
+      connection: createBullMQConnection(),
 
       concurrency:
         Number(
           process.env
-            .AUDIO_WORKER_CONCURRENCY || 2
+            .AUDIO_WORKER_CONCURRENCY || 1
         ),
     }
   );

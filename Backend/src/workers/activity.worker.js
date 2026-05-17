@@ -162,15 +162,12 @@ const worker = new Worker(
   },
 
   {
-    connection:
-      createBullMQConnection(
-        "activity-worker"
-      ),
+    connection: createBullMQConnection(),
 
     concurrency: Number(
       process.env
         .ACTIVITY_WORKER_CONCURRENCY ||
-        5
+        1
     ),
   }
 );

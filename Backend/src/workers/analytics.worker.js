@@ -84,16 +84,13 @@ const worker =
     },
 
     {
-      connection:
-        createBullMQConnection(
-          "analytics-worker"
-        ),
+      connection: createBullMQConnection(),
 
       concurrency:
         Number(
           process.env
             .ANALYTICS_WORKER_CONCURRENCY ||
-            5
+            1
         ),
     }
   );

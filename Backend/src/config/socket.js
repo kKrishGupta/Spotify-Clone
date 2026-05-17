@@ -1,18 +1,13 @@
 const logger =
   require("./logger");
 
-const jwt =
-  require("jsonwebtoken");
-
-const redis =
-  require("./redis");
+const jwt = require("jsonwebtoken");
+const {connectRedis} = require("./redis");
+const redis = require("./redis");
 
 const {
   setUserOnline,
-  setUserOffline,
-} = require(
-  "../service/presence.service"
-);
+  setUserOffline,} = require("../service/presence.service");
 
 let socketio = null;
 
@@ -162,7 +157,7 @@ const initializeSocket =
         /* =================================
            🚀 REDIS PRESENCE
         ================================= */
-
+        await connectRedis();
         await redis.client.set(
           `online:${userId}`,
 
@@ -233,7 +228,7 @@ const initializeSocket =
           async (
             payload
           ) => {
-
+            await connectRedis();
             await redis.client.set(
               `listening:${userId}`,
 
@@ -343,7 +338,7 @@ const initializeSocket =
             onlineUsers.delete(
               userId
             );
-
+            
             await redis.client.del(
               `online:${userId}`
             );

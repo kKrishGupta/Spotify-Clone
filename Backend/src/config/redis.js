@@ -51,7 +51,19 @@ const connectRedis =
     return client;
   };
 
+  const disconnectRedis =
+  async () => {
+
+    if (
+      client.isOpen
+    ) {
+
+      await client.quit();
+    }
+  };
+  
 module.exports = {
   client,
   connectRedis,
+  disconnectRedis,
 };

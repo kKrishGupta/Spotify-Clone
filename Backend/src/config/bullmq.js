@@ -4,31 +4,22 @@ const IORedis =
 const logger =
   require("./logger");
 
-const connections =
-  new Map();
+let sharedConnection = null;
 
 /* =========================================
    🚀 SHARED REDIS CONNECTION
 ========================================= */
 
 const createBullMQConnection =
-  (
-    connectionName =
-      "default"
-  ) => {
+  () => {
 
-    // ✅ REUSE EXISTING
     if (
-      connections.has(
-        connectionName
-      )
+      sharedConnection
     ) {
-      return connections.get(
-        connectionName
-      );
+      return sharedConnection;
     }
 
-    const connection =
+    sharedConnection =
       new IORedis(
         process.env.REDIS_URL,
         {
@@ -38,7 +29,8 @@ const createBullMQConnection =
           enableReadyCheck:
             false,
 
-          lazyConnect: true,
+          lazyConnect:
+            true,
 
           connectTimeout:
             10000,
@@ -54,10 +46,7 @@ const createBullMQConnection =
 
               logger.warn({
                 message:
-                  "Retrying BullMQ Redis connection",
-
-                connection:
-                  connectionName,
+                  "Retrying shared BullMQ Redis",
 
                 attempt:
                   times,
@@ -68,44 +57,35 @@ const createBullMQConnection =
         }
       );
 
-    connection.on(
+    sharedConnection.on(
       "connect",
       () => {
 
         logger.info({
           message:
-            "BullMQ Redis connected",
-
-          connection:
-            connectionName,
+            "Shared BullMQ Redis connected",
         });
       }
     );
 
-    connection.on(
+    sharedConnection.on(
       "ready",
       () => {
 
         logger.info({
           message:
-            "BullMQ Redis ready",
-
-          connection:
-            connectionName,
+            "Shared BullMQ Redis ready",
         });
       }
     );
 
-    connection.on(
+    sharedConnection.on(
       "error",
       (err) => {
 
         logger.error({
           message:
-            "BullMQ Redis error",
-
-          connection:
-            connectionName,
+            "Shared BullMQ Redis error",
 
           error:
             err.message,
@@ -113,41 +93,38 @@ const createBullMQConnection =
       }
     );
 
-    // ✅ SAVE CONNECTION
-    connections.set(
-      connectionName,
-      connection
-    );
-
-    return connection;
+    return sharedConnection;
   };
 
 /* =========================================
-   🚀 CLOSE ALL CONNECTIONS
+   🚀 CLOSE CONNECTION
 ========================================= */
 
 const closeBullMQConnections =
   async () => {
 
-    for (const connection of connections.values()) {
+    if (
+      sharedConnection
+    ) {
 
       try {
 
-        await connection.quit();
+        await sharedConnection.quit();
 
       } catch (err) {
 
         logger.error({
           message:
-            "Redis close failed",
+            "BullMQ Redis close failed",
 
           error:
             err.message,
         });
       }
-    }
 
-    connections.clear();
+      sharedConnection =
+        null;
+    }
   };
 
 module.exports = {

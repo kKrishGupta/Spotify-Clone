@@ -1,25 +1,14 @@
-﻿import { forwardRef } from "react";
-import { cn } from "../../utils/helpers";
+import { cn } from "@/lib/utils";
 
-const Input = forwardRef(({ className = "", icon: Icon, ...props }, ref) => {
+export function Input({ className, type = "text", ...props }) {
   return (
-    <label className="relative block">
-      {Icon ? (
-        <Icon className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-white/35" />
-      ) : null}
-      <input
-        ref={ref}
-        className={cn(
-          "h-12 w-full rounded-2xl border border-white/10 bg-white/[0.075] px-4 text-sm font-medium text-white outline-none transition duration-300 placeholder:text-white/35 focus:border-beatPink/50 focus:bg-white/10 focus:shadow-glow",
-          Icon && "pl-12",
-          className,
-        )}
-        {...props}
-      />
-    </label>
+    <input
+      type={type}
+      className={cn(
+        "flex h-11 w-full rounded-md border border-white/10 bg-white/[0.055] px-3 py-2 text-sm text-white shadow-inset outline-none transition placeholder:text-muted-foreground focus:border-pulse/50 focus:ring-2 focus:ring-pulse/20 disabled:cursor-not-allowed disabled:opacity-50",
+        className,
+      )}
+      {...props}
+    />
   );
-});
-
-Input.displayName = "Input";
-
-export default Input;
+}

@@ -1,11 +1,25 @@
-﻿import { cn } from "../../utils/helpers";
+import { cn } from "@/lib/utils";
 
-const Card = ({ children, className = "", as: Component = "div" }) => {
-  return (
-    <Component className={cn("glass-soft rounded-[1.75rem] p-5", className)}>
-      {children}
-    </Component>
-  );
-};
+export function Card({ className, ...props }) {
+  return <section className={cn("glass rounded-lg", className)} {...props} />;
+}
 
-export default Card;
+export function CardHeader({ className, ...props }) {
+  return <div className={cn("space-y-1.5 p-5", className)} {...props} />;
+}
+
+export function CardTitle({ className, ...props }) {
+  return <h3 className={cn("font-display text-lg font-semibold text-white", className)} {...props} />;
+}
+
+export function CardDescription({ className, ...props }) {
+  return <p className={cn("text-sm text-muted-foreground", className)} {...props} />;
+}
+
+export function CardContent({ className, ...props }) {
+  return <div className={cn("p-5 pt-0", className)} {...props} />;
+}
+
+export function CardFooter({ className, ...props }) {
+  return <div className={cn("flex items-center p-5 pt-0", className)} {...props} />;
+}

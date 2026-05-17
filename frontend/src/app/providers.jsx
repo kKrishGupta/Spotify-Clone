@@ -1,40 +1,14 @@
-﻿import { useEffect } from "react";
-import { getCurrentUser } from "../features/auth/authAPI";
-import { useAuthStore } from "../features/auth/authStore";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
+import { SocketProvider } from "@/providers/SocketProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
-const Providers = ({ children }) => {
-  const login = useAuthStore((s) => s.login);
-  const setLoading = useAuthStore((s) => s.setLoading);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const hydrateUser = async () => {
-      try {
-        setLoading(true);
-
-        const res = await getCurrentUser();
-
-        // console.log("HYDRATE USER:", res); // 🔥 DEBUG
-
-        if (mounted && res?.user) {
-          login(res.user); // ✅ THIS FIXES YOUR ISSUE
-        }
-      } catch (err) {
-        console.log("Not logged in");
-      } finally {
-        if (mounted) setLoading(false);
-      }
-    };
-
-    hydrateUser();
-
-    return () => {
-      mounted = false;
-    };
-  }, [login, setLoading]);
-
-  return children;
-};
-
-export default Providers;
+export function AppProviders({ children }) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <SocketProvider>{children}</SocketProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+}

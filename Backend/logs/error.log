@@ -753,3 +753,27 @@
 {"connection":"analytics-worker","error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"BullMQ Redis error","timestamp":"2026-05-13T12:08:00.344Z"}
 {"error":"ENOENT: no such file or directory, scandir 'D:\\desktop\\Back\\Spotify-Clone\\Backend\\src\\uploads\\temp'","level":"error","message":"Cleanup failed","timestamp":"2026-05-13T12:30:00.107Z"}
 {"error":"read ECONNRESET","level":"error","message":"Redis client error","timestamp":"2026-05-13T12:48:48.558Z"}
+{"error":"ENOENT: no such file or directory, scandir 'D:\\desktop\\Back\\Spotify-Clone\\Backend\\src\\uploads\\temp'","level":"error","message":"Cleanup failed","timestamp":"2026-05-17T06:30:00.054Z"}
+{"error":"read ECONNRESET","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:29.488Z"}
+{"error":"read ECONNRESET","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:29.569Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:29.834Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:29.856Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:29.916Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:30.419Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:30.510Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:31.191Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:31.436Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:32.021Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:32.947Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:33.041Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:34.272Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:34.965Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:35.707Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:37.447Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:37.488Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:39.258Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:40.513Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:41.265Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:43.471Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:43.519Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:45.878Z"}

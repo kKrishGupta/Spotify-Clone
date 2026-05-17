@@ -7197,3 +7197,192 @@
 {"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T06:18:14.068Z"}
 {"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T06:18:14.127Z"}
 {"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T06:18:14.187Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T06:18:35.305Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T06:18:36.077Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T06:18:36.079Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T06:18:36.183Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T06:18:36.248Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T06:18:36.249Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T06:18:36.369Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T06:18:36.437Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T06:18:36.499Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:08.437Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:08.464Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:08.465Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:08.467Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:08.474Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:45.299Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:45.310Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:45.340Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:45.370Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:20:45.399Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:26:59.007Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:26:59.009Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:26:59.010Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:26:59.011Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:26:59.012Z"}
+{"level":"info","message":"Running cleanup scheduler...","timestamp":"2026-05-17T06:30:00.039Z"}
+{"level":"info","message":"Recalculating trending songs...","timestamp":"2026-05-17T06:30:00.041Z"}
+{"error":"ENOENT: no such file or directory, scandir 'D:\\desktop\\Back\\Spotify-Clone\\Backend\\src\\uploads\\temp'","level":"error","message":"Cleanup failed","timestamp":"2026-05-17T06:30:00.054Z"}
+{"count":5,"level":"info","message":"Trending songs updated","timestamp":"2026-05-17T06:30:00.153Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:21.561Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:21.599Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:21.649Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:21.679Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:21.736Z"}
+{"attempt":2,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:22.685Z"}
+{"attempt":2,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:22.753Z"}
+{"attempt":2,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:22.806Z"}
+{"attempt":2,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:22.856Z"}
+{"attempt":2,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:22.933Z"}
+{"attempt":3,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.245Z"}
+{"attempt":3,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.304Z"}
+{"attempt":3,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.322Z"}
+{"attempt":3,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.353Z"}
+{"attempt":3,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.449Z"}
+{"attempt":4,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.891Z"}
+{"attempt":4,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.920Z"}
+{"attempt":4,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.946Z"}
+{"attempt":4,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:23.975Z"}
+{"attempt":4,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:24.087Z"}
+{"attempt":5,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:24.722Z"}
+{"attempt":5,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:24.741Z"}
+{"attempt":5,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:24.842Z"}
+{"attempt":5,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:24.860Z"}
+{"attempt":5,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:24.919Z"}
+{"attempt":6,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:25.884Z"}
+{"attempt":6,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:25.904Z"}
+{"attempt":6,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:25.957Z"}
+{"attempt":6,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:25.962Z"}
+{"attempt":6,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:25.977Z"}
+{"attempt":7,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:27.121Z"}
+{"attempt":7,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:27.128Z"}
+{"attempt":7,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:27.176Z"}
+{"attempt":7,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:27.183Z"}
+{"attempt":7,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:27.192Z"}
+{"error":"read ECONNRESET","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:29.488Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":0,"timestamp":"2026-05-17T06:53:29.500Z"}
+{"error":"read ECONNRESET","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:29.569Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:29.679Z"}
+{"attempt":8,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:29.804Z"}
+{"attempt":8,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:29.811Z"}
+{"attempt":8,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:29.813Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":0,"timestamp":"2026-05-17T06:53:29.831Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:29.834Z"}
+{"attempt":8,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:29.836Z"}
+{"attempt":8,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:29.840Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":1,"timestamp":"2026-05-17T06:53:29.849Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:29.856Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:29.916Z"}
+{"attempt":2,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:30.066Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":2,"timestamp":"2026-05-17T06:53:30.405Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:30.419Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:30.510Z"}
+{"attempt":3,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:30.567Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:31.191Z"}
+{"attempt":4,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:31.201Z"}
+{"attempt":9,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:31.427Z"}
+{"attempt":9,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:31.432Z"}
+{"attempt":9,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:31.434Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":3,"timestamp":"2026-05-17T06:53:31.434Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:31.436Z"}
+{"attempt":9,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:31.456Z"}
+{"attempt":9,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:31.456Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:32.021Z"}
+{"attempt":5,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:32.030Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":4,"timestamp":"2026-05-17T06:53:32.947Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:32.947Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:33.041Z"}
+{"attempt":6,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:33.051Z"}
+{"attempt":10,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:33.251Z"}
+{"attempt":10,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:33.251Z"}
+{"attempt":10,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:33.253Z"}
+{"attempt":10,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:33.262Z"}
+{"attempt":10,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:33.263Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:34.272Z"}
+{"attempt":7,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:34.278Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":5,"timestamp":"2026-05-17T06:53:34.963Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:34.965Z"}
+{"attempt":11,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:35.340Z"}
+{"attempt":11,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:35.416Z"}
+{"attempt":11,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:35.421Z"}
+{"attempt":11,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:35.425Z"}
+{"attempt":11,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:35.445Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:35.707Z"}
+{"attempt":8,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:35.833Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:37.447Z"}
+{"attempt":9,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:37.450Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":6,"timestamp":"2026-05-17T06:53:37.487Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:37.488Z"}
+{"attempt":12,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:37.597Z"}
+{"attempt":12,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:37.622Z"}
+{"attempt":12,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:37.643Z"}
+{"attempt":12,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:37.644Z"}
+{"attempt":12,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:37.655Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:39.258Z"}
+{"attempt":10,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:39.262Z"}
+{"attempt":13,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:40.014Z"}
+{"attempt":13,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:40.037Z"}
+{"attempt":13,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:40.134Z"}
+{"attempt":13,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:40.147Z"}
+{"attempt":13,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:40.158Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":7,"timestamp":"2026-05-17T06:53:40.511Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:40.513Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","requestId":"3beaa685-8d5e-4d93-be34-f71ad77a4965","url":"/api/auth/me"},"timestamp":"2026-05-17T06:53:41.216Z"}
+{"level":"info","message":{"ip":"::1","method":"GET","requestId":"24bb8756-9b72-4f96-8ac5-0a781ebd167d","url":"/api/auth/me"},"timestamp":"2026-05-17T06:53:41.256Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:41.265Z"}
+{"attempt":11,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:41.269Z"}
+{"attempt":14,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:42.627Z"}
+{"attempt":14,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:42.643Z"}
+{"attempt":14,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:42.753Z"}
+{"attempt":14,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:42.768Z"}
+{"attempt":14,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:42.770Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:43.471Z"}
+{"attempt":12,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:43.473Z"}
+{"level":"warn","message":"Retrying Redis connection","retries":8,"timestamp":"2026-05-17T06:53:43.518Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Redis client error","timestamp":"2026-05-17T06:53:43.519Z"}
+{"attempt":15,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:45.441Z"}
+{"attempt":15,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:45.455Z"}
+{"attempt":15,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:45.565Z"}
+{"attempt":15,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:45.582Z"}
+{"attempt":15,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:45.583Z"}
+{"error":"getaddrinfo ENOTFOUND redis-14069.crce292.ap-south-1-2.ec2.cloud.redislabs.com","level":"error","message":"Shared BullMQ Redis error","timestamp":"2026-05-17T06:53:45.878Z"}
+{"attempt":13,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:53:45.880Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T06:53:47.350Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T06:53:47.415Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T06:53:48.533Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T06:53:48.603Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:56:55.624Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:56:55.625Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:56:55.626Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:56:55.627Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T06:56:55.628Z"}
+{"level":"info","message":"Recalculating trending songs...","timestamp":"2026-05-17T07:00:00.054Z"}
+{"count":5,"level":"info","message":"Trending songs updated","timestamp":"2026-05-17T07:00:01.007Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"90861f11-7017-4e2f-8b66-de94f5b43790","url":"/api/auth/register"},"timestamp":"2026-05-17T07:08:02.609Z"}
+{"attempt":1,"level":"warn","message":"Retrying shared BullMQ Redis","timestamp":"2026-05-17T07:08:25.975Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"33cc50b3-506d-4162-95f0-f175edf280a3","url":"/api/auth/register"},"timestamp":"2026-05-17T07:08:32.570Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:11:57.813Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:11:59.119Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:11:59.121Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:11:59.381Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:11:59.447Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:11:59.454Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:11:59.800Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:11:59.902Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:11:59.980Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"bbafd4e0-6a88-4446-a429-8169144f7e85","url":"/api/auth/register"},"timestamp":"2026-05-17T07:12:09.239Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"1dccf7fb-141f-4149-91f4-8176bd4b88e5","url":"/api/auth/register"},"timestamp":"2026-05-17T07:12:33.324Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"2a86926c-94d0-442b-85b6-783fc88be2f5","url":"/api/auth/register"},"timestamp":"2026-05-17T07:16:23.739Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"dc1335ea-9dd0-48db-a291-9dcb331fccb1","url":"/apiauth/verify-email"},"timestamp":"2026-05-17T07:17:35.736Z"}
+{"level":"info","message":{"ip":"::1","method":"POST","requestId":"bf1a5d3f-b711-488c-b865-e323fe583885","url":"/api/auth/verify-email"},"timestamp":"2026-05-17T07:17:42.179Z"}
+{"level":"info","message":"Starting server","timestamp":"2026-05-17T07:30:14.338Z"}
+{"level":"info","message":"✅ MongoDB connected","timestamp":"2026-05-17T07:30:15.098Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-05-17T07:30:15.099Z"}
+{"level":"info","message":"Connecting to Redis","timestamp":"2026-05-17T07:30:15.185Z"}
+{"level":"info","message":"Redis ready","timestamp":"2026-05-17T07:30:15.254Z"}
+{"level":"info","message":"Redis connected successfully","timestamp":"2026-05-17T07:30:15.256Z"}
+{"level":"info","message":"Server running","port":"3000","render":false,"timestamp":"2026-05-17T07:30:15.578Z"}
+{"level":"info","message":"Shared BullMQ Redis connected","timestamp":"2026-05-17T07:30:15.662Z"}
+{"level":"info","message":"Shared BullMQ Redis ready","timestamp":"2026-05-17T07:30:15.751Z"}
+{"level":"info","message":"SMTP server ready","timestamp":"2026-05-17T07:30:16.733Z"}

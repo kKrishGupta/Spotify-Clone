@@ -1,10 +1,71 @@
-const { Resend } =
-  require("resend");
+const nodemailer =
+  require("nodemailer");
 
-const resend =
-  new Resend(
-    process.env.RESEND_API_KEY
-  );
+const logger =
+  require("../config/logger");
+
+/* =========================================
+   🚀 SMTP TRANSPORTER
+========================================= */
+
+const transporter =
+  nodemailer.createTransport({
+
+    host:
+      process.env.EMAIL_HOST ||
+      "smtp.gmail.com",
+
+    port:
+      Number(
+        process.env.EMAIL_PORT
+      ) || 587,
+
+    secure: false,
+
+    auth: {
+
+      user:
+        process.env.EMAIL_USER,
+
+      pass:
+        process.env.EMAIL_PASS,
+    },
+
+    tls: {
+      rejectUnauthorized:
+        false,
+    },
+  });
+
+/* =========================================
+   🚀 VERIFY SMTP
+========================================= */
+
+transporter.verify(
+  (
+    err,
+    success
+  ) => {
+
+    if (err) {
+
+      logger.error({
+        message:
+          "SMTP connection failed",
+
+        error:
+          err.message,
+      });
+
+    } else {
+
+      logger.info({
+        message:
+          "SMTP server ready",
+      });
+    }
+  }
+);
 
 /* =========================================
    🎨 UNIVERSAL EMAIL TEMPLATE
@@ -328,71 +389,101 @@ const buildTemplate = ({
 /* =========================================
    🚀 GENERIC EMAIL SENDER
 ========================================= */
+const sendMail =
+  async ({
+    to,
+    subject,
+    html,
+  }) => {
 
-const sendMail = async ({
-  to,
-  subject,
-  html,
-}) => {
+    try {
 
-  try {
+      const info =
+        await transporter.sendMail({
 
-    const response =
-      await resend.emails.send({
+          from:
+            process.env.MAIL_FROM,
 
-        from:
-          process.env.MAIL_FROM ||
-          "onboarding@resend.dev",
+          to,
+
+          subject,
+
+          html,
+        });
+
+      logger.info({
+        message:
+          "Email sent successfully",
+
+        messageId:
+          info.messageId,
 
         to,
-
-        subject,
-
-        html,
       });
 
-    console.log(
-      "📧 Email sent:",
-      response.data?.id
-    );
+      console.log(
+        "📧 Email sent:",
+        info.messageId
+      );
 
-    return response;
+      return {
+        success: true,
 
-  } catch (error) {
+        messageId:
+          info.messageId,
+      };
 
-    console.error(
-      "❌ Resend email error:",
-      error.message
-    );
+    } catch (error) {
 
-    throw new Error(
-      "Email sending failed"
-    );
-  }
-};
+      logger.error({
+        message:
+          "Email sending failed",
+
+        error:
+          error.message,
+      });
+
+      console.error(
+        "❌ SMTP error:",
+        error
+      );
+
+      throw new Error(
+        error.message ||
+        "Email sending failed"
+      );
+    }
+  };
 
 /* =========================================
    📧 EMAIL VERIFICATION
 ========================================= */
 
 const sendVerificationEmail =
-  async (email, otp) => {
+  async (
+    email,
+    otp
+  ) => {
 
     return await sendMail({
+
       to: email,
 
       subject:
         "Verify your email",
 
-      html: buildTemplate({
-        title:
-          "Verify Your Email",
+      html:
+        buildTemplate({
 
-        subtitle:
-          "Enter this OTP to verify your account",
+          title:
+            "Verify Your Email",
 
-        code: otp,
-      }),
+          subtitle:
+            "Enter this OTP to verify your account",
+
+          code:
+            otp,
+        }),
     });
   };
 
@@ -401,23 +492,30 @@ const sendVerificationEmail =
 ========================================= */
 
 const sendLoginOtpEmail =
-  async (email, otp) => {
+  async (
+    email,
+    otp
+  ) => {
 
     return await sendMail({
+
       to: email,
 
       subject:
         "Login OTP",
 
-      html: buildTemplate({
-        title:
-          "Login to Your Account",
+      html:
+        buildTemplate({
 
-        subtitle:
-          "Use this OTP to login securely",
+          title:
+            "Login to Your Account",
 
-        code: otp,
-      }),
+          subtitle:
+            "Use this OTP to login securely",
+
+          code:
+            otp,
+        }),
     });
   };
 

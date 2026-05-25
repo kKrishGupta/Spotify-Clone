@@ -1,23 +1,326 @@
-import { mockSongs, playlists } from "@/config/constants";
-import { simulateNetwork } from "@/services/mockData.service";
+import {
+  apiClient,
+} from "@/lib/apiClient";
 
 export const musicService = {
-  getExplore: () =>
-    simulateNetwork({
-      heroTrack: mockSongs[0],
-      trending: mockSongs,
-      editorial: playlists,
-      liveRooms: [
-        { id: "room-1", name: "Late Night AI Jam", listeners: 1284, host: "Maya Flux" },
-        { id: "room-2", name: "Focus Pairing Lab", listeners: 842, host: "BeatFlow Curator" },
-        { id: "room-3", name: "Indie Upload Radar", listeners: 516, host: "Nira Coast" },
-      ],
-    }),
-  getLibrary: () =>
-    simulateNetwork({
-      saved: mockSongs.slice(0, 4),
-      downloads: mockSongs.slice(2, 6),
-      playlists,
-      smartCollections: ["Repeat signals", "High save probability", "Low skip comfort", "Regional discovery"],
-    }),
+
+  /* =========================================
+     🚀 EXPLORE PAGE DATA
+  ========================================= */
+
+  getExplore:
+    async () => {
+
+      const response =
+        await apiClient.get(
+          "/music"
+        );
+
+      const songs =
+
+        response?.musics ||
+
+        response?.data?.musics ||
+
+        response?.songs ||
+
+        [];
+
+      return {
+
+        heroTrack:
+          songs[0] || null,
+
+        trending:
+          songs,
+
+        recommended:
+          songs.slice(0, 8),
+
+        latest:
+          songs.slice(0, 12),
+
+        liveRooms: [],
+      };
+    },
+
+  /* =========================================
+     📚 USER LIBRARY
+  ========================================= */
+
+  getLibrary:
+    async () => {
+
+      const response =
+        await apiClient.get(
+          "/music/library"
+        );
+
+      return {
+
+        saved:
+
+          response?.saved ||
+
+          response?.data?.saved ||
+
+          [],
+
+        liked:
+
+          response?.liked ||
+
+          response?.data?.liked ||
+
+          [],
+
+        recent:
+
+          response?.recent ||
+
+          response?.data?.recent ||
+
+          [],
+
+        downloads:
+
+          response?.downloads ||
+
+          response?.data?.downloads ||
+
+          [],
+
+        playlists:
+
+          response?.playlists ||
+
+          response?.data?.playlists ||
+
+          [],
+
+        smartCollections: [
+
+          "Liked Songs",
+
+          "Night Vibes",
+
+          "AI Discoveries",
+
+          "Workout Mix",
+
+          "Chill Realtime",
+        ],
+      };
+    },
+
+  /* =========================================
+     ▶ TRACK PLAY
+  ========================================= */
+
+  trackPlay:
+    async (id) => {
+
+      if (!id) {
+        return null;
+      }
+
+      return await apiClient.put(
+        `/music/play/${id}`
+      );
+    },
+
+  /* =========================================
+     ❤️ LIKE SONG
+  ========================================= */
+
+  likeSong:
+    async (id) => {
+
+      if (!id) {
+        return null;
+      }
+
+      return await apiClient.put(
+        `/music/like/${id}`
+      );
+    },
+
+  /* =========================================
+     🔎 SEARCH SONGS
+  ========================================= */
+
+  searchSongs:
+    async (query) => {
+
+      if (!query?.trim()) {
+
+        return {
+          songs: [],
+        };
+      }
+
+      return await apiClient.get(
+
+        `/music/search?query=${encodeURIComponent(
+          query
+        )}`
+      );
+    },
+
+  /* =========================================
+     🎵 GET ALL SONGS
+  ========================================= */
+
+  getAllSongs:
+    async () => {
+
+      return await apiClient.get(
+        "/music"
+      );
+    },
+
+  /* =========================================
+     🎧 GET SONG BY ID
+  ========================================= */
+
+  getSongById:
+    async (id) => {
+
+      return await apiClient.get(
+        `/music/${id}`
+      );
+    },
+
+  /* =========================================
+     🔥 TRENDING SONGS
+  ========================================= */
+
+  getTrendingSongs:
+    async () => {
+
+      return await apiClient.get(
+        "/music/trending"
+      );
+    },
+
+  /* =========================================
+     🤖 AI RECOMMENDATIONS
+  ========================================= */
+
+  getRecommendations:
+    async () => {
+
+      return await apiClient.get(
+        "/music/recommendations"
+      );
+    },
+
+  /* =========================================
+     🎤 ARTIST SONGS
+  ========================================= */
+
+  getArtistSongs:
+    async (artistId) => {
+
+      return await apiClient.get(
+        `/music/artist/${artistId}`
+      );
+    },
+
+  /* =========================================
+     😊 MOOD SONGS
+  ========================================= */
+
+  getSongsByMood:
+    async (mood) => {
+
+      return await apiClient.get(
+
+        `/music/mood/${encodeURIComponent(
+          mood
+        )}`
+      );
+    },
+
+  /* =========================================
+     🌍 LANGUAGE SONGS
+  ========================================= */
+
+  getSongsByLanguage:
+    async (language) => {
+
+      return await apiClient.get(
+
+        `/music/language/${encodeURIComponent(
+          language
+        )}`
+      );
+    },
+
+  /* =========================================
+     🎼 GENRE SONGS
+  ========================================= */
+
+  getSongsByGenre:
+    async (genre) => {
+
+      return await apiClient.get(
+
+        `/music/genre/${encodeURIComponent(
+          genre
+        )}`
+      );
+    },
+
+  /* =========================================
+     ⬆ UPLOAD SONG
+  ========================================= */
+
+  uploadSong:
+    async (formData) => {
+
+      return await apiClient.post(
+
+        "/music/upload",
+
+        formData,
+
+        {
+          headers: {
+            "Content-Type":
+              "multipart/form-data",
+          },
+        }
+      );
+    },
+
+  /* =========================================
+     ✏ UPDATE SONG
+  ========================================= */
+
+  updateSong:
+    async (
+      id,
+      payload
+    ) => {
+
+      return await apiClient.put(
+
+        `/music/${id}`,
+
+        payload
+      );
+    },
+
+  /* =========================================
+     🗑 DELETE SONG
+  ========================================= */
+
+  deleteSong:
+    async (id) => {
+
+      return await apiClient.delete(
+        `/music/${id}`
+      );
+    },
 };

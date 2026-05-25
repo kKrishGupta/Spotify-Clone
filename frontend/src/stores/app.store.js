@@ -15,7 +15,15 @@ export const useAppStore = create((set) => ({
   setCommandOpen: (commandOpen) => set({ commandOpen }),
   addNotification: (notification) =>
     set((state) => ({
-      notifications: [{ id: crypto.randomUUID(), ...notification }, ...state.notifications].slice(0, 12),
+      notifications: [
+        {
+          id: crypto.randomUUID(),
+          toast: true,
+          createdAt: Date.now(),
+          ...notification,
+        },
+        ...state.notifications,
+      ].slice(0, 12),
     })),
   addActivity: (event) =>
     set((state) => ({

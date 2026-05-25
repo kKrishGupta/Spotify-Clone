@@ -34,14 +34,19 @@ export const sidebarSections = [
   {
     label: "Listen",
     items: [
-      { label: "Home", path: "/app/home", icon: "LayoutDashboard", roles: ["user", "artist", "admin"] },
-      { label: "Explore", path: "/app/explore", icon: "Compass", roles: ["user", "artist", "admin"] },
+      { label: "Home", path: "/app/home", icon: "Home", roles: ["user", "artist", "admin"] },
       { label: "Search", path: "/app/search", icon: "Search", roles: ["user", "artist", "admin"] },
+      { label: "Dashboard", path: "/app/dashboard", icon: "LayoutDashboard", roles: ["user", "artist", "admin"] },
+      { label: "Explore", path: "/app/explore", icon: "Compass", roles: ["user", "artist", "admin"] },
       { label: "Library", path: "/app/library", icon: "Library", roles: ["user", "artist", "admin"] },
+      { label: "Liked Songs", path: "/app/liked", icon: "Heart", roles: ["user", "artist", "admin"] },
       { label: "Playlists", path: "/app/playlists", icon: "ListMusic", roles: ["user", "artist", "admin"] },
+      { label: "Artists", path: "/app/artists", icon: "Mic2", roles: ["user", "artist", "admin"] },
+      { label: "AI Mixes", path: "/app/ai/mood", icon: "Sparkles", roles: ["user", "artist", "admin"] },
       { label: "Live Feed", path: "/app/feed", icon: "Radio", roles: ["user", "artist", "admin"] },
       { label: "Social", path: "/app/social", icon: "UsersRound", roles: ["user", "artist", "admin"] },
       { label: "Signals", path: "/app/notifications", icon: "BellRing", roles: ["user", "artist", "admin"] },
+      { label: "Premium", path: "/app/premium", icon: "Crown", roles: ["user", "artist", "admin"] },
     ],
   },
   {

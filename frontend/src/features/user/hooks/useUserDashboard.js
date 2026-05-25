@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { userService } from "@/features/user/services/user.service";
+import { userDashboardService } from "@/features/user/services/userDashboard.service";
 
 export function useUserDashboard() {
   return useQuery({
-    queryKey: ["user-dashboard"],
-    queryFn: userService.getDashboard,
+    queryKey: ["user-dashboard", "home"],
+    queryFn: userDashboardService.getHomeDashboard,
+    staleTime: 1000 * 60 * 2,
   });
 }

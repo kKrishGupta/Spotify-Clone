@@ -35,6 +35,22 @@ const UserDashboard = lazy(() =>
   import("@/features/user/pages/UserDashboard")
 );
 
+const SpotifyHomePage = lazy(() =>
+  import("@/features/home/pages/SpotifyHomePage")
+);
+
+const PremiumPage = lazy(() =>
+  import("@/features/home/pages/PremiumPage")
+);
+
+const PlaylistDetailPage = lazy(() =>
+  import("@/features/home/pages/PlaylistDetailPage")
+);
+
+const ArtistProfilePage = lazy(() =>
+  import("@/features/home/pages/ArtistProfilePage")
+);
+
 const ExplorePage = lazy(() =>
   import("@/features/music/pages/ExplorePage")
 );
@@ -207,6 +223,13 @@ export function AppRoutes() {
           <Route
             path="home"
             element={screen(
+              <SpotifyHomePage />
+            )}
+          />
+
+          <Route
+            path="dashboard"
+            element={screen(
               <UserDashboard />
             )}
           />
@@ -226,9 +249,23 @@ export function AppRoutes() {
           />
 
           <Route
+            path="liked"
+            element={screen(
+              <LibraryPage />
+            )}
+          />
+
+          <Route
             path="playlists"
             element={screen(
               <PlaylistsPage />
+            )}
+          />
+
+          <Route
+            path="playlist/:id"
+            element={screen(
+              <PlaylistDetailPage />
             )}
           />
 
@@ -254,9 +291,23 @@ export function AppRoutes() {
           />
 
           <Route
+            path="artists"
+            element={screen(
+              <FollowersPage />
+            )}
+          />
+
+          <Route
             path="notifications"
             element={screen(
               <InboxPage />
+            )}
+          />
+
+          <Route
+            path="premium"
+            element={screen(
+              <PremiumPage />
             )}
           />
 
@@ -301,6 +352,13 @@ export function AppRoutes() {
             element={roleScreen(
               ["artist", "admin"],
               <ArtistDashboard />
+            )}
+          />
+
+          <Route
+            path="artist/:id"
+            element={screen(
+              <ArtistProfilePage />
             )}
           />
 

@@ -4,9 +4,13 @@ const musicModel = require("../models/music.model");
 const activityModel = require("../models/activity.model");
 const notificationService = require("../service/notification.service");
 
-const getUserDashboard = async (req, res) => {
-  try {
-    const userId = req.user.id;
+const getUserDashboard =
+  async (req, res) => {
+
+    try {
+
+      const userId =
+        req.user.id;
 
     const user = await userModel.findById(userId);
 

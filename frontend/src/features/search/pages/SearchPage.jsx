@@ -1,52 +1,107 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { PageHeader } from "@/components/common/PageHeader";
-import { SuspenseFallback } from "@/components/common/SuspenseFallback";
-import { AISearchPanel } from "@/features/search/ai-search/AISearchPanel";
-import { SearchResults } from "@/features/search/components/SearchResults";
-import { searchService } from "@/features/search/services/search.service";
-import { SemanticMap } from "@/features/search/semantic/SemanticMap";
-import { useDebounce } from "@/hooks/useDebounce";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { useState }
+from "react";
+
+import { Search }
+from "lucide-react";
+
+import { Input }
+from "@/components/ui/input";
+
+import { SongCard }
+from "@/features/music/components/SongCard";
+
+import { useSemanticSearch }
+from "@/features/music/hooks/useSemanticSearch";
 
 export default function SearchPage() {
-  useDocumentTitle("Search", "Semantic AI music search.");
-  const [query, setQuery] = useState("neon focus night drive");
-  const debounced = useDebounce(query, 250);
-  const { data, isLoading } = useQuery({
-    queryKey: ["semantic-search", debounced],
-    queryFn: () => searchService.semanticSearch(debounced),
-  });
+
+  const [query, setQuery] =
+    useState("");
+
+  const {
+    data,
+    isLoading,
+  } =
+    useSemanticSearch(query);
+
+  const songs =
+    data?.data || [];
 
   return (
+
     <div className="space-y-6">
-      <PageHeader
-        eyebrow="Phase 8"
-        title="Semantic AI search"
-        description="Search by feeling, context, language, lyric fragments, or recommendation intent."
-      />
-      <div className="relative">
-        <Search className="pointer-events-none absolute left-4 top-4 size-5 text-muted-foreground" />
-        <Input
-          className="h-14 rounded-lg pl-12 text-base"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Describe a sound, mood, scene, or artist..."
-        />
-      </div>
-      {isLoading ? (
-        <SuspenseFallback />
-      ) : (
-        <div className="grid gap-6 xl:grid-cols-[1fr_360px]">
-          <SearchResults results={data} />
-          <div className="space-y-4">
-            <SemanticMap score={data.semanticScore} />
-            <AISearchPanel suggestions={data.suggestions} onSelect={setQuery} />
-          </div>
+
+      <div className="
+        sticky top-0 z-20
+        rounded-xl
+        border border-white/10
+        bg-black/40
+        p-4
+        backdrop-blur-xl
+      ">
+
+        <div className="relative">
+
+          <Search className="
+            absolute left-4 top-1/2
+            size-5 -translate-y-1/2
+            text-muted-foreground
+          " />
+
+          <Input
+
+            value={query}
+
+            onChange={(e) =>
+              setQuery(
+                e.target.value
+              )
+            }
+
+            placeholder="
+              Search songs, moods,
+              artists, vibes,
+              AI semantic tags...
+            "
+
+            className="
+              h-14 pl-12 text-lg
+            "
+          />
+
         </div>
-      )}
+
+      </div>
+
+      {isLoading ? (
+
+        <div className="
+          text-muted-foreground
+        ">
+          AI searching...
+        </div>
+
+      ) : null}
+
+      <div className="
+        grid gap-4
+        md:grid-cols-2
+        xl:grid-cols-4
+      ">
+
+        {songs.map((song) => (
+
+          <SongCard
+            key={
+              song._id
+            }
+            song={song}
+          />
+
+        ))}
+
+      </div>
+
     </div>
   );
 }

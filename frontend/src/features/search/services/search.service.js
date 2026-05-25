@@ -1,19 +1,86 @@
-import { aiPrompts, mockSongs, playlists } from "@/config/constants";
-import { simulateNetwork } from "@/services/mockData.service";
+import { apiClient }
+from "@/lib/apiClient";
 
 export const searchService = {
-  semanticSearch: (query) => {
-    const lowered = query.toLowerCase();
-    const songs = mockSongs.filter((song) =>
-      [song.title, song.artist, song.album, song.mood].join(" ").toLowerCase().includes(lowered),
-    );
 
-    return simulateNetwork({
-      query,
-      songs: songs.length ? songs : mockSongs.slice(0, 4),
-      playlists,
-      suggestions: aiPrompts,
-      semanticScore: Math.max(72, Math.min(99, 82 + query.length)),
-    });
-  },
+  semanticSearch:
+    async (query) => {
+
+      if (!query?.trim()) {
+
+        return {
+          songs: [],
+          playlists: [],
+          suggestions: [],
+          semanticScore: 0,
+        };
+      }
+
+      // 🚀 AI VECTOR SEARCH
+      const response =
+        await apiClient.get(
+          `/music/search?query=${encodeURIComponent(query)}`
+        );
+
+      const songs =
+        response.data ||
+        response.songs ||
+        [];
+
+      // 🚀 AI RANKING ENGINE
+      const ranked =
+        songs.sort(
+          (a, b) => {
+
+            const scoreA =
+              (
+                a.aiScore || 0
+              ) +
+              (
+                a.plays || 0
+              ) * 0.4 +
+              (
+                a.likes || 0
+              ) * 0.6;
+
+            const scoreB =
+              (
+                b.aiScore || 0
+              ) +
+              (
+                b.plays || 0
+              ) * 0.4 +
+              (
+                b.likes || 0
+              ) * 0.6;
+
+            return (
+              scoreB -
+              scoreA
+            );
+          }
+        );
+
+      return {
+
+        query,
+
+        songs: ranked,
+
+        playlists: [],
+
+        suggestions: [
+          "Punjabi workout",
+          "Hindi sad lofi",
+          "Night drive synth",
+          "Arijit romantic",
+          "Gym phonk",
+        ],
+
+        semanticScore:
+          ranked.length
+            ? 96
+            : 52,
+      };
+    },
 };

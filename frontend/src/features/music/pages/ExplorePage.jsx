@@ -28,7 +28,14 @@ export default function ExplorePage() {
       />
       <GlassPanel className="overflow-hidden">
         <div className="grid gap-0 lg:grid-cols-[.9fr_1.1fr]">
-          <div className="min-h-80" style={{ background: data.heroTrack.cover }} />
+          <div className="min-h-80" style={{
+            backgroundImage: `url(${
+              data?.heroTrack?.thumbnail ||
+              data?.heroTrack?.cover
+            })`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }} />
           <div className="flex flex-col justify-center p-6 md:p-10">
             <Badge variant="pink">Top neural match</Badge>
             <h2 className="mt-4 font-display text-4xl font-semibold text-white md:text-6xl">{data.heroTrack.title}</h2>
@@ -38,7 +45,7 @@ export default function ExplorePage() {
               <Badge>{data.heroTrack.bpm} BPM</Badge>
               <Badge variant="green">{data.heroTrack.energy}% energy</Badge>
             </div>
-            <Button className="mt-8 w-fit" variant="neon" size="lg" onClick={() => playTrack(data.heroTrack)}>
+            <Button className="mt-8 w-fit" variant="neon" size="lg" onClick={() => playTrack(data.heroTrack,data.trending, [data.heroTrack])}>
               <Headphones className="size-5" />
               Play now
             </Button>

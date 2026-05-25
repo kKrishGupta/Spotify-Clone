@@ -30,16 +30,59 @@ setupSecurity(app);
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
+app.use('/api/health',healthRoutes);
 app.use(rateLimiter);
 app.use(traceMiddleware);
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+
+  // // Production frontend domains
+  // "https://your-frontend.vercel.app",
+  // "https://your-frontend.netlify.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+
+      // Allow REST tools / Postman / mobile apps
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (
+        allowedOrigins.includes(origin)
+      ) {
+        callback(null, true);
+      } else {
+        callback(
+          new Error(
+            "CORS not allowed"
+          )
+        );
+      }
+    },
+
     credentials: true,
+
+    methods: [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE",
+      "OPTIONS",
+    ],
+
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "x-request-id"
+    ],
   })
 );
-
 app.use('/api/auth', authRoutes);
 app.use('/api/music', musicRoutes);
 app.use('/api/activity', activityRoutes);
@@ -51,7 +94,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/notifications',notificationRoutes);
 app.use('/api/analytics', analyticsRoutes);
-app.use('/api/health',healthRoutes);
+
 app.use('/api/moderation',moderationRoutes);
 app.use('/api/presence',presenceRoutes);
 app.use('/api/metrics',prometheusRoutes);

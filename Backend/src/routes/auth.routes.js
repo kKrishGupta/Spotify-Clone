@@ -21,8 +21,27 @@ router.post("/verify-login-otp", authController.loginWithOtp);
 router.post("/resend-otp", authController.resendOtp);
 
 // 🔐 AUTH FEATURES (UNCHANGED)
-router.post("/logout", authController.logoutUser);
+
 router.get("/me", protect, authController.getCurrentUser);
 router.post("/refresh", authController.refreshAccessToken);
 
+// 🔐 FORGOT PASSWORD → SEND RESET OTP
+router.post(
+  "/forgot-password",
+  authController.forgotPassword
+);
+
+// 🔐 VERIFY RESET OTP
+router.post(
+  "/verify-reset-otp",
+  authController.verifyResetOtp
+);
+
+// 🔐 RESET PASSWORD
+router.post(
+  "/reset-password",
+  authController.resetPassword
+);
+
+router.post("/logout", authController.logoutUser);
 module.exports = router;

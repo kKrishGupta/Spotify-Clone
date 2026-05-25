@@ -61,7 +61,7 @@ export function Sidebar({ mobile = false }) {
         })}
       </nav>
       <div className="glass-soft mt-4 rounded-lg p-4">
-        <p className="text-sm font-semibold text-white">{user?.name}</p>
+        <p className="text-sm font-semibold text-white">{user?.username || user?.name}</p>
         <p className="mt-1 text-xs text-muted-foreground">{user?.plan}</p>
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
           <div className="h-full w-4/5 rounded-full bg-premium-line" />

@@ -1,12 +1,49 @@
-import { Navigate } from "react-router-dom";
-import { useAuthStore } from "@/features/auth/store/auth.store";
-import { canAccessRoute } from "@/middleware/auth.middleware";
+import {
+  Navigate,
+} from "react-router-dom";
 
-export function RoleGate({ roles, children }) {
-  const user = useAuthStore((state) => state.user);
+import {
+  useAuthStore,
+} from "@/features/auth/store/auth.store";
 
-  if (!canAccessRoute(user, roles)) {
-    return <Navigate to="/app/home" replace />;
+export function RoleGate({
+
+  children,
+
+  roles = [],
+}) {
+
+  const {
+
+    user,
+
+    hydrated,
+  } =
+    useAuthStore();
+
+  // ✅ WAIT FOR STORE HYDRATION
+  if (!hydrated) {
+
+    return null;
+  }
+
+  // ✅ ROLE CHECK
+  if (
+
+    !user ||
+
+    !roles.includes(
+      user.role
+    )
+  ) {
+
+    return (
+
+      <Navigate
+        to="/app/home"
+        replace
+      />
+    );
   }
 
   return children;

@@ -20,6 +20,15 @@ const userSchema = new mongoose.Schema({
     enum : ['user' , 'artist','admin'],
     default:'user',
   },
+  resetPasswordOtp: {
+  type: String,
+  default: null,
+},
+
+resetPasswordOtpExpires: {
+  type: Date,
+  default: null,
+},
 
   avatar: String,
 

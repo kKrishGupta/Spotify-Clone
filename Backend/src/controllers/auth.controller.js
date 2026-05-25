@@ -184,8 +184,10 @@ const verifyEmail =
       // 🔐 VERIFY OTP
       const hashedOtp =
         hashOtp(
-          otp.trim()
-        );
+          otp
+            .replace(/\s/g, "")
+            .trim()
+        )
 
       if (
         parsed.emailOtp !==
@@ -382,7 +384,11 @@ const loginWithOtp = asyncHandler(async (req, res) => {
     return res.status(429).json({ message: "Too many attempts" });
   }
 
-  const hashedOtp = hashOtp(otp.trim());
+  const hashedOtp = hashOtp(
+  otp
+    .replace(/\s/g, "")
+    .trim()
+);
 
   if (user.loginOtp !== hashedOtp) {
     user.otpAttempts += 1;
@@ -406,38 +412,97 @@ const loginWithOtp = asyncHandler(async (req, res) => {
 });
 
 // ================= RESEND OTP =================
-const resendOtp = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+const resendOtp =
+  asyncHandler(
+    async (req, res) => {
 
-  const user = await userModel.findOne({
-    email: email.toLowerCase(),
-  });
+      const {
+        email,
+      } = req.body;
 
-  if (!user || user.isVerified) {
-    return res.status(400).json({ message: "Invalid request" });
-  }
+      if (!email) {
 
-  if (user.otpLastSentAt && Date.now() - user.otpLastSentAt < 60000) {
-    return res.status(429).json({ message: "Wait before requesting again" });
-  }
+        return res.status(400).json({
 
-  user.emailOtp = undefined;
-  user.emailOtpExpires = undefined;
+          success: false,
 
-  const otp = crypto.randomInt(100000, 999999).toString();
-  const hashedOtp = hashOtp(otp);
+          message:
+            "Email is required",
+        });
+      }
 
-  user.emailOtp = hashedOtp;
-  user.emailOtpExpires = Date.now() + 10 * 60 * 1000;
-  user.otpAttempts = 0;
-  user.otpLastSentAt = Date.now();
+      // ✅ GET TEMP USER
+      const tempData =
+        await redis.client.get(
+          `verify:${email.toLowerCase()}`
+        );
 
-  await user.save();
+      // ❌ SESSION EXPIRED
+      if (!tempData) {
 
-  await sendVerificationEmail(user.email, otp);
+        return res.status(400).json({
 
-  res.json({ message: "OTP resent successfully" });
-});
+          success: false,
+
+          message:
+            "Registration session expired. Please register again.",
+        });
+      }
+
+      const parsed =
+        JSON.parse(
+          tempData
+        );
+
+      // ✅ GENERATE NEW OTP
+      const otp =
+        crypto
+          .randomInt(
+            100000,
+            999999
+          )
+          .toString();
+
+      const hashedOtp =
+        hashOtp(otp);
+
+      // ✅ UPDATE OTP
+      parsed.emailOtp =
+        hashedOtp;
+
+      // ✅ RESET TIMER
+      parsed.createdAt =
+        Date.now();
+
+      // ✅ SAVE AGAIN
+      await redis.client.set(
+
+        `verify:${email.toLowerCase()}`,
+
+        JSON.stringify(
+          parsed
+        ),
+
+        {
+          EX: 600,
+        }
+      );
+
+      // ✅ SEND EMAIL
+      await sendVerificationEmail(
+        email,
+        otp
+      );
+
+      return res.status(200).json({
+
+        success: true,
+
+        message:
+          "OTP resent successfully",
+      });
+    }
+  );
 
 
 
@@ -504,10 +569,212 @@ const getCurrentUser = asyncHandler(async (req, res) => {
   res.json({ user });
 });
 
+const forgotPassword =
+  asyncHandler(
+    async (req, res) => {
+
+      const {
+        email,
+      } = req.body;
+
+      const user =
+        await userModel.findOne({
+
+          email:
+            email.toLowerCase(),
+        });
+
+      if (!user) {
+
+        return res.status(404).json({
+
+          success: false,
+
+          message:
+            "User not found",
+        });
+      }
+
+      const otp =
+        crypto
+          .randomInt(
+            100000,
+            999999
+          )
+          .toString();
+
+      const hashedOtp =
+        hashOtp(otp);
+
+      user.resetPasswordOtp =
+        hashedOtp;
+
+      user.resetPasswordOtpExpires =
+        Date.now() +
+        10 * 60 * 1000;
+
+      await user.save();
+
+      await sendVerificationEmail(
+        email,
+        otp
+      );
+
+      res.json({
+
+        success: true,
+
+        message:
+          "Password reset OTP sent",
+      });
+    }
+  );
+
+  const verifyResetOtp =
+  asyncHandler(
+    async (req, res) => {
+
+      const {
+        email,
+        otp,
+      } = req.body;
+
+      const user =
+        await userModel.findOne({
+
+          email:
+            email.toLowerCase(),
+        });
+
+      if (!user) {
+
+        return res.status(404).json({
+
+          success: false,
+
+          message:
+            "User not found",
+        });
+      }
+
+      if (
+        !user.resetPasswordOtp
+      ) {
+
+        return res.status(400).json({
+
+          success: false,
+
+          message:
+            "No reset OTP found",
+        });
+      }
+
+      if (
+        user.resetPasswordOtpExpires <
+        Date.now()
+      ) {
+
+        return res.status(400).json({
+
+          success: false,
+
+          message:
+            "OTP expired",
+        });
+      }
+
+      const hashedOtp =
+        hashOtp(
+
+          otp
+            .replace(/\s/g, "")
+            .trim()
+        );
+
+      if (
+        hashedOtp !==
+        user.resetPasswordOtp
+      ) {
+
+        return res.status(400).json({
+
+          success: false,
+
+          message:
+            "Invalid OTP",
+        });
+      }
+
+      res.json({
+
+        success: true,
+
+        message:
+          "OTP verified",
+      });
+    }
+  );
+
+ const resetPassword =
+  asyncHandler(
+    async (req, res) => {
+
+      const {
+        email,
+        password,
+      } = req.body;
+
+      const user =
+        await userModel.findOne({
+
+          email:
+            email.toLowerCase(),
+        });
+
+      if (!user) {
+
+        return res.status(404).json({
+
+          success: false,
+
+          message:
+            "User not found",
+        });
+      }
+
+      const hashedPassword =
+        await bcrypt.hash(
+          password,
+          10
+        );
+
+      user.password =
+        hashedPassword;
+
+      user.resetPasswordOtp =
+        null;
+
+      user.resetPasswordOtpExpires =
+        null;
+
+      await user.save();
+
+      res.json({
+
+        success: true,
+
+        message:
+          "Password reset successful",
+      });
+    }
+  );
+
 // ================= EXPORT =================
 module.exports = {
   registerUser,
   verifyEmail,
+  verifyResetOtp,
   loginUser,
   sendLoginOtp,
   loginWithOtp,
@@ -515,4 +782,6 @@ module.exports = {
   getCurrentUser,
   logoutUser,
   refreshAccessToken,
+  forgotPassword,
+  resetPassword,
 };

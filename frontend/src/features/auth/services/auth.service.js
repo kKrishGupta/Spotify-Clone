@@ -1,41 +1,97 @@
-import { demoUsers } from "@/config/constants";
-import { simulateNetwork } from "@/services/mockData.service";
-
-function resolveRole(email = "") {
-  if (email.includes("admin")) {
-    return "admin";
-  }
-  if (email.includes("artist")) {
-    return "artist";
-  }
-  return "user";
-}
-
-function createSession(email) {
-  const role = resolveRole(email);
-  const user = { ...demoUsers[role], email: email || demoUsers[role].email };
-
-  return {
-    user,
-    accessToken: `${role}.demo.access.${Date.now()}`,
-    refreshToken: `${role}.demo.refresh.${Date.now()}`,
-  };
-}
+import {
+  apiClient,
+} from "@/lib/apiClient";
 
 export const authService = {
-  login: (payload) => simulateNetwork(createSession(payload.email), 420),
-  register: (payload) =>
-    simulateNetwork({
-      user: { ...demoUsers.user, name: payload.name, email: payload.email },
-      accessToken: `user.demo.access.${Date.now()}`,
-      refreshToken: `user.demo.refresh.${Date.now()}`,
-    }),
-  verifyOtp: (payload) => simulateNetwork({ verified: payload.code.length === 6 }),
-  forgotPassword: (payload) => simulateNetwork({ sent: true, email: payload.email }),
-  resetPassword: () => simulateNetwork({ reset: true }),
-  refresh: (refreshToken) =>
-    simulateNetwork({
-      accessToken: `refreshed.demo.access.${Date.now()}`,
-      refreshToken: refreshToken || `refreshed.demo.refresh.${Date.now()}`,
-    }),
+
+  // ✅ REGISTER
+  register:
+    (payload) =>
+      apiClient.post(
+        "/auth/register",
+        payload
+      ),
+
+  // ✅ LOGIN
+  login:
+    (payload) =>
+      apiClient.post(
+        "/auth/login",
+        payload
+      ),
+
+  // ✅ VERIFY EMAIL OTP
+  verifyEmail:
+    (payload) =>
+      apiClient.post(
+        "/auth/verify-email",
+        payload
+      ),
+
+  // ✅ LOGIN OTP
+  loginOtp:
+    (payload) =>
+      apiClient.post(
+        "/auth/login-otp",
+        payload
+      ),
+
+  // ✅ VERIFY LOGIN OTP
+  verifyLoginOtp:
+    (payload) =>
+      apiClient.post(
+        "/auth/verify-login-otp",
+        payload
+      ),
+
+  // ✅ CURRENT USER
+  me:
+    () =>
+      apiClient.get(
+        "/auth/me"
+      ),
+
+  // ✅ REFRESH TOKEN
+  refresh:
+    () =>
+      apiClient.post(
+        "/auth/refresh"
+      ),
+
+  // ✅ LOGOUT
+  logout:
+    () =>
+      apiClient.post(
+        "/auth/logout"
+      ),
+
+  sendOtp:
+    (payload) =>
+      apiClient.post(
+        "/auth/resend-otp",
+        payload
+      ),
+
+      // ✅ FORGOT PASSWORD
+forgotPassword:
+  (payload) =>
+    apiClient.post(
+      "/auth/forgot-password",
+      payload
+    ),
+
+verifyResetOtp:
+  (payload) =>
+    apiClient.post(
+      "/auth/verify-reset-otp",
+      payload
+    ),
+
+resetPassword:
+  (payload) =>
+    apiClient.post(
+      "/auth/reset-password",
+      payload
+    ),
+
 };

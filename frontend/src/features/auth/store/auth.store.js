@@ -1,69 +1,296 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { demoUsers } from "@/config/constants";
-import { authService } from "@/features/auth/services/auth.service";
+import { create }
+from "zustand";
 
-const demoSession = {
-  user: demoUsers.admin,
-  accessToken: "admin.demo.access.seed",
-  refreshToken: "admin.demo.refresh.seed",
-  status: "authenticated",
-};
+import { persist }
+from "zustand/middleware";
 
-export const useAuthStore = create(
-  persist(
-    (set, get) => ({
-      ...demoSession,
-      isRefreshing: false,
-      login: async (payload) => {
-        const session = await authService.login(payload);
-        set({ ...session, status: "authenticated" });
-        return session;
-      },
-      register: async (payload) => {
-        const session = await authService.register(payload);
-        set({ ...session, status: "authenticated" });
-        return session;
-      },
-      verifyOtp: async (payload) => authService.verifyOtp(payload),
-      forgotPassword: async (payload) => authService.forgotPassword(payload),
-      resetPassword: async (payload) => authService.resetPassword(payload),
-      refreshSession: async () => {
-        const { refreshToken } = get();
-        if (!refreshToken) {
-          set({ user: null, accessToken: null, refreshToken: null, status: "anonymous" });
-          return false;
-        }
+import {
+  authService,
+} from "@/features/auth/services/auth.service";
 
-        set({ isRefreshing: true });
-        try {
-          const tokens = await authService.refresh(refreshToken);
-          set({ ...tokens, isRefreshing: false, status: "authenticated" });
-          return true;
-        } catch {
-          set({ user: null, accessToken: null, refreshToken: null, isRefreshing: false, status: "anonymous" });
-          return false;
-        }
-      },
-      logout: () => set({ user: null, accessToken: null, refreshToken: null, status: "anonymous" }),
-      switchRole: (role) => {
-        const user = demoUsers[role] || demoUsers.user;
-        set({
-          user,
-          accessToken: `${role}.demo.access.${Date.now()}`,
-          refreshToken: `${role}.demo.refresh.${Date.now()}`,
-          status: "authenticated",
+export const useAuthStore =
+  create(
+
+    persist(
+
+      (set) => ({
+
+        user: null,
+
+        accessToken: null,
+
+        refreshToken: null,
+
+        loading: false,
+
+        hydrated: false,
+
+        // ✅ INITIALIZE SESSION
+       initialize:
+  async () => {
+
+    try {
+
+      const {
+        accessToken,
+        refreshToken,
+      } =
+        useAuthStore.getState();
+
+      // ✅ NO SESSION
+      if (
+        !accessToken &&
+        !refreshToken
+      ) {
+
+        return set({
+
+          hydrated: true,
         });
-      },
-    }),
-    {
-      name: "beatflow-auth",
-      partialize: (state) => ({
-        user: state.user,
-        accessToken: state.accessToken,
-        refreshToken: state.refreshToken,
-        status: state.status,
+      }
+
+      // ✅ TRY USER FETCH
+      const response =
+        await authService.me();
+
+      const data =
+        response.data ||
+        response;
+
+      set({
+
+        user:
+          data.user || data,
+
+        hydrated:
+          true,
+      });
+
+    } catch (err) {
+
+      console.error(
+        "Initialize failed:",
+        err
+      );
+
+      set({
+
+        user: null,
+
+        accessToken: null,
+
+        refreshToken: null,
+
+        hydrated: true,
+      });
+
+      localStorage.removeItem(
+        "beatflow-auth"
+      );
+    }
+  },
+
+        // ✅ LOGIN
+        login:
+          async (payload) => {
+
+            set({
+              loading: true,
+            });
+
+            try {
+
+              const response =
+                await authService.login(
+                  payload
+                );
+
+              const data =
+                response.data ||
+                response;
+
+              set({
+
+                user:
+                  data.user,
+
+                accessToken:
+                  data.accessToken,
+
+                refreshToken:
+                  data.refreshToken,
+
+                loading:
+                  false,
+              });
+
+              return data;
+
+            } catch (err) {
+
+              set({
+                loading: false,
+              });
+
+              throw err;
+            }
+          },
+
+        // ✅ SEND OTP
+        sendOtp:
+          async (payload) => {
+
+            return await authService
+              .sendOtp(payload);
+          },
+
+        // ✅ REGISTER
+        register:
+          async (payload) => {
+
+            return await authService
+              .register(payload);
+          },
+
+        // ✅ VERIFY EMAIL
+        verifyEmail:
+          async (payload) => {
+
+            return await authService
+              .verifyEmail(payload);
+          },
+
+        // ✅ LOGIN OTP
+        loginOtp:
+          async (payload) => {
+
+            return await authService
+              .loginOtp(payload);
+          },
+
+        // ✅ VERIFY LOGIN OTP
+        verifyLoginOtp:
+          async (payload) => {
+
+            set({
+              loading: true,
+            });
+
+            try {
+
+              const response =
+                await authService
+                  .verifyLoginOtp(
+                    payload
+                  );
+
+              const data =
+                response.data ||
+                response;
+
+              // ✅ SAVE SESSION
+              set({
+
+                user:
+                  data.user,
+
+                accessToken:
+                  data.accessToken,
+
+                refreshToken:
+                  data.refreshToken,
+
+                loading:
+                  false,
+              });
+
+              return data;
+
+            } catch (err) {
+
+              set({
+                loading: false,
+              });
+
+              throw err;
+            }
+          },
+
+        // ✅ REFRESH SESSION
+        refreshSession:
+          async () => {
+
+            const response =
+              await authService
+                .refresh();
+
+            const data =
+              response.data ||
+              response;
+
+            set({
+
+              accessToken:
+                data.accessToken,
+
+              refreshToken:
+                data.refreshToken,
+            });
+
+            return data;
+          },
+
+        // ✅ LOGOUT
+        logout:
+          async () => {
+            try {
+              await authService
+                .logout();
+
+            } catch (err) {
+              console.error(
+                "Logout failed:",
+                err
+              );
+            }
+
+            set({
+              user: null,
+              accessToken: null,
+              refreshToken: null,
+              hydrated: true,
+            });
+
+           localStorage.removeItem(
+              "beatflow-auth"
+            );
+          },
+
+         forgotPassword:
+          async (payload) => {
+
+            return await authService
+              .forgotPassword(payload);
+          },
+
+        verifyResetOtp:
+          async (payload) => {
+
+            return await authService
+              .verifyResetOtp(payload);
+          },
+
+        resetPassword:
+          async (payload) => {
+
+            return await authService
+              .resetPassword(payload);
+          }, 
       }),
-    },
-  ),
-);
+
+      {
+        name:
+          "beatflow-auth",
+      }
+    )
+  );
